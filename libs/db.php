@@ -5,10 +5,10 @@
 //  let's dance with smarty and phplib db_mysql.
 
 define('DB_LIB_PATH', 'DB/db_mysql.inc');
-define('DB_HOST', 'localhost');
+define('DB_HOST', '127.0.0.1');
 define('DB_NAME', 'turtlerock');
-define('DB_USER', 'turtlerock');
-define('DB_PASS', 'turtlerock');
+define('DB_USER', 'root');
+define('DB_PASS', '123');
 
 require_once(DB_LIB_PATH);
 

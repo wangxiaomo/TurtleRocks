@@ -55,5 +55,5 @@ if($user_type == 0){
 
 $smarty->assign('user_type', $user_type);
 $smarty->assign('navs', $navs);
-$smarty->display('show_company.tpl');
+$smarty->display('new_company.tpl');
 ?>
