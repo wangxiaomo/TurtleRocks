@@ -1,0 +1,117 @@
+
+// common css for TurtleRocks
+* { margin: 0; padding: 0; }
+html { height: 100%; }
+body { min-height: 100%; height: 100%; padding-top: 0; }
+body { font: 14px/20px "Lucida Grande","Lucida Sans Unicode",Helvetica,Arial,Verdana,sans-serif; }
+h1,h2,h3,h4 { margin-bottom: 18px; font-weight: bold; }
+h1 { font-size: 24px; line-height: 36px; }
+a:link, a:visited, a:active { text-decoration: none; }
+p { margin-bottom: 18px; word-spacing: -1px; }
+table { border-collapse: collapse; border-spacing: 0; }
+table { display: table; border-collapse: separate; border-spacing: 2px; border-color: gray; }
+tbody { display: table-row-group; vertical-align: middle; border-color: inherit; }
+tr { display: table-row; vertical-align: inherit; border-color: inherit; }
+td, th { display: table-cell; vertical-align: inherit; }
+font { float: left; }
+hgroup h1 { text-align: center; }
+
+.content-wrapper {
+  position: relative;
+  min-height: 100%;
+  padding-top: 18px;
+  background: url('../img/bg.png') 0 0 repeat;
+}
+
+.content-header {
+  width: 500px;
+  height: 92px;
+  position: relative;
+  margin: 18px auto 0;
+  z-index: 999;
+  font-size: 12px;
+
+  h1 {
+    display: inline;
+
+    a {
+      position: absolute;
+      font-size: 24px;
+      color: white;
+      left: 141px;
+      width: 209px;
+      height: 46px;
+      top: 7px;
+      outline: none;
+    }
+  }
+}
+
+.login_footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 0;
+  color: white;
+  font-size: 10px;
+  margin: 18px auto;
+  padding-bottom: 36px;
+  text-align: center;
+}
+
+
+.content {
+  background-color: #E7E7E7;
+  background: -webkit-gradient(liner, 0% 0%, 0% 100%, from(white) to (#E7E7E7));
+  background: -moz-liner-gradient(100% 100% 90deg, #E7E7E7, white);
+  background: gradient(liner, 0% 0%, 0% 100%, from(white) to (#E7E7E7));
+  position: relative;
+  width: 405px;
+  min-height: 267px;
+  margin: 0 auto;
+  padding: 37px 45px 0 50px !important;
+  box-shadow: 5px 5px 7px rgba(0, 0, 0, .4);
+  border-color: #E5E5E5 #DBDBDB #D2D2D2;
+}
+
+.rounded {
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -o-border-radius: 4px;
+  -khtml-border-radius: 4px;
+}
+
+p.intro {
+  color: #888;
+  font-size: 1.143em;
+  line-height: 1.562em;
+  font-weight: normal;
+}
+
+.hero {
+  p.intro {
+    font-size: 14px;
+    color: #333;
+  }
+}
+
+#ds_container {
+  table {
+    width: 100%;
+    margin-left: 40px;
+  }
+}
+
+.my-btn-group {
+  margin-right: 70px;
+  .btn {
+    width: 100px;
+    float: right;
+    margin-right:10px;
+  }
+}
+
+.cleaner {
+  height: 20%;
+}
