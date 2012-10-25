@@ -2,6 +2,8 @@
 require('../libs/smarty.php');
 require('./utils/helper.php');
 require('./utils/company.php');
+require('./utils/school.php');
+require('./utils/student.php');
 
 //检查登陆状态
 $consumer = $_COOKIE["consumer"];

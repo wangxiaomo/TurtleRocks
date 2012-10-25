@@ -6,7 +6,12 @@ function change_company_meta_info($company_id,$meta_info){
 	$db->connect();
 	$db->query($sql);
 }
-
+function update_company_info($consumer, $company_name, $meta_info){
+	$sql = "update tr_company set company_name='$company_name', meta_info='$meta_info' where consumer='$consumer';";
+	$db = new DB;
+	$db->connect();
+	$db->query($sql);
+}
 function new_job($company_id,$job_name,$job_meta){
 	$sql = "insert into tr_job (company_id,job_name,job_meta) values($company_id,'$job_name','$job_meta')";
 	$db =new DB;

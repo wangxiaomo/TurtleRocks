@@ -11,8 +11,8 @@ if($smarty->is_cached('login.tpl')){
 
 if($_POST["consumer"]){
     //登陆
-    $consumer = trim($_POST['consumer']);
-    $password = trim($_POST['password']);
+    $consumer = escape($_POST['consumer']);
+    $password = escape($_POST['password']);
     $user_type = check_login($consumer, $password);
     if($user_type!=-1){
         setcookie('consumer', $consumer);
