@@ -58,18 +58,7 @@ function get_account_info($user_type, $consumer){
           'major'         =>  $db->f('major'),
           'contact_num'   =>  $db->f('contact_num'),
           'extra'         =>  $db->f('extra'),
-          'family_info'   =>  Array(),
         );
-        $sql = "SELECT id, name, relationship, contact_num FROM tr_family WHERE student_id='" . $student_id . "';";
-        $db->query($sql);
-        while($db->next_record()){
-          array_push($account['family_info'], Array(
-            'id'    =>  $db->f('id'),
-            'name'  =>  $db->f('name'),
-            'relationship'  =>  $db->f('relationship'),
-            'contact_num'   =>  $db->f('contact_num'),
-          ));
-        }
         return $account;
     }else{
         $sql = "SELECT company_id, company_name, meta_info FROM tr_company WHERE consumer='" . $consumer . "';";

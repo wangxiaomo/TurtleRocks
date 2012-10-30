@@ -1,13 +1,28 @@
-
+* { margin: 0; padding: 0;}
 #main {
+  label {
+    display: inline;
+  }
+
   table {
     width: 480px;
     margin-left: 20px;
     text-align: right;
     tr {
+      td {
+        text-align: left;
+        padding: 5px;
+        
+        input {
+          margin-bottom: -2px;
+        }
+      }
       td.op {
         width: 200px;
         padding-left: 25px;
+      }
+      td.m {
+        text-align: right;
       }
     }
   }
