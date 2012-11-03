@@ -8,7 +8,7 @@
   - libs 存放库文件。
   - configs 存放 Smarty 配置文件
   - templates 存放模板文件
-  - templates_c 存放模板编译好的文件（可以忽略）
+  - templates\_c 存放模板编译好的文件（可以忽略）
   - cache 存放 Smarty 缓存文件（可以忽略）
   - src 存放核心 php 文件
 
@@ -19,36 +19,36 @@
   Smarty 库文件位于 libs/Smarty 下，调用脚本为 libs/smarty.php，通过配置变量，然后实例化
   MySmarty 就初始化好 Smarty 了。示例：
 
-      <?php
-      require('./libs/smarty.php');
-      $smarty = new MySmarty;
-      $smarty->assign('name', 'xiaomo');
-      $smarty->display('index.tpl');
-      ?>
+    <?php
+    require('./libs/smarty.php');
+    $smarty = new MySmarty;
+    $smarty->assign('name', 'xiaomo');
+    $smarty->display('index.tpl');
+    ?>
 
   - DB
 
   DB 库文件位于 libs/DB 下，调用脚本是 libs/db.php，通过配置变量，然后实例化 DB 就初始化好
-  DB 了。DB 采用的是 PHPLIB db_mysql.inc，所以详细调用过程请参见 PHPLIB MANUAL。示例：
+  DB 了。DB 采用的是 PHPLIB db\_mysql.inc，所以详细调用过程请参见 PHPLIB MANUAL。示例：
 
-      <?php
-      require('./libs/db.php');
-      $db = new DB;
-      $db->connect();
-      $query = 'SELECT * FROM table';
-      $db->query($query);
-      while($db->next_record()){
-        echo $db->f('name');
-        echo $db->f('gender');
-      }
-      $db->free();
-      ?>
+    <?php
+    require('./libs/db.php');
+    $db = new DB;
+    $db->connect();
+    $query = 'SELECT * FROM table';
+    $db->query($query);
+    while($db->next_record()){
+      echo $db->f('name');
+      echo $db->f('gender');
+    }
+    $db->free();
+    ?>
 
 + static js and css
 
   js 主要使用 Jquery lastest.css 使用 less 来编写，之后进行编译。
 
-+ 保证 cache 和 templates_c 有写权限*important*
++ 保证 cache 和 templates\_c 有写权限*important*
 
 + dbname: turtlerock. dbuser: turtlerock. dbpass: turtlerock
 
