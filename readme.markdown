@@ -19,12 +19,12 @@
       Smarty 库文件位于 libs/Smarty 下，调用脚本为 libs/smarty.php，通过配置变量，然后实例化
       MySmarty 就初始化好 Smarty 了。示例：
 
-        <?php
-        require('./libs/smarty.php');
-        $smarty = new MySmarty;
-        $smarty->assign('name', 'xiaomo');
-        $smarty->display('index.tpl');
-        ?>
+          <?php
+          require('./libs/smarty.php');
+          $smarty = new MySmarty;
+          $smarty->assign('name', 'xiaomo');
+          $smarty->display('index.tpl');
+          ?>
 
   - DB
 
