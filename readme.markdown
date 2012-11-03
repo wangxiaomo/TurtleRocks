@@ -31,18 +31,18 @@
       DB 库文件位于 libs/DB 下，调用脚本是 libs/db.php，通过配置变量，然后实例化 DB 就初始化好
       DB 了。DB 采用的是 PHPLIB db\_mysql.inc，所以详细调用过程请参见 PHPLIB MANUAL。示例：
 
-          <?php
-          require('./libs/db.php');
-          $db = new DB;
-          $db->connect();
-          $query = 'SELECT * FROM table';
-          $db->query($query);
-          while($db->next_record()){
-            echo $db->f('name');
-            echo $db->f('gender');
-          }
-          $db->free();
-          ?>
+            <?php
+            require('./libs/db.php');
+            $db = new DB;
+            $db->connect();
+            $query = 'SELECT * FROM table';
+            $db->query($query);
+            while($db->next_record()){
+              echo $db->f('name');
+              echo $db->f('gender');
+            }
+            $db->free();
+            ?>
 
 + static js and css
 
