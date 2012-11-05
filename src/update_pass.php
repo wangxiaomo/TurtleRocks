@@ -1,6 +1,5 @@
 <?php
 include('base.php');
-
 if($_POST){
   if($consumer != $_POST['consumer']){
     header('HTTP/1.0 403');

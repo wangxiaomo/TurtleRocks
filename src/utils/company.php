@@ -12,7 +12,6 @@ function update_company_info($consumer, $company_name, $meta_info){
 	$db->connect();
 	$db->query($sql);
 }
-]
 function audit_apply_record($record_id, $status){
     $db = new DB;
     $db->connect;

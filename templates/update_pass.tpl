@@ -20,13 +20,15 @@
         <div class="status">{$status}</div>
       {/if}
       <div class="op" style="margin-left:20px;">
-        <table>
-        <tr><td class="m">账号:</td><td><input type="text" value="{$smarty.cookies.consumer}" disabled="disabled" /></td></tr>
-        <tr><td class="m">原始密码:</td><td><input type="password" id="origin_pass" name="origin_pass" /></td></tr>
-        <tr><td class="m">新密码:</td><td><input type="password" id="new_pass" name="new_pass" /></td></tr>
-        <tr><td class="m">确认密码:</td><td><input type="password" id="re_new_pass" name="re_new_pass" /></td></tr>
-        <tr><td>&nbsp;</td><td><button id="submit" class="btn btn-primary">提交</button><button id="reset" class="btn">重置</button></td></tr>
-        </table>
+        <form method="POST" action="">
+          <table>
+            <tr><td class="m">账号:</td><td><input type="text" id="consumer" name="consumer" value="{$smarty.cookies.consumer}" readonly="readonly" /></td></tr>
+            <tr><td class="m">原始密码:</td><td><input type="password" id="origin_pass" name="origin_pass" /></td></tr>
+            <tr><td class="m">新密码:</td><td><input type="password" id="new_pass" name="new_pass" /></td></tr>
+            <tr><td class="m">确认密码:</td><td><input type="password" id="re_new_pass" name="re_new_pass" /></td></tr>
+            <tr><td>&nbsp;</td><td><div class="btn-group"><button class="submit btn btn-primary">提交</button><button class="reset btn">重置</button></div></td></tr>
+          </table>
+        </form>
       </div>
     </div>
     <div class="clear">&nbsp;</div>
@@ -42,17 +44,18 @@ $(function(){
     return $('#new_pass').attr('value') == $('#re_new_pass').attr('value');
   }
   function reset(){
-    $('input[disabled!=true]').attr('value', '');
+    $('input:password').attr('value', '');
   }
-  $('#submit').on('click', function(){
+  $('button.submit').on('click', function(){
     if(check_new_pass()){
-      $('form').submit();
+      $('form[class!=searchform]').submit();
     }else{
-      alert("重复输入的密码不一致.请确认输入!");
+      alert("两次输入的密码不一致.请重新输入!!!");
       reset();
     }
+    return false;
   });
-  $('#reset').on('click', reset);
+  $('button.reset').on('click', reset);
 });
 </script>
 {/literal}

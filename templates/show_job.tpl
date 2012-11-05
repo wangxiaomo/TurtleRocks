@@ -29,7 +29,7 @@
           <td><a href="#">申请</a></td>
         </tr>
         {foreachelse}
-          <tr>这家公司没有任何职位..不给力啊依然的.老师!!!</tr>
+          <tr><td colspan=4><div class="status">这家公司没有任何职位..不给力啊依然的.老师!!!</div></td></tr>
         {/foreach}
         <!--
 显示完整的职位信息.通过点击来进行 toggle.不设置单独的页面来输出职位介绍.

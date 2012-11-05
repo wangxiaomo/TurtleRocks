@@ -15,7 +15,7 @@
   <div id="content-wrap" style="background-color:white;">
     {include file="sidebar.tpl"}
     <div id="main"> 
-      <h1>修改个人信息</h1>
+      <h1>修改信息</h1>
       <div class="op" style="margin-left:20px;">
         <form method="POST">
           <table>
