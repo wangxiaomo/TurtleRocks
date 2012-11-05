@@ -55,4 +55,18 @@ function update_school_info($consumer, $department_name){
     $db->query("UPDATE tr_school SET department_name='" . $department_name . "' WHERE consumer='" . $consumer . "';");
     return true;
 }
+function add_new_department($department_name, $consumer, $password){
+    $db = new DB;
+    $db->connect();
+    $db->query("INSERT INTO tr_login(consumer,password,user_type) VALUES('$consumer', '" . md5($password) . "',0);");
+    if($db->Error){
+        return "用户名已存在.";
+    }
+    $db->query("INSERT INTO tr_school(consumer,department_name) VALUES('$consumer', '$department_name');");
+    if($db->Error){
+        $db->query("DELETE FROM tr_login WHERE consumer='$consumer';");
+        return "部门名已存在.请确认!";
+    }
+    return "";
+}
 ?>

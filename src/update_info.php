@@ -8,7 +8,7 @@ if($_POST){
         $department_name = escape($_POST['department_name']);
         update_school_info($consumer, $department_name);
     }elseif($user_type == 1){
-        //修改学生信息
+        //todo: 上传头像
         $name = escape($_POST['name']);
         $gender = escape($_POST['gender']);
         $id_num = escape($_POST['id_num']);
@@ -21,7 +21,7 @@ if($_POST){
     }else{
         $company_name = escape($_POST['company_name']);
         $meta_info = escape($_POST['meta_info']);
-        update_company_info($consumer, $company_name, $meta_info);
+    update_company_info($consumer, $company_name, $meta_info);
     }
 }
 

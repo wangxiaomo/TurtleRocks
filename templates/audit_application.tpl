@@ -22,55 +22,20 @@
           <td>状态</td>
           <td>操作</td>
         </thead>
+        {foreach from=$records item=record}
         <tr>
-          <td>小黑</td>
-          <td>开发工程师</td>
-          <td>2012/09/01</td>
+          <td>{$record.name}</td>
+          <td>{$record.job_name}</td>
+          <td>{$record.request_date}</td>
           <td>审核中</td>
           <td><a href="#">通过</a>&nbsp;&nbsp;<a href="#">拒绝</a></td>
+          <!--
+            操作通过 ajax 来实现.
+          -->
         </tr>
-        <tr>
-          <td>小黑</td>
-          <td>开发工程师</td>
-          <td>2012/09/01</td>
-          <td>审核中</td>
-          <td><a href="#">通过</a>&nbsp;&nbsp;<a href="#">拒绝</a></td>
-        </tr>
-        <tr>
-          <td>小黑</td>
-          <td>开发工程师</td>
-          <td>2012/09/01</td>
-          <td>审核中</td>
-          <td><a href="#">通过</a>&nbsp;&nbsp;<a href="#">拒绝</a></td>
-        </tr>
-        <tr>
-          <td>小黑</td>
-          <td>开发工程师</td>
-          <td>2012/09/01</td>
-          <td>审核中</td>
-          <td><a href="#">通过</a>&nbsp;&nbsp;<a href="#">拒绝</a></td>
-        </tr>
-        <tr>
-          <td>小黑</td>
-          <td>开发工程师</td>
-          <td>2012/09/01</td>
-          <td>审核中</td>
-          <td><a href="#">通过</a>&nbsp;&nbsp;<a href="#">拒绝</a></td>
-        </tr>
-        <tr>
-          <td>小黑</td>
-          <td>开发工程师</td>
-          <td>2012/09/01</td>
-          <td>审核中</td>
-          <td><a href="#">通过</a>&nbsp;&nbsp;<a href="#">拒绝</a></td>
-        </tr>
-        <tr>
-          <td>小黑</td>
-          <td>开发工程师</td>
-          <td>2012/09/01</td>
-          <td>审核中</td>
-          <td><a href="#">通过</a>&nbsp;&nbsp;<a href="#">拒绝</a></td>
-        </tr>
+        {foreachelse}
+          <tr>没有申请的记录.公司不给力啊!!!</tr>
+        {/foreach}
       </table>
     </div>
     <div class="clear">&nbsp;</div>

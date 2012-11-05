@@ -16,13 +16,17 @@
     <div id="main"> 
       <h1>新增学生帐号</h1>
 	  <div>
-		<form method="POST">
-			<p>学生名称: <input type="text" name="comany_name"/></p>
-			<p>登录名称: <input type="text" name="login_name" /></p>
-			<p>密码:  <input type="password" name="login_pass" /></p>
-			<input type="hidden" name="user_type" value="student"/>
-			<p><input id="submit" type="submit" value="提交"></p>
-		</form>
+		{if $error}
+      <div class="status">{$error}</div>
+    {/if}
+    <form method="POST">
+      <table>
+        <tr><td class="m">登录账号:</td><td><input type="text" id="login_name" name="login_name"/></td></tr>
+        <tr><td class="m">登录密码:</td><td><input type="password" id="login_pass" name="login_pass"/></td></tr>
+        <tr><td class="m">确认密码:</td><td><input type="password" id="re_login_pass" name="re_login_pass"/></td></tr>
+        <tr><td>&nbsp;</td><td><button id="submit" class="btn btn-primary">提交</button><button id="reset" class="btn">重置</button></td></tr>
+      </table>
+    </form>
 	  </div>
     </div>
     <div class="clear">&nbsp;</div>

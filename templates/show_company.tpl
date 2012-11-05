@@ -20,36 +20,15 @@
           <td>公司信息</td>
           <td>操作</td>
         </thead>
+        {foreach from=$companies item=company}
         <tr>
-          <td>百度</td>
-          <td>中国第一互联网</td>
-          <td><a href="show_job.php?id=1">查看该公司提供的职位</a></td>
+          <td>{$company.company_name}</td>
+          <td>{$company.meta_info}</td>
+          <td><a href="show_job.php?cid={$company.company_id}">查看该公司提供的职位</a></td>
         </tr>
-        <tr>
-          <td>百度</td>
-          <td>中国第一互联网</td>
-          <td><a href="show_job.php?id=1">查看该公司提供的职位</a></td>
-        </tr>
-        <tr>
-          <td>百度</td>
-          <td>中国第一互联网</td>
-          <td><a href="show_job.php?id=1">查看该公司提供的职位</a></td>
-        </tr>
-        <tr>
-          <td>百度</td>
-          <td>中国第一互联网</td>
-          <td><a href="show_job.php?id=1">查看该公司提供的职位</a></td>
-        </tr>
-        <tr>
-          <td>百度</td>
-          <td>中国第一互联网</td>
-          <td><a href="show_job.php?id=1">查看该公司提供的职位</a></td>
-        </tr>
-        <tr>
-          <td>百度</td>
-          <td>中国第一互联网</td>
-          <td><a href="show_job.php?id=1">查看该公司提供的职位</a></td>
-        </tr>
+        {foreachelse}
+          <tr>没有招聘公司. 不给力啊.老师!!!</tr>
+        {/foreach}
       </table>
     </div>
     <div class="clear">&nbsp;</div>

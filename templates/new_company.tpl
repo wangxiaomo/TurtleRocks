@@ -16,12 +16,17 @@
     <div id="main"> 
       <h1>新增公司帐号</h1>
 	  <div>
+    {if $error}
+      <div class="status">{$error}</div>
+    {/if}
 		<form method="POST">
-			<p><span>公司名称: </span><input type="text" name="comany_name"/></p>
-			<p><span>登录名称: </span><input type="text" name="login_name" /></p>
-			<p><span>密码: </span><input type="password" name="login_pass" /></p>
-			<input type="hidden" name="user_type" value="company"/>
-			<input id="submit" type="submit" value="提交">
+      <table>
+        <tr><td class="m">公司名称:</td><td><input type="text" id="company_name" name="comany_name"/></td></tr>
+        <tr><td class="m">登录账号:</td><td><input type="text" id="login_name" name="login_name"/></td></tr>
+        <tr><td class="m">登录密码:</td><td><input type="password" id="login_pass" name="login_pass"/></td></tr>
+        <tr><td class="m">确认密码:</td><td><input type="password" id="re_login_pass" name="re_login_pass"/></td></tr>
+        <tr><td>&nbsp;</td><td><button id="submit" class="btn btn-primary">提交</button><button id="reset" class="btn">重置</button></td></tr>
+			</table>
 		</form>
 	  </div>
     </div>
@@ -31,5 +36,24 @@
 <div class="footer">
   {include file="footer.tpl"}
 </div>
+{literal}
+<script>
+$(function(){
+  $('#submit').on('click', function(e){
+    e.preventDefault();
+    if($('#login_pass').attr('value')!=$('#re_login_pass').attr('value')){
+      alert("请确认新密码!");
+      $('input:password').attr('value','');
+      return false;
+    }
+    $('form').submit();
+  });
+  $('#reset').on('click', function(e){
+    e.preventDefault();
+    $('input').attr('value', '');
+  });
+});
+</script>
+{/literal}
 </body>
 </html>

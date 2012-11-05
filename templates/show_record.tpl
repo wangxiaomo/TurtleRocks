@@ -22,55 +22,22 @@
           <td>状态</td>
           <td>审批时间</td>
         </thead>
+        {foreach from=$records item=record}
         <tr>
-          <td>百度</td>
-          <td>开发工程师</td>
-          <td>2012/09/01</td>
-          <td>审核中</td>
-          <td>请耐心等待回复</td>
+          <td>{$record.company_name}</td>
+          <td>{$record.job_name}</td>
+          <td>{$record.request_date}</td>
+          {if $record.status == 0}
+            <td>审核中.</td>
+            <td>请耐心等待回复.</td>
+          {else}
+            <td>已通过审核</td>
+            <td>{$record.audit_date}</td>
+          {/if}
         </tr>
-        <tr>
-          <td>百度</td>
-          <td>开发工程师</td>
-          <td>2012/09/01</td>
-          <td>审核中</td>
-          <td>请耐心等待回复</td>
-        </tr>
-        <tr>
-          <td>百度</td>
-          <td>开发工程师</td>
-          <td>2012/09/01</td>
-          <td>审核中</td>
-          <td>请耐心等待回复</td>
-        </tr>
-        <tr>
-          <td>百度</td>
-          <td>开发工程师</td>
-          <td>2012/09/01</td>
-          <td>审核中</td>
-          <td>请耐心等待回复</td>
-        </tr>
-        <tr>
-          <td>百度</td>
-          <td>开发工程师</td>
-          <td>2012/09/01</td>
-          <td>审核中</td>
-          <td>请耐心等待回复</td>
-        </tr>
-        <tr>
-          <td>百度</td>
-          <td>开发工程师</td>
-          <td>2012/09/01</td>
-          <td>审核中</td>
-          <td>请耐心等待回复</td>
-        </tr>
-        <tr>
-          <td>百度</td>
-          <td>开发工程师</td>
-          <td>2012/09/01</td>
-          <td>审核中</td>
-          <td>请耐心等待回复</td>
-        </tr>
+        {foreachelse}
+          <tr>没有实习记录.同学不给力啊!!!</tr>
+        {/foreach}
       </table>
     </div>
     <div class="clear">&nbsp;</div>

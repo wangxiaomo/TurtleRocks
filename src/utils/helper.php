@@ -30,6 +30,13 @@ function check_login($consumer, $password){
     return $user_type == NULL?-1:$user_type;
 }
 
+function update_consumer_pass($consumer, $password){
+    $db = new DB;
+    $db->connect();
+    $db->query("update tr_login set password='$password' where consumer='$consumer';");
+    return true;
+}
+
 function get_account_info($user_type, $consumer){
     $db = new DB;
     $db->connect();
@@ -70,5 +77,40 @@ function get_account_info($user_type, $consumer){
           'meta_info'     =>  $db->f('meta_info'),
         );
     }
+}
+
+function get_consumer_records($consumer, $user_type, $limit=20){
+  //首先要根据 user_type 来判断权限.
+  if($user_type == 0){
+    //当前查看者为学校.有权看所有学生的实习记录
+    $sql = "SELECT name,company_name,job_name,request_date,audit_date,status FROM tr_record,tr_student,tr_company,tr_job "
+         . "WHERE tr_student.student_id=tr_record.record_id AND tr_job.job_id=tr_record.job_id AND tr_job.company_id=tr_company.company_id "
+         . "ORDER BY record_id DESC LIMIT $limit;"
+  }elseif($user_type == 1){
+    //当前查看者为学生.有权查看自己的实习记录
+    $sql = "SELECT name,company_name,job_name,request_date,audit_date,status FROM tr_record,tr_student,tr_company,tr_job "
+         . "WHERE tr_student.student_id=tr_record.record_id AND tr_job.job_id=tr_record.job_id AND tr_job.company_id=tr_company.company_id "
+         . "AND tr_student.consumer='$consumer' ORDER BY record_id DESC LIMIT $limit;"
+  }else{
+    //当前查看者为公司.有权查看申请本公司的实习记录
+    $sql = "SELECT name,company_name,job_name,request_date,audit_date,status FROM tr_record,tr_student,tr_company,tr_job "
+         . "WHERE tr_student.student_id=tr_record.record_id AND tr_job.job_id=tr_record.job_id AND tr_job.company_id=tr_company.company_id "
+         . "AND tr_company.consumer='$consumer' ORDER BY record_id DESC LIMIT $limit;"
+  }
+  $db = new DB;
+  $db->connect();
+  $db->query($sql);
+  $ret = Array();
+  while($db->next_record()){
+    array_push($ret, Array(
+      'name'  =>  $db->f('name'),
+      'company_name'  =>  $db->f('company_name'),
+      'job_name'  =>  $db->f('job_name'),
+      'request_date'  =>  $db->f('request_date'),
+      'audit_date'  =>  $db->f('audit_date'),
+      'status'  =>  $db->f('status'),
+    ));
+  }
+  return $ret;
 }
 ?>

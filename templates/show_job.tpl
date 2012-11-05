@@ -21,42 +21,20 @@
           <td>职位信息</td>
           <td>操作</td>
         </thead>
+        {foreach from=$jobs item=job}
         <tr>
-          <td>百度</td>
-          <td>开发工程师</td>
-          <td>负责万能的开发工作</td>
+          <td>{$job.company_name}</td>
+          <td>{$job.job_name}</td>
+          <td>{$job.job_meta|truncate:20}</td>
           <td><a href="#">申请</a></td>
         </tr>
-        <tr>
-          <td>百度</td>
-          <td>开发工程师</td>
-          <td>负责万能的开发工作</td>
-          <td><a href="#">申请</a></td>
-        </tr>
-        <tr>
-          <td>百度</td>
-          <td>开发工程师</td>
-          <td>负责万能的开发工作</td>
-          <td><a href="#">申请</a></td>
-        </tr>
-        <tr>
-          <td>百度</td>
-          <td>开发工程师</td>
-          <td>负责万能的开发工作</td>
-          <td><a href="#">申请</a></td>
-        </tr>
-        <tr>
-          <td>百度</td>
-          <td>开发工程师</td>
-          <td>负责万能的开发工作</td>
-          <td><a href="#">申请</a></td>
-        </tr>
-        <tr>
-          <td>百度</td>
-          <td>开发工程师</td>
-          <td>负责万能的开发工作</td>
-          <td><a href="#">申请</a></td>
-        </tr>
+        {foreachelse}
+          <tr>这家公司没有任何职位..不给力啊依然的.老师!!!</tr>
+        {/foreach}
+        <!--
+显示完整的职位信息.通过点击来进行 toggle.不设置单独的页面来输出职位介绍.
+职位申请通过 ajax 来做.
+        -->
       </table>
     </div>
     <div class="clear">&nbsp;</div>
