@@ -33,6 +33,9 @@
           <tr>没有招聘公司. 不给力啊.老师!!!</tr>
         {/foreach}
       </table>
+      <div class="tooltips">
+        <p><span class="label label-success">提示</span>点击该行可查看具体信息!</p>
+      </div>
     </div>
     <div class="clear">&nbsp;</div>
   </div>

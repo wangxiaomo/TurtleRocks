@@ -28,10 +28,7 @@
           <td>{$record.job_name}</td>
           <td>{$record.request_date}</td>
           <td>审核中</td>
-          <td><a href="#">通过</a>&nbsp;&nbsp;<a href="#">拒绝</a></td>
-          <!--
-            操作通过 ajax 来实现.
-          -->
+          <td><a class="op" href="j/audit_application.php?op=yes&record_id={$record.record_id}">通过</a>&nbsp;&nbsp;<a class="op" href="j/audit_application.php?op=no&record_id={$record.record_id}">拒绝</a></td>
         </tr>
         {foreachelse}
           <tr><td colspan=5><div class="status">没有申请的记录.公司不给力啊!!!</div></td></tr>
@@ -44,5 +41,26 @@
 <div class="footer">
   {include file="footer.tpl"}
 </div>
+{literal}
+<script>
+$(function(){
+  $('a.op').on('click', function(e){
+    e.preventDefault();
+    var o = $(this);
+    $.post($(o).attr('href'), function(d){
+      if(d.r == 0){
+        alert("操作失败.请重新尝试!");
+        return false;
+      }else{
+        alert("审批成功!");
+        $(o).closest('td').html('操作已完成');
+        $(o).closest('td').prev().html($(o).text().trim());
+      }
+    });
+    return false;
+  });
+});
+</script>
+{/literal}
 </body>
 </html>

@@ -26,6 +26,9 @@
           <td>{$company.meta_info|truncate:30}</td>
           <td><a href="show_job.php?id={$company.company_id}">查看该公司提供的职位</a></td>
         </tr>
+        <tr class="meta_info">
+          <td colspan=3>{$company.meta_info}</td>
+        </tr>
       {foreachelse}
         <tr><td>没有公司数据。请联系管理员添加</td></tr>
       {/foreach}
@@ -48,7 +51,10 @@
           <td>{$job.company_name}</td>
           <td>{$job.job_name}</td>
           <td>{$job.job_meta|truncate:30}</td>
-          <td><a href="javascript:void(0);" data-id="{$job.job_id}">申请职位</a></td>
+          <td><a href="show_job.php">查看详情</a></td>
+        </tr>
+        <tr class="meta_info">
+          <td colspan=4>{$job.job_meta}</td>
         </tr>
       {foreachelse}
         <tr><td>没有公司数据。请联系管理员添加</td></tr>
@@ -66,5 +72,16 @@
 <div class="footer">
   {include file="footer.tpl"}
 </div>
+{literal}
+<script>
+$(function(){
+  $('tr[class!=meta_info]').on('click', function(e){
+    if(e.target.localName != 'a'){
+      $(this).next().toggle(500);
+    }
+  });
+});
+</script>
+{/literal}
 </body>
 </html>

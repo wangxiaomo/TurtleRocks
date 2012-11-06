@@ -27,7 +27,10 @@
             <td class="company_name">{$job.company_name}</td>
             <td>{$job.job_name}</td>
             <td>{$job.job_meta|truncate:30}</td>
-            <td><a href="manage_job.php?job_id={$job.job_id}">修改</a>&nbsp;&nbsp;<a href="#">删除</a></td>
+            <td><a href="manage_job.php?job_id={$job.job_id}">修改</a>&nbsp;&nbsp;<a class="delete-job" href="j/delete_job.php?job_id={$job.job_id}">删除</a></td>
+          </tr>
+          <tr class="meta_info">
+            <td colspan=4>{$job.job_meta}</td>
           </tr>
           {foreachelse}
             <tr>没有发布任何工作.不给力啊公司!!!</tr>
@@ -37,6 +40,7 @@
       {else}
         <h1>修改工作</h1>
         <table>
+          <input type="hidden" id="job_id" name="job_id" value="{$job.job_id}" />
           <tr><td class="m">公司名称:</td><td>{$job.company_name}</td></tr>
           <tr><td class="m">职位名称:</td><td><input type="text" id="job_name" name="job_name" value="{$job.job_name}" /></td></tr>
           <tr><td class="m">职位信息:</td><td><textarea id="job_meta" name="job_meta">{$job.job_meta}</textarea></td></tr>
@@ -62,12 +66,43 @@ $(function(){
   });
   $(document).on('click', '#add', function(e){
     e.preventDefault();
-    //TODO: ajax add the new job
+    var job_name = $('#job_name').attr('value').trim();
+    var job_meta = $('#job_meta').attr('value').trim();
+    $.post('j/add_job.php', {job_name:job_name, job_meta:job_meta}, function(d){
+      if(d.r == 0){
+        alert("添加失败!可能有同名公司的存在!");
+        return false;
+      }else{
+        window.location.reload();
+      }
+      return false;
+    });
   });
   $(document).on('click', '#reset', function(e){
     e.preventDefault();
     $('input#job_name').attr('value', '');
     $('input#job_meta').attr('vaalue', '');
+  });
+  $('tr[class!=meta_info]').on('click', function(e){
+    if(e.target.localName!='a'){
+      $(this).next().toggle(500);
+    }
+  });
+  $('.delete-job').on('click', function(e){
+    e.preventDefault();
+    var o = $(this);
+    var tr = o.closest('tr');
+    $.post($(o).attr('href'), function(d){
+      if(d.r == 0){
+        alert("已有学生申请该工作.确认删除请联系管理员!");
+        return flase;
+      }else{
+        alert("删除成功!");
+        $(tr).next().remove();
+        $(tr).fadeOut(500, function(){ $(tr).remove(); });
+      }
+    });
+    return false;
   });
 });
   </script>
@@ -86,7 +121,22 @@ $(function(){
   {literal}
   <script>
 $(function(){
-  //修改工作
+  //修改
+  $('#submit').on('click', function(e){
+    e.preventDefault();
+    var job_id = $('#job_id').attr('value').trim();
+    var job_name = $('#job_name').attr('value').trim();
+    var job_meta = $('#job_meta').attr('value').trim();
+    $.post('j/update_job.php', {job_id:job_id, job_name:job_name, job_meta:job_meta},
+        function (d){
+      if(d.r == 0){
+        alert("修改失败!");
+        return false;
+      }else{
+        window.location = 'manage_job.php';
+      }
+    });
+  });
 });
   </script>
   {/literal}

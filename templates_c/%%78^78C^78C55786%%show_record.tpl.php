@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.27, created on 2012-11-05 11:46:29
+<?php /* Smarty version 2.6.27, created on 2012-11-06 13:16:36
          compiled from show_record.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'config_load', 'show_record.tpl', 1, false),)), $this); ?>
@@ -35,36 +35,104 @@ unset($_smarty_tpl_vars);
     <div id="main"> 
       <h1>查看实习记录</h1>
       <table class="table table-bordered table-hover table-condensed">
-        <thead>
-          <td>公司名称</td>
-          <td>职位名称</td>
-          <td>申请时间</td>
-          <td>状态</td>
-          <td>审批时间</td>
-        </thead>
-        <?php $_from = $this->_tpl_vars['records']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }if (count($_from)):
+        <?php if ($this->_tpl_vars['user_type'] == 0): ?>
+          <thead>
+            <td>学生姓名</td>
+            <td>公司名称</td>
+            <td>职位名称</td>
+            <td>申请时间</td>
+            <td>状态</td>
+            <td>审批时间</td>
+          </thead>
+          <?php $_from = $this->_tpl_vars['records']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }if (count($_from)):
     foreach ($_from as $this->_tpl_vars['record']):
 ?>
-        <tr>
-          <td><?php echo $this->_tpl_vars['record']['company_name']; ?>
+          <tr>
+            <td><?php echo $this->_tpl_vars['record']['name']; ?>
 </td>
-          <td><?php echo $this->_tpl_vars['record']['job_name']; ?>
+            <td><?php echo $this->_tpl_vars['record']['company_name']; ?>
 </td>
-          <td><?php echo $this->_tpl_vars['record']['request_date']; ?>
+            <td><?php echo $this->_tpl_vars['record']['job_name']; ?>
 </td>
-          <?php if ($this->_tpl_vars['record']['status'] == 0): ?>
-            <td>审核中.</td>
-            <td>请耐心等待回复.</td>
-          <?php else: ?>
-            <td>已通过审核</td>
-            <td><?php echo $this->_tpl_vars['record']['audit_date']; ?>
+            <td><?php echo $this->_tpl_vars['record']['request_date']; ?>
 </td>
-          <?php endif; ?>
-        </tr>
-        <?php endforeach; else: ?>
-          <tr>没有实习记录.同学不给力啊!!!</tr>
-        <?php endif; unset($_from); ?>
+            <?php if ($this->_tpl_vars['record']['status'] == 0): ?>
+              <td>审核中.</td>
+              <td>请耐心等待回复.</td>
+            <?php else: ?>
+              <td>已通过审核</td>
+              <td><?php echo $this->_tpl_vars['record']['audit_date']; ?>
+</td>
+            <?php endif; ?>
+          </tr>
+          <?php endforeach; else: ?>
+            <tr><td colspan=6><div class="status">没有实习记录.同学不给力啊!!!</div></td></tr>
+          <?php endif; unset($_from); ?>
+        <?php elseif ($this->_tpl_vars['user_type'] == 1): ?>
+          <thead>
+            <td>公司名称</td>
+            <td>职位名称</td>
+            <td>申请时间</td>
+            <td>状态</td>
+            <td>审批时间</td>
+          </thead>
+          <?php $_from = $this->_tpl_vars['records']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }if (count($_from)):
+    foreach ($_from as $this->_tpl_vars['record']):
+?>
+          <tr>
+            <td><?php echo $this->_tpl_vars['record']['company_name']; ?>
+</td>
+            <td><?php echo $this->_tpl_vars['record']['job_name']; ?>
+</td>
+            <td><?php echo $this->_tpl_vars['record']['request_date']; ?>
+</td>
+            <?php if ($this->_tpl_vars['record']['status'] == 0): ?>
+              <td>审核中.</td>
+              <td>请耐心等待回复.</td>
+            <?php else: ?>
+              <td>已通过审核</td>
+              <td><?php echo $this->_tpl_vars['record']['audit_date']; ?>
+</td>
+            <?php endif; ?>
+          </tr>
+          <?php endforeach; else: ?>
+            <tr><td colspan=5><div class="status">没有实习记录.同学不给力啊!!!</div></td></tr>
+          <?php endif; unset($_from); ?>
+        <?php else: ?>
+          <thead>
+            <td>学生姓名</td>
+            <td>职位名称</td>
+            <td>申请时间</td>
+            <td>状态</td>
+            <td>审批时间</td>
+          </thead>
+          <?php $_from = $this->_tpl_vars['records']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }if (count($_from)):
+    foreach ($_from as $this->_tpl_vars['record']):
+?>
+          <tr>
+            <td><?php echo $this->_tpl_vars['record']['name']; ?>
+</td>
+            <td><?php echo $this->_tpl_vars['record']['job_name']; ?>
+</td>
+            <td><?php echo $this->_tpl_vars['record']['request_date']; ?>
+</td>
+            <?php if ($this->_tpl_vars['record']['status'] == 0): ?>
+              <td>审核中.</td>
+              <td>请耐心等待回复.</td>
+            <?php else: ?>
+              <td>已通过审核</td>
+              <td><?php echo $this->_tpl_vars['record']['audit_date']; ?>
+</td>
+            <?php endif; ?>
+          </tr>
+          <?php endforeach; else: ?>
+            <tr><td colspan=5><div class="status">没有实习记录.公司不给力啊!!!</div></td></tr>
+          <?php endif; unset($_from); ?>
+        <?php endif; ?>
       </table>
+      <div class="tooltips">
+        <p><span class="label label-important">重要</span>审核通过后请主动联系公司负责人协商下一步的工作.</p>
+      </div>
     </div>
     <div class="clear">&nbsp;</div>
   </div>
