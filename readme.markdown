@@ -53,3 +53,11 @@
 + dbname: turtlerock. dbuser: turtlerock. dbpass: turtlerock
 
 + Life Goes On.Go Go DolphinQ.
+
+后续
+-----------------
+
++ LoginPage 在 IE 下定位有问题
++ 修改部分页面样式
++ 用户 Upload 头像
++ 填充真实数据
