@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.27, created on 2012-11-05 10:57:27
+<?php /* Smarty version 2.6.27, created on 2012-11-06 13:26:48
          compiled from sidebar.tpl */ ?>
 <img src="<?php echo $this->_config[0]['vars']['STATIC_DIR']; ?>
 /images/headerphoto.jpg" width="820" height="120" alt="headerphoto" class="no-border" />
@@ -8,7 +8,7 @@
   <p class="align-right">- xxx 2012.04</p>
   <h1>功能导航</h1>
   <ul class="sidemenu">
-    <li><a href="./">首页</a></li>
+    <li><a href="index.php">首页</a></li>
   <?php $_from = $this->_tpl_vars['navs']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }if (count($_from)):
     foreach ($_from as $this->_tpl_vars['nav']):
 ?>

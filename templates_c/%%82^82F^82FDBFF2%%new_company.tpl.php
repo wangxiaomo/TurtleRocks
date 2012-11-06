@@ -1,7 +1,7 @@
-<?php /* Smarty version 2.6.27, created on 2012-11-06 13:24:22
-         compiled from show_company.tpl */ ?>
+<?php /* Smarty version 2.6.27, created on 2012-11-06 14:42:57
+         compiled from new_company.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
-smarty_core_load_plugins(array('plugins' => array(array('function', 'config_load', 'show_company.tpl', 1, false),array('modifier', 'truncate', 'show_company.tpl', 26, false),)), $this); ?>
+smarty_core_load_plugins(array('plugins' => array(array('function', 'config_load', 'new_company.tpl', 1, false),)), $this); ?>
 <?php echo smarty_function_config_load(array('file' => "main.conf"), $this);?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -16,6 +16,8 @@ unset($_smarty_tpl_vars);
 /images/BrightSide.css" type="text/css" />
 <link href="<?php echo $this->_config[0]['vars']['STATIC_DIR']; ?>
 /less/main.less" rel="stylesheet/less" type="text/css">
+<link href="<?php echo $this->_config[0]['vars']['STATIC_DIR']; ?>
+/less/test.less" rel="stylesheet/less" type="text/css">
 <script type="text/javascript" src="<?php echo $this->_config[0]['vars']['STATIC_DIR']; ?>
 /js/libs/less.min.js"></script>
 </head>
@@ -33,35 +35,22 @@ $this->_tpl_vars = $_smarty_tpl_vars;
 unset($_smarty_tpl_vars);
  ?>
     <div id="main"> 
-      <h1>查看全部公司</h1>
-      <table class="table table-bordered table-hover table-condensed">
-        <thead>
-          <td>公司名称</td>
-          <td>公司信息</td>
-          <td>操作</td>
-        </thead>
-        <?php $_from = $this->_tpl_vars['companies']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }if (count($_from)):
-    foreach ($_from as $this->_tpl_vars['company']):
-?>
-        <tr>
-          <td><?php echo $this->_tpl_vars['company']['company_name']; ?>
-</td>
-          <td><?php echo ((is_array($_tmp=$this->_tpl_vars['company']['meta_info'])) ? $this->_run_mod_handler('truncate', true, $_tmp, 20) : smarty_modifier_truncate($_tmp, 20)); ?>
-</td>
-          <td><a href="show_job.php?cid=<?php echo $this->_tpl_vars['company']['company_id']; ?>
-">查看该公司提供的职位</a></td>
-        </tr>
-        <tr class="meta_info">
-          <td colspan=3><?php echo $this->_tpl_vars['company']['meta_info']; ?>
-</td>
-        </tr>
-        <?php endforeach; else: ?>
-          <tr>没有招聘公司. 不给力啊.老师!!!</tr>
-        <?php endif; unset($_from); ?>
-      </table>
-      <div class="tooltips">
-        <p><span class="label label-success">提示</span>点击该行可查看具体信息!</p>
-      </div>
+      <h1>新增公司帐号</h1>
+	  <div>
+    <?php if ($this->_tpl_vars['error']): ?>
+      <div class="status"><?php echo $this->_tpl_vars['error']; ?>
+</div>
+    <?php endif; ?>
+		<form method="POST">
+      <table>
+        <tr><td class="m">公司名称:</td><td><input type="text" id="company_name" name="comany_name"/></td></tr>
+        <tr><td class="m">登录账号:</td><td><input type="text" id="login_name" name="login_name"/></td></tr>
+        <tr><td class="m">登录密码:</td><td><input type="password" id="login_pass" name="login_pass"/></td></tr>
+        <tr><td class="m">确认密码:</td><td><input type="password" id="re_login_pass" name="re_login_pass"/></td></tr>
+        <tr><td>&nbsp;</td><td><button id="submit" class="btn btn-primary">提交</button><button id="reset" class="btn">重置</button></td></tr>
+			</table>
+		</form>
+	  </div>
     </div>
     <div class="clear">&nbsp;</div>
   </div>
@@ -76,10 +65,18 @@ unset($_smarty_tpl_vars);
 <?php echo '
 <script>
 $(function(){
-  $(\'tr[class!=meta_info]\').on(\'click\', function(e){
-    if(e.target.localName != \'a\'){
-      $(this).next().toggle(500);
+  $(\'#submit\').on(\'click\', function(e){
+    e.preventDefault();
+    if($(\'#login_pass\').attr(\'value\')!=$(\'#re_login_pass\').attr(\'value\')){
+      alert("请确认新密码!");
+      $(\'input:password\').attr(\'value\',\'\');
+      return false;
     }
+    $(\'form\').submit();
+  });
+  $(\'#reset\').on(\'click\', function(e){
+    e.preventDefault();
+    $(\'input\').attr(\'value\', \'\');
   });
 });
 </script>

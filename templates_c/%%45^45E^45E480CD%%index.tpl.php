@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.27, created on 2012-11-05 11:37:23
+<?php /* Smarty version 2.6.27, created on 2012-11-06 14:40:37
          compiled from index.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'config_load', 'index.tpl', 1, false),array('modifier', 'truncate', 'index.tpl', 26, false),)), $this); ?>
@@ -51,6 +51,10 @@ unset($_smarty_tpl_vars);
           <td><a href="show_job.php?id=<?php echo $this->_tpl_vars['company']['company_id']; ?>
 ">查看该公司提供的职位</a></td>
         </tr>
+        <tr class="meta_info">
+          <td colspan=3><?php echo $this->_tpl_vars['company']['meta_info']; ?>
+</td>
+        </tr>
       <?php endforeach; else: ?>
         <tr><td>没有公司数据。请联系管理员添加</td></tr>
       <?php endif; unset($_from); ?>
@@ -78,8 +82,11 @@ unset($_smarty_tpl_vars);
 </td>
           <td><?php echo ((is_array($_tmp=$this->_tpl_vars['job']['job_meta'])) ? $this->_run_mod_handler('truncate', true, $_tmp, 30) : smarty_modifier_truncate($_tmp, 30)); ?>
 </td>
-          <td><a href="javascript:void(0);" data-id="<?php echo $this->_tpl_vars['job']['job_id']; ?>
-">申请职位</a></td>
+          <td><a href="show_job.php">查看详情</a></td>
+        </tr>
+        <tr class="meta_info">
+          <td colspan=4><?php echo $this->_tpl_vars['job']['job_meta']; ?>
+</td>
         </tr>
       <?php endforeach; else: ?>
         <tr><td>没有公司数据。请联系管理员添加</td></tr>
@@ -101,5 +108,17 @@ $this->_tpl_vars = $_smarty_tpl_vars;
 unset($_smarty_tpl_vars);
  ?>
 </div>
+<?php echo '
+<script>
+$(function(){
+  $(\'tr[class!=meta_info]\').on(\'click\', function(e){
+    if(e.target.localName != \'a\'){
+      $(this).next().toggle(500);
+    }
+  });
+});
+</script>
+'; ?>
+
 </body>
 </html>

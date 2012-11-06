@@ -19,14 +19,18 @@
           <td>公司名称</td>
           <td>职位名称</td>
           <td>职位信息</td>
-          <td>操作</td>
+          {if $user_type!=0}
+            <td>操作</td>
+          {/if}
         </thead>
         {foreach from=$jobs item=job}
         <tr>
           <td>{$job.company_name}</td>
           <td>{$job.job_name}</td>
           <td>{$job.job_meta|truncate:20}</td>
-          <td><a href="#">申请</a></td>
+          {if $user_type!=0}
+            <td><a class="apply" href="j/apply_for_job.php?job_id={$job.job_id}">申请</a></td>
+          {/if}
         </tr>
         <tr class="meta_info">
           <td colspan=4>{$job.job_meta}</td>
@@ -35,6 +39,9 @@
           <tr><td colspan=4><div class="status">这家公司没有任何职位..不给力啊依然的.老师!!!</div></td></tr>
         {/foreach}
       </table>
+      <div class="tooltips">
+        <p><span class="label label-success">提示</span>点击该行可查看具体信息!</p>
+      </div>
     </div>
     <div class="clear">&nbsp;</div>
   </div>
@@ -49,6 +56,26 @@ $(function(){
     if(e.target.localName!='a'){
       $(this).next().toggle(500);
     }
+  });
+  $('a.apply').on('click', function(e){
+    e.preventDefault();
+    if($(this).text().trim() == '已申请'){
+      alert("请不要重复申请!");
+      return false;
+    }
+    var o = $(this);
+    $.post($(o).attr('href'), function(d){
+      if(d.r == 0){
+        //申请失败
+        alert("申请失败.请重试!");
+        return false;
+      }else{
+        //申请成功
+        alert("申请成功.请耐心等待审核!");
+        $(o).text('已申请');
+      }
+    });
+    return false;
   });
 });
 </script>

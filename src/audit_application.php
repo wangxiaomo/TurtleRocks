@@ -8,5 +8,6 @@ if($user_type!=2){
 }
 
 $records = get_applications($consumer);
+$smarty->assign('records', $records);
 $smarty->display('audit_application.tpl');
 ?>

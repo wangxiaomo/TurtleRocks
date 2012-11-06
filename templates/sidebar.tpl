@@ -5,7 +5,7 @@
   <p class="align-right">- xxx 2012.04</p>
   <h1>功能导航</h1>
   <ul class="sidemenu">
-    <li><a href="./">首页</a></li>
+    <li><a href="index.php">首页</a></li>
   {foreach from=$navs item=nav}
     <li><a href="{$nav.url}">{$nav.meta}</a></li>
   {/foreach}

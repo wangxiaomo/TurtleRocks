@@ -87,10 +87,13 @@
             {/if}
           </tr>
           {foreachelse}
-            <tr><td colspan=5><div class="status">没有实习记录.同学不给力啊!!!</div></td></tr>
+            <tr><td colspan=5><div class="status">没有实习记录.公司不给力啊!!!</div></td></tr>
           {/foreach}
         {/if}
       </table>
+      <div class="tooltips">
+        <p><span class="label label-important">重要</span>审核通过后请主动联系公司负责人协商下一步的工作.</p>
+      </div>
     </div>
     <div class="clear">&nbsp;</div>
   </div>
