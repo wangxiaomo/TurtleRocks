@@ -67,7 +67,7 @@ function get_jobs_from_company_by_consumer($consumer, $limit=20){
     $db = new DB;
     $db->connect();
     $db->query("SELECT job_id,company_name,job_name,job_meta FROM tr_company,tr_job WHERE tr_company.company_id=tr_job.company_id "
-              ."AND tr_company.company_id=$cid AND consumer='$consumer' LIMIT $limit;");
+              ."AND consumer='$consumer' LIMIT $limit;");
     $ret = Array();
     while($db->next_record()){
         array_push($ret, Array(
@@ -102,19 +102,18 @@ function get_job($job_id){
               ."AND job_id=$job_id;");
     $ret = Array();
     $db->next_record();
-    array_push($ret, Array(
+    return Array(
         'job_id'=>$db->f('job_id'),
         'company_name'=>$db->f('company_name'), 
         'job_name'=>$db->f('job_name'), 
         'job_meta'=>$db->f('job_meta'),
-    ));
-    return $ret;
+    );
 }
 function get_applications($consumer){
     $db = new DB;
     $db->connect();
     $db->query("SELECT record_id,name,company_name,job_name,request_date,audit_date,status FROM tr_student,tr_company,tr_job,tr_record "
-              ."WHERE tr_record.job_id=tr_job.job_id AND tr_job.job_id=tr_company.job_id AND tr_record.student_id=tr_student.student_id "
+              ."WHERE tr_record.job_id=tr_job.job_id AND tr_job.company_id=tr_company.company_id AND tr_record.student_id=tr_student.student_id "
               ."AND tr_company.consumer='$consumer' AND status=0 ORDER BY record_id;");
     $ret = Array();
     while($db->next_record()){

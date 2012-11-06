@@ -28,13 +28,12 @@
           <td>{$job.job_meta|truncate:20}</td>
           <td><a href="#">申请</a></td>
         </tr>
+        <tr class="meta_info">
+          <td colspan=4>{$job.job_meta}</td>
+        </tr>
         {foreachelse}
           <tr><td colspan=4><div class="status">这家公司没有任何职位..不给力啊依然的.老师!!!</div></td></tr>
         {/foreach}
-        <!--
-显示完整的职位信息.通过点击来进行 toggle.不设置单独的页面来输出职位介绍.
-职位申请通过 ajax 来做.
-        -->
       </table>
     </div>
     <div class="clear">&nbsp;</div>
@@ -43,5 +42,16 @@
 <div class="footer">
   {include file="footer.tpl"}
 </div>
+{literal}
+<script>
+$(function(){
+  $('tr[class!=meta_info]').on('click', function(e){
+    if(e.target.localName!='a'){
+      $(this).next().toggle(500);
+    }
+  });
+});
+</script>
+{/literal}
 </body>
 </html>

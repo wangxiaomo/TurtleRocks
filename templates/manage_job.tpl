@@ -38,7 +38,7 @@
         <h1>修改工作</h1>
         <table>
           <tr><td class="m">公司名称:</td><td>{$job.company_name}</td></tr>
-          <tr><td class="m">职位名称:</td><td><input type="text" id="job_name" name="job_name" value="{$job.name}" /></td></tr>
+          <tr><td class="m">职位名称:</td><td><input type="text" id="job_name" name="job_name" value="{$job.job_name}" /></td></tr>
           <tr><td class="m">职位信息:</td><td><textarea id="job_meta" name="job_meta">{$job.job_meta}</textarea></td></tr>
           <tr><td>&nbsp;</td><td><button id="submit" class="btn btn-primary">提交</button><button id="reset" class="btn">重置</button></td></tr>
         </table>
@@ -57,8 +57,8 @@ $(function(){
   $('#new_job').on('click', function(e){
     e.preventDefault();
     var template = _.template($('#new-job-item').html());
-    var company_name = $('.company_name').text();
-    $('.main').append(template({company_name:company_name}));
+    var company_name = $('.company_name').first().text();
+    $('#main').append(template({company_name:company_name}));
   });
   $(document).on('click', '#add', function(e){
     e.preventDefault();

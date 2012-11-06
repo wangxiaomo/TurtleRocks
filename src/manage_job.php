@@ -10,7 +10,7 @@ if($user_type!=2){
 if($job_id = $_GET['job_id']){
   //修改
   $job = get_job($job_id);
-  $smarty->assign('update', true);]
+  $smarty->assign('update', true);
   $smarty->assign('job', $job);
 }else{
   $jobs = get_jobs_from_company_by_consumer($consumer);
