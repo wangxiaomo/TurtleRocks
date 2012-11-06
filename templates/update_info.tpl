@@ -25,7 +25,7 @@
             <tr><td>&nbsp;</td><td><button>提交</button><button>重置</button></td></tr>
           {/if }
           {if $user_type == 1}
-            <tr><td class="m">照片:</td><td><img src="{$account.pic_path}" width="60" height="80" /></td></tr>
+            <tr><td class="m">照片:</td><td>{if $account.pic_path}<img src="{$account.pic_path}" width="60" height="80" />{else}<img src="../upload/students/default.jpg" width="60" height="80" />{/if}</td></tr>
             <tr><td class="m">姓名:</td><td><input type="text" name="name" value="{$account.name}" /></td></tr>
             <tr><td class="m">性别:</td><td>
               {if $account.gender == 1}

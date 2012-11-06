@@ -3,8 +3,8 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2012 年 11 月 05 日 10:34
--- 服务器版本: 5.5.27
+-- 生成日期: 2012 年 11 月 06 日 15:05
+-- 服务器版本: 5.5.28
 -- PHP 版本: 5.4.6-1ubuntu1
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
@@ -19,11 +19,16 @@ SET time_zone = "+00:00";
 --
 -- 数据库: `turtlerock`
 --
+DROP DATABASE `turtlerock`;
+CREATE DATABASE `turtlerock` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `turtlerock`;
 
 -- --------------------------------------------------------
 
 --
 -- 表的结构 `tr_company`
+--
+-- 创建时间: 2012 年 11 月 06 日 01:55
 --
 
 CREATE TABLE IF NOT EXISTS `tr_company` (
@@ -38,11 +43,17 @@ CREATE TABLE IF NOT EXISTS `tr_company` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
+-- 表的关联 `tr_company`:
+--   `consumer`
+--       `tr_login` -> `consumer`
+--
+
+--
 -- 转存表中的数据 `tr_company`
 --
 
 INSERT INTO `tr_company` (`consumer`, `company_id`, `company_name`, `meta_info`) VALUES
-('c1', 1, 'company1', 'company1 meta'),
+('c1', 1, 'company1', 'company1 meta shenme ab'),
 ('c2', 2, 'company2', 'company1 meta'),
 ('c3', 3, 'company3', 'company1 meta');
 
@@ -51,6 +62,8 @@ INSERT INTO `tr_company` (`consumer`, `company_id`, `company_name`, `meta_info`)
 --
 -- 表的结构 `tr_family`
 --
+-- 创建时间: 2012 年 11 月 06 日 01:55
+--
 
 CREATE TABLE IF NOT EXISTS `tr_family` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -58,13 +71,22 @@ CREATE TABLE IF NOT EXISTS `tr_family` (
   `name` varchar(20) NOT NULL,
   `relationship` varchar(20) NOT NULL,
   `contact_num` varchar(20) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `tr_family_ibfk_1` (`student_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+--
+-- 表的关联 `tr_family`:
+--   `student_id`
+--       `tr_student` -> `student_id`
+--
 
 -- --------------------------------------------------------
 
 --
 -- 表的结构 `tr_job`
+--
+-- 创建时间: 2012 年 11 月 06 日 01:55
 --
 
 CREATE TABLE IF NOT EXISTS `tr_job` (
@@ -75,23 +97,32 @@ CREATE TABLE IF NOT EXISTS `tr_job` (
   PRIMARY KEY (`job_id`),
   UNIQUE KEY `job_id` (`job_id`),
   KEY `company_id` (`company_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+
+--
+-- 表的关联 `tr_job`:
+--   `company_id`
+--       `tr_company` -> `company_id`
+--
 
 --
 -- 转存表中的数据 `tr_job`
 --
 
 INSERT INTO `tr_job` (`job_id`, `company_id`, `job_name`, `job_meta`) VALUES
-(1, 1, 'job11', 'job11'),
+(1, 1, 'job11', 'job11323'),
 (2, 1, 'job12', 'job12'),
 (3, 1, 'job13', 'job13'),
 (4, 2, 'job21', 'job21'),
-(5, 2, 'job22', 'job22');
+(5, 2, 'job22', 'job22'),
+(6, 1, 'æ‰«åœ°çš„', 'äº”å¹´å·¥ä½œç»éªŒ');
 
 -- --------------------------------------------------------
 
 --
 -- 表的结构 `tr_login`
+--
+-- 创建时间: 2012 年 11 月 06 日 01:55
 --
 
 CREATE TABLE IF NOT EXISTS `tr_login` (
@@ -122,6 +153,8 @@ INSERT INTO `tr_login` (`consumer`, `password`, `user_type`) VALUES
 --
 -- 表的结构 `tr_record`
 --
+-- 创建时间: 2012 年 11 月 06 日 01:55
+--
 
 CREATE TABLE IF NOT EXISTS `tr_record` (
   `record_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -133,7 +166,15 @@ CREATE TABLE IF NOT EXISTS `tr_record` (
   PRIMARY KEY (`record_id`),
   KEY `student_id` (`student_id`),
   KEY `job_id` (`job_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
+
+--
+-- 表的关联 `tr_record`:
+--   `student_id`
+--       `tr_student` -> `student_id`
+--   `job_id`
+--       `tr_job` -> `job_id`
+--
 
 --
 -- 转存表中的数据 `tr_record`
@@ -143,14 +184,19 @@ INSERT INTO `tr_record` (`record_id`, `student_id`, `job_id`, `request_date`, `a
 (1, 1, 1, '2011-12-03', '2011-12-04', 1),
 (2, 2, 1, '2012-02-03', '2012-02-04', 1),
 (3, 2, 3, '2012-02-03', '2012-02-04', 1),
-(4, 2, 3, '0000-00-00', '0000-00-00', 0),
+(4, 2, 3, '0000-00-00', '2012-11-06', 1),
 (5, 3, 3, '0000-00-00', '0000-00-00', 0),
-(6, 4, 3, '0000-00-00', '0000-00-00', 0);
+(6, 4, 3, '0000-00-00', '0000-00-00', 0),
+(7, 1, 1, '2012-11-06', '0000-00-00', 0),
+(8, 1, 1, '2012-11-06', '0000-00-00', 0),
+(9, 1, 2, '2012-11-06', '0000-00-00', 0);
 
 -- --------------------------------------------------------
 
 --
 -- 表的结构 `tr_school`
+--
+-- 创建时间: 2012 年 11 月 06 日 01:55
 --
 
 CREATE TABLE IF NOT EXISTS `tr_school` (
@@ -159,6 +205,12 @@ CREATE TABLE IF NOT EXISTS `tr_school` (
   `department_type` int(11) NOT NULL,
   KEY `consumer` (`consumer`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- 表的关联 `tr_school`:
+--   `consumer`
+--       `tr_login` -> `consumer`
+--
 
 --
 -- 转存表中的数据 `tr_school`
@@ -172,6 +224,8 @@ INSERT INTO `tr_school` (`consumer`, `department_name`, `department_type`) VALUE
 
 --
 -- 表的结构 `tr_student`
+--
+-- 创建时间: 2012 年 11 月 06 日 01:55
 --
 
 CREATE TABLE IF NOT EXISTS `tr_student` (
@@ -191,11 +245,17 @@ CREATE TABLE IF NOT EXISTS `tr_student` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
+-- 表的关联 `tr_student`:
+--   `consumer`
+--       `tr_login` -> `consumer`
+--
+
+--
 -- 转存表中的数据 `tr_student`
 --
 
 INSERT INTO `tr_student` (`consumer`, `student_id`, `name`, `gender`, `pic_path`, `id_num`, `grade`, `major`, `contact_num`, `extra`) VALUES
-('test1', 1, 'xiao1', 1, '../upload/students/1.jpg', '123', '123', '123', '123', 'asdasdasd'),
+('test1', 1, 'xiao1', 1, '', '123', '123', '123', '123', 'asdasdasd'),
 ('test2', 2, 'xiao2', 2, '', '', '', '', '', ''),
 ('test3', 3, 'xiao3', 1, '', '', '', '', '', ''),
 ('test4', 4, 'xiao4', 2, '', '', '', '', '', ''),
@@ -210,6 +270,12 @@ INSERT INTO `tr_student` (`consumer`, `student_id`, `name`, `gender`, `pic_path`
 --
 ALTER TABLE `tr_company`
   ADD CONSTRAINT `tr_company_ibfk_1` FOREIGN KEY (`consumer`) REFERENCES `tr_login` (`consumer`);
+
+--
+-- 限制表 `tr_family`
+--
+ALTER TABLE `tr_family`
+  ADD CONSTRAINT `tr_family_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `tr_student` (`student_id`);
 
 --
 -- 限制表 `tr_job`
@@ -235,12 +301,6 @@ ALTER TABLE `tr_school`
 --
 ALTER TABLE `tr_student`
   ADD CONSTRAINT `tr_student_ibfk_1` FOREIGN KEY (`consumer`) REFERENCES `tr_login` (`consumer`);
-
---
--- 限制表 `tr_family`
---
-ALTER TABLE `tr_family`
-  ADD CONSTRAINT `tr_family_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `tr_student` (`student_id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
