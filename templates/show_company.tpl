@@ -23,8 +23,11 @@
         {foreach from=$companies item=company}
         <tr>
           <td>{$company.company_name}</td>
-          <td>{$company.meta_info}</td>
+          <td>{$company.meta_info|truncate:20}</td>
           <td><a href="show_job.php?cid={$company.company_id}">查看该公司提供的职位</a></td>
+        </tr>
+        <tr class="meta_info">
+          <td colspan=3>{$company.meta_info}</td>
         </tr>
         {foreachelse}
           <tr>没有招聘公司. 不给力啊.老师!!!</tr>
@@ -37,5 +40,16 @@
 <div class="footer">
   {include file="footer.tpl"}
 </div>
+{literal}
+<script>
+$(function(){
+  $('tr[class!=meta_info]').on('click', function(e){
+    if(e.target.localName != 'a'){
+      $(this).next().toggle(500);
+    }
+  });
+});
+</script>
+{/literal}
 </body>
 </html>

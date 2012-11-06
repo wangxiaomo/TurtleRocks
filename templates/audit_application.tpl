@@ -34,7 +34,7 @@
           -->
         </tr>
         {foreachelse}
-          <tr>没有申请的记录.公司不给力啊!!!</tr>
+          <tr><td colspan=5><div class="status">没有申请的记录.公司不给力啊!!!</div></td></tr>
         {/foreach}
       </table>
     </div>
