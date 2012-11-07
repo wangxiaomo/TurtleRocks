@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.27, created on 2012-11-07 08:55:07
+<?php /* Smarty version 2.6.27, created on 2012-11-07 10:27:08
          compiled from update_info.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'config_load', 'update_info.tpl', 1, false),)), $this); ?>
@@ -51,8 +51,8 @@ unset($_smarty_tpl_vars);
             <tr><td>&nbsp;</td><td><button id="submit" class="btn btn-primary">提交</button><button id="reset" class="btn">重置</button></td></tr>
           <?php endif; ?>
           <?php if ($this->_tpl_vars['user_type'] == 1): ?>
-            <tr><td class="m">照片:</td><td class="left"><?php if ($this->_tpl_vars['account']['pic_path']): ?><img src="<?php echo $this->_tpl_vars['account']['pic_path']; ?>
-" width="60" height="80" /><?php else: ?><img src="../upload/students/default.jpg" width="60" height="80" /><?php endif; ?></td></tr>
+            <tr><td class="m">照片:</td><td class="left"><div class="pic_file"><?php if ($this->_tpl_vars['account']['pic_path']): ?><img src="<?php echo $this->_tpl_vars['account']['pic_path']; ?>
+" width="60" height="80" /><?php else: ?><img src="../upload/students/default.jpg" width="60" height="80" /><?php endif; ?></div><input type="file" id="change_photo" name="change_photo" data-url="upload.php" multiple/></td></tr>
             <tr><td class="m">姓名:</td><td class="left"><input type="text" name="name" value="<?php echo $this->_tpl_vars['account']['name']; ?>
 " /></td></tr>
             <tr><td class="m">性别:</td><td class="left">
@@ -98,6 +98,14 @@ $this->_tpl_vars = $_smarty_tpl_vars;
 unset($_smarty_tpl_vars);
  ?>
 </div>
+<script src="<?php echo $this->_config[0]['vars']['STATIC_DIR']; ?>
+/js/libs/load-image.min.js"></script>
+<script src="<?php echo $this->_config[0]['vars']['STATIC_DIR']; ?>
+/js/libs/ui/minified/jquery.ui.widget.min.js"></script>
+<script src="<?php echo $this->_config[0]['vars']['STATIC_DIR']; ?>
+/js/libs/jquery.iframe-transport.js"></script>
+<script src="<?php echo $this->_config[0]['vars']['STATIC_DIR']; ?>
+/js/libs/jquery.fileupload.js"></script>
 <?php echo '
 <script>
 $(function(){
@@ -152,6 +160,29 @@ $(function(){
         );
       }
       o.append(_.template($(\'#add-family-item\').html()));
+    });
+    return false;
+  });
+  $(\'#change_photo\').on(\'change\', function(e){
+    e = e.originalEvent;
+    e.preventDefault();
+    window.loadImage(
+      (e.dataTransfer || e.target).files[0],
+      function(img){
+        $(\'.pic_file\').html(img);
+      },
+      {
+        minWidth: 80,
+        minHeight: 60,
+        maxWidth: 80,
+        minHeight: 60,
+      }
+    );
+    $(\'#change_photo\').fileupload({
+      url: \'upload.php\',
+      done: function(e, data){
+        console.log(data);
+      }
     });
     return false;
   });
