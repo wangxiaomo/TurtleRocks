@@ -5,6 +5,7 @@
 {include file="header.tpl"}
 <link rel="stylesheet" href="{#STATIC_DIR#}/images/BrightSide.css" type="text/css" />
 <link href="{#STATIC_DIR#}/less/main.less" rel="stylesheet/less" type="text/css">
+<link href="{#STATIC_DIR#}/less/test.less" rel="stylesheet/less" type="text/css">
 <script type="text/javascript" src="{#STATIC_DIR#}/js/libs/less.min.js"></script>
 </head>
 <body>
@@ -62,6 +63,9 @@
 $(function(){
   $('#new_job').on('click', function(e){
     e.preventDefault();
+    if($('#job_name').length){
+      return false;
+    }
     var template = _.template($('#new-job-item').html());
     var company_name = $('input:hidden#company_name').attr('value').trim();
     $('#main').append(template({company_name:company_name}));
