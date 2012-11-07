@@ -12,6 +12,12 @@ $db->query("SELECT student_id FROM tr_student,tr_login WHERE tr_login.consumer=t
 $db->next_record();
 $student_id = $db->f('student_id');
 
+$db->query("SELECT record_id FROM tr_record WHERE student_id=$student_id AND job_id=$job_id AND status=0;");
+$db->next_record();
+if($db->f('record_id')){
+    return jsonize(Array('r'=>2));
+}
+
 $db->query("INSERT INTO tr_record(student_id, job_id, request_date, status) VALUES($student_id, $job_id, "
           ."NOW(), 0);");
 if($db->Error){

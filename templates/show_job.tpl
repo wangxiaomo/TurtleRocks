@@ -69,9 +69,12 @@ $(function(){
         //申请失败
         alert("申请失败.请重试!");
         return false;
-      }else{
+      }else if(d.r == 1){
         //申请成功
         alert("申请成功.请耐心等待审核!");
+        $(o).text('已申请');
+      }else{
+        alert("已有申请记录.请耐心等待审核!");
         $(o).text('已申请');
       }
     });

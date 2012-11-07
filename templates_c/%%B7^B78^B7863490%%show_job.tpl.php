@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.27, created on 2012-11-07 08:33:36
+<?php /* Smarty version 2.6.27, created on 2012-11-07 11:08:13
          compiled from show_job.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'config_load', 'show_job.tpl', 1, false),array('modifier', 'truncate', 'show_job.tpl', 30, false),)), $this); ?>
@@ -100,9 +100,12 @@ $(function(){
         //申请失败
         alert("申请失败.请重试!");
         return false;
-      }else{
+      }else if(d.r == 1){
         //申请成功
         alert("申请成功.请耐心等待审核!");
+        $(o).text(\'已申请\');
+      }else{
+        alert("已有申请记录.请耐心等待审核!");
         $(o).text(\'已申请\');
       }
     });
