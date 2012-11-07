@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.27, created on 2012-11-07 10:27:08
+<?php /* Smarty version 2.6.27, created on 2012-11-07 11:04:31
          compiled from update_info.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'config_load', 'update_info.tpl', 1, false),)), $this); ?>
@@ -109,6 +109,9 @@ unset($_smarty_tpl_vars);
 <?php echo '
 <script>
 $(function(){
+  //TODO: Fix IT. Hack Method
+  $(\'#change_photo\').fileupload();
+
   $(document).on(\'click\', \'.btn-add\', function(e){
     e.preventDefault();
     var li = $(this).closest(\'li\');
@@ -166,6 +169,12 @@ $(function(){
   $(\'#change_photo\').on(\'change\', function(e){
     e = e.originalEvent;
     e.preventDefault();
+    $(\'#change_photo\').fileupload({
+      url: \'upload.php\',
+      done: function(e, data){
+        console.log(data);
+      }
+    });
     window.loadImage(
       (e.dataTransfer || e.target).files[0],
       function(img){
@@ -178,12 +187,6 @@ $(function(){
         minHeight: 60,
       }
     );
-    $(\'#change_photo\').fileupload({
-      url: \'upload.php\',
-      done: function(e, data){
-        console.log(data);
-      }
-    });
     return false;
   });
 });

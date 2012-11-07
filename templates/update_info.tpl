@@ -69,6 +69,9 @@
 {literal}
 <script>
 $(function(){
+  //TODO: Fix IT. Hack Method
+  $('#change_photo').fileupload();
+
   $(document).on('click', '.btn-add', function(e){
     e.preventDefault();
     var li = $(this).closest('li');
@@ -126,6 +129,12 @@ $(function(){
   $('#change_photo').on('change', function(e){
     e = e.originalEvent;
     e.preventDefault();
+    $('#change_photo').fileupload({
+      url: 'upload.php',
+      done: function(e, data){
+        console.log(data);
+      }
+    });
     window.loadImage(
       (e.dataTransfer || e.target).files[0],
       function(img){
@@ -138,12 +147,6 @@ $(function(){
         minHeight: 60,
       }
     );
-    $('#change_photo').fileupload({
-      url: 'upload.php',
-      done: function(e, data){
-        console.log(data);
-      }
-    });
     return false;
   });
 });
