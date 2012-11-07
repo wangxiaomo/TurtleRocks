@@ -28,7 +28,7 @@
             <tr><td>&nbsp;</td><td><button id="submit" class="btn btn-primary">提交</button><button id="reset" class="btn">重置</button></td></tr>
           {/if }
           {if $user_type == 1}
-            <tr><td class="m">照片:</td><td class="left">{if $account.pic_path}<img src="{$account.pic_path}" width="60" height="80" />{else}<img src="../upload/students/default.jpg" width="60" height="80" />{/if}</td></tr>
+            <tr><td class="m">照片:</td><td class="left"><div class="pic_file">{if $account.pic_path}<img src="{$account.pic_path}" width="60" height="80" />{else}<img src="../upload/students/default.jpg" width="60" height="80" />{/if}</div><input type="file" id="change_photo" name="change_photo" data-url="upload.php" multiple/></td></tr>
             <tr><td class="m">姓名:</td><td class="left"><input type="text" name="name" value="{$account.name}" /></td></tr>
             <tr><td class="m">性别:</td><td class="left">
               {if $account.gender == 1}
@@ -62,6 +62,10 @@
 <div class="footer">
   {include file="footer.tpl"}
 </div>
+<script src="{#STATIC_DIR#}/js/libs/load-image.min.js"></script>
+<script src="{#STATIC_DIR#}/js/libs/ui/minified/jquery.ui.widget.min.js"></script>
+<script src="{#STATIC_DIR#}/js/libs/jquery.iframe-transport.js"></script>
+<script src="{#STATIC_DIR#}/js/libs/jquery.fileupload.js"></script>
 {literal}
 <script>
 $(function(){
@@ -116,6 +120,29 @@ $(function(){
         );
       }
       o.append(_.template($('#add-family-item').html()));
+    });
+    return false;
+  });
+  $('#change_photo').on('change', function(e){
+    e = e.originalEvent;
+    e.preventDefault();
+    window.loadImage(
+      (e.dataTransfer || e.target).files[0],
+      function(img){
+        $('.pic_file').html(img);
+      },
+      {
+        minWidth: 80,
+        minHeight: 60,
+        maxWidth: 80,
+        minHeight: 60,
+      }
+    );
+    $('#change_photo').fileupload({
+      url: 'upload.php',
+      done: function(e, data){
+        console.log(data);
+      }
     });
     return false;
   });

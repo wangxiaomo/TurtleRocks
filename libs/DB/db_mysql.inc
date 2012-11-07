@@ -87,7 +87,6 @@ class DB_MySQL {
         $this->connect_failed("cannot use database ".$Database);
         return 0;
       }
-      mysql_query($Database, "SET NAMES 'UTF8'");
     }
     
     return $this->Link_ID;

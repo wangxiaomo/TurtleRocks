@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.27, created on 2012-11-07 09:01:36
+<?php /* Smarty version 2.6.27, created on 2012-11-07 09:03:13
          compiled from manage_job.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'config_load', 'manage_job.tpl', 1, false),array('modifier', 'truncate', 'manage_job.tpl', 31, false),)), $this); ?>
