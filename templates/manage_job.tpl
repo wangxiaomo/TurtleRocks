@@ -14,6 +14,7 @@
     {include file="sidebar.tpl"}
     <div id="main">
       {if not $update}
+        <input type="hidden" id="company_name" name="company_name" value="{$company_name}" />
         <h1>工作发布与维护</h1>
         <table class="table table-bordered table-hover table-condensed">
           <thead>
@@ -30,10 +31,10 @@
             <td><a href="manage_job.php?job_id={$job.job_id}">修改</a>&nbsp;&nbsp;<a class="delete-job" href="j/delete_job.php?job_id={$job.job_id}">删除</a></td>
           </tr>
           <tr class="meta_info">
-            <td colspan=4>{$job.job_meta}</td>
+            <td colspan=4><pre>{$job.job_meta}</pre></td>
           </tr>
           {foreachelse}
-            <tr>没有发布任何工作.不给力啊公司!!!</tr>
+            <tr><td colspan=4><div class="status">没有发布任何工作.不给力啊公司!!!</div></td></tr>
           {/foreach}
         </table>
         <div style="margin-left: 420px;"><button id="new_job">发布新职位</button></div>
@@ -41,9 +42,10 @@
         <h1>修改工作</h1>
         <table>
           <input type="hidden" id="job_id" name="job_id" value="{$job.job_id}" />
-          <tr><td class="m">公司名称:</td><td>{$job.company_name}</td></tr>
-          <tr><td class="m">职位名称:</td><td><input type="text" id="job_name" name="job_name" value="{$job.job_name}" /></td></tr>
-          <tr><td class="m">职位信息:</td><td><textarea id="job_meta" name="job_meta">{$job.job_meta}</textarea></td></tr>
+          <tr><td class="m">公司名称:</td><td class="left">{$job.company_name}</td></tr>
+          <tr><td class="m">职位名称:</td><td class="left"><input type="text" id="job_name" name="job_name" value="{$job.job_name}" /></td></tr>
+          <tr><td class="m">职位信息:</td><td class="left"><textarea id="job_meta" name="job_meta" style="height:300px;
+            ">{$job.job_meta}</textarea></td></tr>
           <tr><td>&nbsp;</td><td><button id="submit" class="btn btn-primary">提交</button><button id="reset" class="btn">重置</button></td></tr>
         </table>
       {/if}
@@ -61,7 +63,7 @@ $(function(){
   $('#new_job').on('click', function(e){
     e.preventDefault();
     var template = _.template($('#new-job-item').html());
-    var company_name = $('.company_name').first().text();
+    var company_name = $('input:hidden#company_name').attr('value').trim();
     $('#main').append(template({company_name:company_name}));
   });
   $(document).on('click', '#add', function(e){
@@ -109,9 +111,9 @@ $(function(){
   <script type="text/template" id="new-job-item">
 <div>
   <table>
-    <tr><td class="m">公司名称:</td><td><%= company_name %></td></tr>
-    <tr><td class="m">职位名称:</td><td><input type="text" id="job_name" name="job_name"/></td></tr>
-    <tr><td class="m">职位信息:</td><td><textarea id="job_meta" name="job_meta"></textarea></td></tr>
+    <tr><td class="m">公司名称:</td><td class="left"><%= company_name %></td></tr>
+    <tr><td class="m">职位名称:</td><td class="left"><input type="text" id="job_name" name="job_name"/></td></tr>
+    <tr><td class="m">职位信息:</td><td class="left"><textarea id="job_meta" name="job_meta" style="height:300px;"></textarea></td></tr>
     <tr><td>&nbsp;</td><td><button id="add" class="btn btn-primary">添加</button><button id="reset" class="btn">重置</button></td></tr>
   </table>
 </div>

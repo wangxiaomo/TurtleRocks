@@ -22,10 +22,10 @@
       <div class="op" style="margin-left:20px;">
         <form method="POST" action="">
           <table>
-            <tr><td class="m">账号:</td><td><input type="text" id="consumer" name="consumer" value="{$smarty.cookies.consumer}" readonly="readonly" /></td></tr>
-            <tr><td class="m">原始密码:</td><td><input type="password" id="origin_pass" name="origin_pass" /></td></tr>
-            <tr><td class="m">新密码:</td><td><input type="password" id="new_pass" name="new_pass" /></td></tr>
-            <tr><td class="m">确认密码:</td><td><input type="password" id="re_new_pass" name="re_new_pass" /></td></tr>
+            <tr><td class="m">账号:</td><td class="left"><input type="text" id="consumer" name="consumer" value="{$smarty.cookies.consumer}" readonly="readonly" /></td></tr>
+            <tr><td class="m">原始密码:</td><td class="left"><input type="password" id="origin_pass" name="origin_pass" /></td></tr>
+            <tr><td class="m">新密码:</td><td class="left"><input type="password" id="new_pass" name="new_pass" /></td></tr>
+            <tr><td class="m">确认密码:</td><td class="left"><input type="password" id="re_new_pass" name="re_new_pass" /></td></tr>
             <tr><td>&nbsp;</td><td><div class="btn-group"><button class="submit btn btn-primary">提交</button><button class="reset btn">重置</button></div></td></tr>
           </table>
         </form>

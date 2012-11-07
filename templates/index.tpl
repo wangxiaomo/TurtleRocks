@@ -22,48 +22,48 @@
         </thead>
       {foreach from=$companys item=company}
         <tr>
-          <td>{$company.company_name}</td>
-          <td>{$company.meta_info|truncate:30}</td>
-          <td><a href="show_job.php?id={$company.company_id}">查看该公司提供的职位</a></td>
+          <td class="company_name">{$company.company_name}</td>
+          <td class="meta_info">{$company.meta_info|truncate:25}</td>
+          <td class="op"><a href="show_job.php?id={$company.company_id}">查看</a></td>
         </tr>
         <tr class="meta_info">
-          <td colspan=3>{$company.meta_info}</td>
+          <td colspan=3><pre>{$company.meta_info}</pre></td>
         </tr>
       {foreachelse}
-        <tr><td>没有公司数据。请联系管理员添加</td></tr>
+        <tr><td colspan=3 style="text-align:center;">没有公司数据。请联系管理员添加</td></tr>
       {/foreach}
+      {if $companys}
         <tfoot>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
+          <td colspan=2>&nbsp;</td>
           <td class="op"><a href="show_company.php">查看全部</a></td>
         </tfoot>
+      {/if}
       </table>
       <h1>当前热招工作</h1>
       <table class="table table-bordered table-hover table-condensed">
         <thead>
           <td>公司</td>
           <td>工作</td>
-          <td>描述</td>
           <td>操作</td>
         </thead>
       {foreach from=$jobs item=job}
         <tr>
-          <td>{$job.company_name}</td>
-          <td>{$job.job_name}</td>
-          <td>{$job.job_meta|truncate:30}</td>
-          <td><a href="show_job.php">查看详情</a></td>
+          <td class="company_name">{$job.company_name}</td>
+          <td class="job_name">{$job.job_name}</td>
+          <td class="op"><a href="show_job.php">查看详情</a></td>
         </tr>
         <tr class="meta_info">
-          <td colspan=4>{$job.job_meta}</td>
+          <td colspan=3><pre>{$job.job_meta}</pre></td>
         </tr>
       {foreachelse}
-        <tr><td>没有公司数据。请联系管理员添加</td></tr>
+        <tr><td colspan=3 style="text-align: center">没有公司数据。请联系管理员添加</td></tr>
       {/foreach}
+      {if $jobs}
         <tfoot>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
+          <td colspan=2>&nbsp;</td>
           <td class="op"><a href="show_company.php">查看全部</a></td>
         </tfoot>
+      {/if}
       </table>
     </div>
     <div class="clear">&nbsp;</div>

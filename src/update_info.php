@@ -21,8 +21,9 @@ if($_POST){
     }else{
         $company_name = escape($_POST['company_name']);
         $meta_info = escape($_POST['meta_info']);
-    update_company_info($consumer, $company_name, $meta_info);
+        update_company_info($consumer, $company_name, $meta_info);
     }
+    $smarty->assign('status', "修改成功!");
 }
 
 $account = get_account_info($user_type, $consumer);

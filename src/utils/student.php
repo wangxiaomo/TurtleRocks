@@ -14,6 +14,7 @@ function add_new_student($consumer, $password){
     if($db->Error){
       return "登录账号已存在.请确认!!!";
     }
-    return "";
+    $db->query("INSERT INTO tr_student(consumer) VALUES('$consumer');");
+    return "添加成功!";
 }
 ?>

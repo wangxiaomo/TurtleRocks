@@ -141,6 +141,14 @@ function add_new_company($company_name, $consumer, $password){
         $db->query("DELETE FROM tr_login WHERE consumer='$consumer';");
         return "公司名已存在.请确认!";
     }
-    return "";
+    return "添加成功!";
+}
+function get_company_name($consumer){
+    $db = new DB;
+    $db->connect();
+
+    $db->query("SELECT company_name FROM tr_company WHERE consumer='$consumer';");
+    $db->next_record();
+    return $db->f('company_name');
 }
 ?>

@@ -67,6 +67,6 @@ function add_new_department($department_name, $consumer, $password){
         $db->query("DELETE FROM tr_login WHERE consumer='$consumer';");
         return "部门名已存在.请确认!";
     }
-    return "";
+    return "添加成功!";
 }
 ?>
