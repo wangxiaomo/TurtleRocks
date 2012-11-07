@@ -7,9 +7,10 @@ if($user_type!=0){
 }
 
 if($_POST){
-    $company_name = escape($_POST['company_name']);
+    $company_name = $_POST["company_name"];
     $consumer = escape($_POST['login_name']);
     $password = escape($_POST['login_pass']);
+    
     $error = add_new_company($company_name, $consumer, $password);
     $smarty->assign('error', $error);
 }

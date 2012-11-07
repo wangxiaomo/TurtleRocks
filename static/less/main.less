@@ -9,21 +9,37 @@
     width: 480px;
     margin-left: 20px;
     text-align: right;
+    thead {
+      tr {
+        td {
+          text-align: center;
+        }
+      }
+    }
     tr {
       td {
-        text-align: left;
+        text-align: center;
         padding: 5px;
         
         input {
           margin-bottom: -2px;
         }
+
+        pre {
+          text-align: left;
+        }
       }
       td.op {
-        width: 200px;
-        padding-left: 25px;
+        width: 50px;
       }
       td.m {
         text-align: right;
+      }
+      td.company_name {
+        width: 200px;
+      }
+      td.left {
+        text-align: left;
       }
     }
     tr.meta_info {

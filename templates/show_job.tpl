@@ -33,7 +33,7 @@
           {/if}
         </tr>
         <tr class="meta_info">
-          <td colspan=4>{$job.job_meta}</td>
+          <td colspan=4><pre>{$job.job_meta}</pre></td>
         </tr>
         {foreachelse}
           <tr><td colspan=4><div class="status">这家公司没有任何职位..不给力啊依然的.老师!!!</div></td></tr>

@@ -20,6 +20,10 @@ if($smarty->is_cached('index.tpl')){
 */
 
 $user_type = get_user_type($consumer);
+if($user_type == -1){
+    header('Location:logout.php');
+}
+
 $navs = Array();
 if($user_type == 0){
     //给出属于学校的navs

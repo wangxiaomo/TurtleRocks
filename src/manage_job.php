@@ -17,5 +17,7 @@ if($job_id = $_GET['job_id']){
   $smarty->assign('jobs', $jobs);
 }
 
+$company_name = get_company_name($consumer);
+$smarty->assign('company_name', $company_name);
 $smarty->display('manage_job.tpl');
 ?>

@@ -21,11 +21,11 @@
     {/if}
 		<form method="POST">
       <table>
-        <tr><td class="m">公司名称:</td><td><input type="text" id="company_name" name="comany_name"/></td></tr>
+        <tr><td class="m">公司名称:</td><td><input type="text" id="company_name" name="company_name"/></td></tr>
         <tr><td class="m">登录账号:</td><td><input type="text" id="login_name" name="login_name"/></td></tr>
         <tr><td class="m">登录密码:</td><td><input type="password" id="login_pass" name="login_pass"/></td></tr>
         <tr><td class="m">确认密码:</td><td><input type="password" id="re_login_pass" name="re_login_pass"/></td></tr>
-        <tr><td>&nbsp;</td><td><button id="submit" class="btn btn-primary">提交</button><button id="reset" class="btn">重置</button></td></tr>
+        <tr><td>&nbsp;</td><td><button class="submit btn btn-primary">提交</button><button class="reset btn">重置</button></td></tr>
 			</table>
 		</form>
 	  </div>
@@ -39,16 +39,16 @@
 {literal}
 <script>
 $(function(){
-  $('#submit').on('click', function(e){
+  $('button.submit').on('click', function(e){
     e.preventDefault();
     if($('#login_pass').attr('value')!=$('#re_login_pass').attr('value')){
-      alert("请确认新密码!");
+      alert("请确认新密码!"); 
       $('input:password').attr('value','');
       return false;
     }
-    $('form').submit();
+    $('form[class!=searchform]').submit();
   });
-  $('#reset').on('click', function(e){
+  $('.reset').on('click', function(e){
     e.preventDefault();
     $('input').attr('value', '');
   });
