@@ -8,3 +8,4 @@
 <script type="text/javascript" src="{#STATIC_DIR#}/js/libs/bootstrap.min.js"></script>
 <script type="text/javascript" src="{#STATIC_DIR#}/js/libs/underscore-min.js"></script>
 <script src="{#STATIC_DIR#}/js/common.js"></script>
+

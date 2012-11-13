@@ -6,6 +6,7 @@
 <link rel="stylesheet" href="{#STATIC_DIR#}/images/BrightSide.css" type="text/css" />
 <link href="{#STATIC_DIR#}/less/main.less" rel="stylesheet/less" type="text/css">
 <link href="{#STATIC_DIR#}/less/test.less" rel="stylesheet/less" type="text/css">
+<link href="{#STATIC_DIR#}/css/bootstrap-wysihtml5.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="{#STATIC_DIR#}/js/libs/less.min.js"></script>
 </style>
 </head>
@@ -67,11 +68,19 @@
 <script src="{#STATIC_DIR#}/js/libs/jquery.iframe-transport.js"></script>
 <script src="{#STATIC_DIR#}/js/libs/jquery.fileupload.js"></script>
 {literal}
+<script src="../static/js/wysihtml5-0.3.0.js"></script>
+<script src="../static/js/bootstrap-wysihtml5.js"></script>
 <script>
 $(function(){
   //TODO: Fix IT. Hack Method
   $('#change_photo').fileupload();
-
+  $('textarea').wysihtml5({
+    "font-styles": true,
+    "emphasis": false,
+    "lists": true,
+    "link": false,
+    "image": true,
+  });
   $(document).on('click', '.btn-add', function(e){
     e.preventDefault();
     var li = $(this).closest('li');

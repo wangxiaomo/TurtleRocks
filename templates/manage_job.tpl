@@ -6,6 +6,7 @@
 <link rel="stylesheet" href="{#STATIC_DIR#}/images/BrightSide.css" type="text/css" />
 <link href="{#STATIC_DIR#}/less/main.less" rel="stylesheet/less" type="text/css">
 <link href="{#STATIC_DIR#}/less/test.less" rel="stylesheet/less" type="text/css">
+<link href="{#STATIC_DIR#}/css/bootstrap-wysihtml5.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="{#STATIC_DIR#}/js/libs/less.min.js"></script>
 </head>
 <body>
@@ -28,7 +29,7 @@
           <tr>
             <td class="company_name">{$job.company_name}</td>
             <td>{$job.job_name}</td>
-            <td>{$job.job_meta|truncate:30}</td>
+            <td>点击查看更多</td>
             <td><a href="manage_job.php?job_id={$job.job_id}">修改</a>&nbsp;&nbsp;<a class="delete-job" href="j/delete_job.php?job_id={$job.job_id}">删除</a></td>
           </tr>
           <tr class="meta_info">
@@ -59,8 +60,19 @@
 </div>
 {if not $update}
   {literal}
+  <script src="../static/js/wysihtml5-0.3.0.js"></script>
+  <script src="../static/js/bootstrap-wysihtml5.js"></script>
   <script>
 $(function(){
+  function render(){
+    $('#job_meta').wysihtml5({
+      "font-styles": true,
+      "emphasis": false,
+      "lists": true,
+      "link": false,
+      "image": true,
+    });
+  }
   $('#new_job').on('click', function(e){
     e.preventDefault();
     if($('#job_name').length){
@@ -69,11 +81,12 @@ $(function(){
     var template = _.template($('#new-job-item').html());
     var company_name = $('input:hidden#company_name').attr('value').trim();
     $('#main').append(template({company_name:company_name}));
+    render();
   });
   $(document).on('click', '#add', function(e){
     e.preventDefault();
     var job_name = $('#job_name').attr('value').trim();
-    var job_meta = $('#job_meta').attr('value').trim();
+    var job_meta = $('#job_meta').val();
     $.post('j/add_job.php', {job_name:job_name, job_meta:job_meta}, function(d){
       if(d.r == 0){
         alert("添加失败!可能有同名公司的存在!");
@@ -125,6 +138,8 @@ $(function(){
   {/literal}
 {else}
   {literal}
+  <script src="../static/js/wysihtml5-0.3.0.js"></script>
+  <script src="../static/js/bootstrap-wysihtml5.js"></script>
   <script>
 $(function(){
   //修改
@@ -132,7 +147,7 @@ $(function(){
     e.preventDefault();
     var job_id = $('#job_id').attr('value').trim();
     var job_name = $('#job_name').attr('value').trim();
-    var job_meta = $('#job_meta').attr('value').trim();
+    var job_meta = $('#job_meta').val();
     $.post('j/update_job.php', {job_id:job_id, job_name:job_name, job_meta:job_meta},
         function (d){
       if(d.r == 0){
@@ -142,6 +157,13 @@ $(function(){
         window.location = 'manage_job.php';
       }
     });
+  });
+  $('#job_meta').wysihtml5({
+    "font-styles": true,
+    "emphasis": false,
+    "lists": true,
+    "link": false,
+    "image": true,
   });
 });
   </script>

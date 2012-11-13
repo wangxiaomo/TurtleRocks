@@ -23,7 +23,7 @@
       {foreach from=$companys item=company}
         <tr>
           <td class="company_name">{$company.company_name}</td>
-          <td class="meta_info">{$company.meta_info|truncate:25}</td>
+          <td class="meta_info">点击查看更多</td>
           <td class="op"><a href="show_job.php?id={$company.company_id}">查看</a></td>
         </tr>
         <tr class="meta_info">
