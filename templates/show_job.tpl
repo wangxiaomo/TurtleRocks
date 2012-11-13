@@ -6,8 +6,11 @@
 <link rel="stylesheet" href="{#STATIC_DIR#}/images/BrightSide.css" type="text/css" />
 <link href="{#STATIC_DIR#}/less/main.less" rel="stylesheet/less" type="text/css">
 <script type="text/javascript" src="{#STATIC_DIR#}/js/libs/less.min.js"></script>
+<script src="{#STATIC_DIR#}/js/paginator.js"></script>
 </head>
 <body>
+<input type="hidden" id="page" value="{$page}" />
+<input type="hidden" id="total" value="{$total}" />
 <div id="wrap">
   {include file="top_nav.tpl"}
   <div id="content-wrap" style="background-color:white;">
@@ -27,7 +30,7 @@
         <tr>
           <td>{$job.company_name}</td>
           <td>{$job.job_name}</td>
-          <td>{$job.job_meta|truncate:20}</td>
+          <td>点击查看更多</td>
           {if $user_type!=0}
             <td><a class="apply" href="j/apply_for_job.php?job_id={$job.job_id}">申请</a></td>
           {/if}
@@ -42,6 +45,7 @@
       <div class="tooltips">
         <p><span class="label label-success">提示</span>点击该行可查看具体信息!</p>
       </div>
+      <div class="paginator"></div>
     </div>
     <div class="clear">&nbsp;</div>
   </div>
@@ -52,6 +56,32 @@
 {literal}
 <script>
 $(function(){
+  $('.paginator').html(
+    paginator({
+      current: $('#page').attr('value'),
+      total: $('#total').attr('value'),
+    })
+  );
+  /* paginator */
+  $(document).on('click', '.prev a', function(e){
+    e.preventDefault();
+    var page = parseInt($('#page').attr('value'))-1;
+    window.location = '?p='+page;
+  });
+  $(document).on('click', '.next a', function(e){
+    e.preventDefault();
+    var page = parseInt($('#page').attr('value'))+1;
+    window.location = '?p='+page;
+  });
+  $(document).on('click', '.paginator a', function(e){
+    e.preventDefault();
+    if($(this).parent().hasClass('prev') || $(this).parent().hasClass('next')){
+      return false;
+    }
+    window.location = '?p='+parseInt($(this).text());
+  });
+  /* end paginator */
+
   $('tr[class!=meta_info]').on('click', function(e){
     if(e.target.localName!='a'){
       $(this).next().toggle(500);

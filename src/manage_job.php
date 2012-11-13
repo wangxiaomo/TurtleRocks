@@ -13,11 +13,16 @@ if($job_id = $_GET['job_id']){
   $smarty->assign('update', true);
   $smarty->assign('job', $job);
 }else{
-  $jobs = get_jobs_from_company_by_consumer($consumer);
+  $page = $_GET['p'];
+  $page = $page == NULL?1:$page;
+  $total = get_jobs_count_from_company_by_consumer($consumer);
+  $jobs = get_jobs_from_company_by_consumer($consumer, $page);
+  $smarty->assign('page', $page);
+  $smarty->assign('total', ceil($total/20));
   $smarty->assign('jobs', $jobs);
 }
 
 $company_name = get_company_name($consumer);
 $smarty->assign('company_name', $company_name);
 $smarty->display('manage_job.tpl');
-?>
+?> 

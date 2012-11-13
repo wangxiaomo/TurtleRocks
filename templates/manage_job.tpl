@@ -8,8 +8,11 @@
 <link href="{#STATIC_DIR#}/less/test.less" rel="stylesheet/less" type="text/css">
 <link href="{#STATIC_DIR#}/css/bootstrap-wysihtml5.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="{#STATIC_DIR#}/js/libs/less.min.js"></script>
+<script src="{#STATIC_DIR#}/js/paginator.js"></script>
 </head>
 <body>
+<input type="hidden" id="page" value="{$page}" />
+<input type="hidden" id="total" value="{$total}" />
 <div id="wrap">
   {include file="top_nav.tpl"}
   <div id="content-wrap" style="background-color:white;">
@@ -40,6 +43,7 @@
           {/foreach}
         </table>
         <div style="margin-left: 420px;"><button id="new_job">发布新职位</button></div>
+        <div class="paginator"></div>
       {else}
         <h1>修改工作</h1>
         <table>
@@ -64,6 +68,31 @@
   <script src="../static/js/bootstrap-wysihtml5.js"></script>
   <script>
 $(function(){
+  $('.paginator').html(
+    paginator({
+      current: $('#page').attr('value'),
+      total: $('#total').attr('value'),
+    })
+  );
+  /* paginator */
+  $(document).on('click', '.prev a', function(e){
+    e.preventDefault();
+    var page = parseInt($('#page').attr('value'))-1;
+    window.location = '?p='+page;
+  });
+  $(document).on('click', '.next a', function(e){
+    e.preventDefault();
+    var page = parseInt($('#page').attr('value'))+1;
+    window.location = '?p='+page;
+  });
+  $(document).on('click', '.paginator a', function(e){
+    e.preventDefault();
+    if($(this).parent().hasClass('prev') || $(this).parent().hasClass('next')){
+      return false;
+    }
+    window.location = '?p='+parseInt($(this).text());
+  });
+  /* end paginator */
   function render(){
     $('#job_meta').wysihtml5({
       "font-styles": true,

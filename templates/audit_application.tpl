@@ -6,8 +6,11 @@
 <link rel="stylesheet" href="{#STATIC_DIR#}/images/BrightSide.css" type="text/css" />
 <link href="{#STATIC_DIR#}/less/main.less" rel="stylesheet/less" type="text/css">
 <script type="text/javascript" src="{#STATIC_DIR#}/js/libs/less.min.js"></script>
+<script src="{#STATIC_DIR#}/js/paginator.js"></script>
 </head>
 <body>
+<input type="hidden" id="page" value="{$page}" />
+<input type="hidden" id="total" value="{$total}" />
 <div id="wrap">
   {include file="top_nav.tpl"}
   <div id="content-wrap" style="background-color:white;">
@@ -34,6 +37,7 @@
           <tr><td colspan=5><div class="status">没有申请的记录.公司不给力啊!!!</div></td></tr>
         {/foreach}
       </table>
+      <div class="paginator"></div>
     </div>
     <div class="clear">&nbsp;</div>
   </div>
@@ -44,6 +48,31 @@
 {literal}
 <script>
 $(function(){
+  $('.paginator').html(
+    paginator({
+      current: $('#page').attr('value'),
+      total: $('#total').attr('value'),
+    })
+  );
+  /* paginator */
+  $(document).on('click', '.prev a', function(e){
+    e.preventDefault();
+    var page = parseInt($('#page').attr('value'))-1;
+    window.location = '?p='+page;
+  });
+  $(document).on('click', '.next a', function(e){
+    e.preventDefault();
+    var page = parseInt($('#page').attr('value'))+1;
+    window.location = '?p='+page;
+  });
+  $(document).on('click', '.paginator a', function(e){
+    e.preventDefault();
+    if($(this).parent().hasClass('prev') || $(this).parent().hasClass('next')){
+      return false;
+    }
+    window.location = '?p='+parseInt($(this).text());
+  });
+  /* end paginator */
   $('a.op').on('click', function(e){
     e.preventDefault();
     var o = $(this);

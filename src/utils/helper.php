@@ -79,23 +79,24 @@ function get_account_info($user_type, $consumer){
     }
 }
 
-function get_consumer_records($consumer, $user_type, $limit=20){
+function get_consumer_records($consumer, $user_type, $page=1, $limit=20){
+  $start = ($page-1)*$limit;
   //首先要根据 user_type 来判断权限.
   if($user_type == 0){
     //当前查看者为学校.有权看所有学生的实习记录
     $sql = "SELECT name,company_name,job_name,request_date,audit_date,status FROM tr_record,tr_student,tr_company,tr_job "
          . "WHERE tr_student.student_id=tr_record.student_id AND tr_job.job_id=tr_record.job_id AND tr_job.company_id=tr_company.company_id "
-         . "ORDER BY record_id DESC LIMIT $limit;";
+         . "ORDER BY record_id DESC LIMIT $start, $limit;";
   }elseif($user_type == 1){
     //当前查看者为学生.有权查看自己的实习记录
     $sql = "SELECT name,company_name,job_name,request_date,audit_date,status FROM tr_record,tr_student,tr_company,tr_job "
          . "WHERE tr_student.student_id=tr_record.student_id AND tr_job.job_id=tr_record.job_id AND tr_job.company_id=tr_company.company_id "
-         . "AND tr_student.consumer='$consumer' ORDER BY record_id DESC LIMIT $limit;";
+         . "AND tr_student.consumer='$consumer' ORDER BY record_id DESC LIMIT $start,$limit;";
   }else{
     //当前查看者为公司.有权查看申请本公司的实习记录
     $sql = "SELECT name,company_name,job_name,request_date,audit_date,status FROM tr_record,tr_student,tr_company,tr_job "
          . "WHERE tr_student.student_id=tr_record.student_id AND tr_job.job_id=tr_record.job_id AND tr_job.company_id=tr_company.company_id "
-         . "AND tr_company.consumer='$consumer' ORDER BY record_id DESC LIMIT $limit;";
+         . "AND tr_company.consumer='$consumer' ORDER BY record_id DESC LIMIT $start,$limit;";
   }
   $db = new DB;
   $db->connect();
@@ -112,5 +113,28 @@ function get_consumer_records($consumer, $user_type, $limit=20){
     ));
   }
   return $ret;
+}
+function get_consumer_record_count($consumer, $user_type){
+  //首先要根据 user_type 来判断权限.
+  if($user_type == 0){
+    //当前查看者为学校.有权看所有学生的实习记录
+    $sql = "SELECT count(*) as c FROM tr_record,tr_student,tr_company,tr_job "
+         . "WHERE tr_student.student_id=tr_record.student_id AND tr_job.job_id=tr_record.job_id AND tr_job.company_id=tr_company.company_id;";
+  }elseif($user_type == 1){
+    //当前查看者为学生.有权查看自己的实习记录
+    $sql = "SELECT count(*) as c FROM tr_record,tr_student,tr_company,tr_job "
+         . "WHERE tr_student.student_id=tr_record.student_id AND tr_job.job_id=tr_record.job_id AND tr_job.company_id=tr_company.company_id "
+         . "AND tr_student.consumer='$consumer';";
+  }else{
+    //当前查看者为公司.有权查看申请本公司的实习记录
+    $sql = "SELECT count(*) as c FROM tr_record,tr_student,tr_company,tr_job "
+         . "WHERE tr_student.student_id=tr_record.student_id AND tr_job.job_id=tr_record.job_id AND tr_job.company_id=tr_company.company_id "
+         . "AND tr_company.consumer='$consumer';";
+  }
+  $db = new DB;
+  $db->connect();
+  $db->query($sql);
+  $db->next_record();
+  return $db->f('c');
 }
 ?>

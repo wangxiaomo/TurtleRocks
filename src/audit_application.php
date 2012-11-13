@@ -7,7 +7,13 @@ if($user_type!=2){
   return false;
 }
 
-$records = get_applications($consumer);
+$page = $_GET['p'];
+$page = $page==NULL?1:$page;
+
+$total = get_application_count($consumer);
+$records = get_applications($consumer, $page);
 $smarty->assign('records', $records);
+$smarty->assign('page', $page);
+$smarty->assign('total', ceil($total/20));
 $smarty->display('audit_application.tpl');
 ?>

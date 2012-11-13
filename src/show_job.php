@@ -1,13 +1,19 @@
 <?php
 include('base.php');
 
-//cid=xxx and not cid request.
+$page = $_GET['p'];
+$page = $page == NULL?1:$page;
+
 if($cid = $_GET['cid']){
-  $jobs = get_jobs_from_company($cid);
+  $total = get_job_count_from_company($cid);
+  $jobs = get_jobs_from_company($cid, $page);
 }else{
-  $jobs = get_all_jobs();
+  $total = get_all_job_count();
+  $jobs = get_all_jobs($page);
 }
 
+$smarty->assign('page', $page);
+$smarty->assign('total', ceil($total/20));
 $smarty->assign('jobs', $jobs);
 $smarty->display('show_job.tpl');
 ?>
