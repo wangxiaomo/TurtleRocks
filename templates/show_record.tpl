@@ -6,8 +6,11 @@
 <link rel="stylesheet" href="{#STATIC_DIR#}/images/BrightSide.css" type="text/css" />
 <link href="{#STATIC_DIR#}/less/main.less" rel="stylesheet/less" type="text/css">
 <script type="text/javascript" src="{#STATIC_DIR#}/js/libs/less.min.js"></script>
+<script src="{#STATIC_DIR#}/js/paginator.js"></script>
 </head>
 <body>
+<input type="hidden" id="page" value="{$page}" />
+<input type="hidden" id="total" value="{$total}" />
 <div id="wrap">
   {include file="top_nav.tpl"}
   <div id="content-wrap" style="background-color:white;">
@@ -94,6 +97,7 @@
       <div class="tooltips">
         <p><span class="label label-important">重要</span>审核通过后请主动联系公司负责人协商下一步的工作.</p>
       </div>
+      <div class="paginator"></div>
     </div>
     <div class="clear">&nbsp;</div>
   </div>
@@ -102,4 +106,48 @@
   {include file="footer.tpl"}
 </div>
 </body>
+{literal}
+<script>
+$(function(){
+  $('.paginator').html(
+    paginator({
+      current: $('#page').attr('value'),
+      total: $('#total').attr('value'),
+    })
+  );
+  /* paginator */
+  $(document).on('click', '.prev a', function(e){
+    e.preventDefault();
+    var page = parseInt($('#page').attr('value'))-1;
+    if(window.location.search){
+      window.location = window.location.search + '&p=' + page;
+    }else{
+      window.location = '?p='+page;
+    }
+  });
+  $(document).on('click', '.next a', function(e){
+    e.preventDefault();
+    var page = parseInt($('#page').attr('value'))+1;
+    if(window.location.search){
+      window.location = window.location.search + '&p=' + page;
+    }else{
+      window.location = '?p='+page;
+    }
+  });
+  $(document).on('click', '.paginator a', function(e){
+    e.preventDefault();
+    if($(this).parent().hasClass('prev') || $(this).parent().hasClass('next')){
+      return false;
+    }
+    var page = parseInt($(this).text());
+    if(window.location.search){
+      window.location = window.location.search + '&p=' + page;
+    }else{
+      window.location = '?p='+page;
+    }
+  });
+  /* end paginator */
+});
+</script>
+{/literal}
 </html>

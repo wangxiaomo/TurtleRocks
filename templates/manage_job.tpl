@@ -78,21 +78,34 @@ $(function(){
   $(document).on('click', '.prev a', function(e){
     e.preventDefault();
     var page = parseInt($('#page').attr('value'))-1;
-    window.location = '?p='+page;
+    if(window.location.search){
+      window.location = window.location.search + '&p=' + page;
+    }else{
+      window.location = '?p='+page;
+    }
   });
   $(document).on('click', '.next a', function(e){
     e.preventDefault();
     var page = parseInt($('#page').attr('value'))+1;
-    window.location = '?p='+page;
+    if(window.location.search){
+      window.location = window.location.search + '&p=' + page;
+    }else{
+      window.location = '?p='+page;
+    }
   });
   $(document).on('click', '.paginator a', function(e){
     e.preventDefault();
     if($(this).parent().hasClass('prev') || $(this).parent().hasClass('next')){
       return false;
     }
-    window.location = '?p='+parseInt($(this).text());
+    var page = parseInt($(this).text());
+    if(window.location.search){
+      window.location = window.location.search + '&p=' + page;
+    }else{
+      window.location = '?p='+page;
+    }
   });
-  /* end paginator */
+  /* paginator */
   function render(){
     $('#job_meta').wysihtml5({
       "font-styles": true,

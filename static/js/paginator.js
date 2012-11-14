@@ -51,5 +51,3 @@ var paginator = function(page_config){
   paginated_html.push('</div>');
   return paginated_html.join('');
 };
-
-console.log(paginator({current:'1',total:'15', prev_text:'a', next_text:'b'}));
