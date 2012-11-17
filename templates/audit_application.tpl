@@ -27,7 +27,7 @@
         </thead>
         {foreach from=$records item=record}
         <tr>
-          <td>{$record.name}</td>
+          <td><a href="show_info.php?sid={$record.student_id}" target="_blank">{$record.name}</a></td>
           <td>{$record.job_name}</td>
           <td>{$record.request_date}</td>
           <td>审核中</td>

@@ -17,4 +17,36 @@ function add_new_student($consumer, $password){
     $db->query("INSERT INTO tr_student(consumer) VALUES('$consumer');");
     return "添加成功!";
 }
+function get_student_info($sid){
+    $db = new DB;
+    $db->connect();
+    $sql = "SELECT student_id, name, gender, pic_path, id_num, grade, major, contact_num, extra "
+             . "FROM tr_student WHERE student_id=" . $sid . ";";
+    $db->query($sql);
+    $db->next_record();
+    $student_id = $db->f('student_id');
+    $account = Array(
+      'student_id'    =>  $student_id,
+      'name'          =>  $db->f('name'),
+      'gender'        =>  $db->f('gender'),
+      'pic_path'      =>  $db->f('pic_path'),
+      'id_num'        =>  $db->f('id_num'),
+      'grade'         =>  $db->f('grade'),
+      'major'         =>  $db->f('major'),
+      'contact_num'   =>  $db->f('contact_num'),
+      'extra'         =>  $db->f('extra'),
+      'family'        =>  Array(),
+    );
+    $sql = "select id, name, relationship, contact_num from tr_family where student_id=$sid;";
+    $db->query($sql);
+    while($db->next_record()){
+        array_push($account['family'], Array(
+            "id"        =>  $db->f("id"),
+            "name"      =>  $db->f("name"),
+            "relationship"  =>  $db->f("relationship"),
+            "contact_num"   =>  $db->f("contact_num"),
+        ));
+    }
+    return $account;
+}
 ?>

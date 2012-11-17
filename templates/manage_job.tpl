@@ -196,7 +196,7 @@ $(function(){
         alert("修改失败!");
         return false;
       }else{
-        window.location = 'manage_job.php';
+        alert("修改成功!");
       }
     });
   });

@@ -1,7 +1,7 @@
 <?php
 include('base.php');
 
-if($user_type!=2){
+if($user_type!=0 && $user_type!=2){
   header('HTTP/1.1 403');
   return false;
 }

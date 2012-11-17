@@ -84,7 +84,7 @@ function get_consumer_records($consumer, $user_type, $page=1, $limit=20){
   //首先要根据 user_type 来判断权限.
   if($user_type == 0){
     //当前查看者为学校.有权看所有学生的实习记录
-    $sql = "SELECT name,company_name,job_name,request_date,audit_date,status FROM tr_record,tr_student,tr_company,tr_job "
+    $sql = "SELECT tr_record.student_id,name,company_name,job_name,request_date,audit_date,status FROM tr_record,tr_student,tr_company,tr_job "
          . "WHERE tr_student.student_id=tr_record.student_id AND tr_job.job_id=tr_record.job_id AND tr_job.company_id=tr_company.company_id "
          . "ORDER BY record_id DESC LIMIT $start, $limit;";
   }elseif($user_type == 1){
@@ -104,6 +104,7 @@ function get_consumer_records($consumer, $user_type, $page=1, $limit=20){
   $ret = Array();
   while($db->next_record()){
     array_push($ret, Array(
+      'student_id' => $db->f('student_id'),
       'name'  =>  $db->f('name'),
       'company_name'  =>  $db->f('company_name'),
       'job_name'  =>  $db->f('job_name'),

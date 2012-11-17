@@ -170,12 +170,13 @@ function get_applications($consumer, $page=1, $limit=20){
     $start = ($page-1)*$limit;
     $db = new DB;
     $db->connect();
-    $db->query("SELECT record_id,name,company_name,job_name,request_date,audit_date,status FROM tr_student,tr_company,tr_job,tr_record "
+    $db->query("SELECT tr_record.student_id,record_id,name,company_name,job_name,request_date,audit_date,status FROM tr_student,tr_company,tr_job,tr_record "
               ."WHERE tr_record.job_id=tr_job.job_id AND tr_job.company_id=tr_company.company_id AND tr_record.student_id=tr_student.student_id "
               ."AND tr_company.consumer='$consumer' AND status=0 ORDER BY record_id LIMIT $start,$limit;");
     $ret = Array();
     while($db->next_record()){
         array_push($ret,Array(
+            'student_id'    =>  $db->f('student_id'),
             'record_id' =>  $db->f('record_id'),
             'name'  =>  $db->f('name'),
             'company_name'  =>  $db->f('company_name'),
