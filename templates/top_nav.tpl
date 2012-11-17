@@ -10,3 +10,14 @@
   </form>
   <span class="right">欢迎回来，{$smarty.cookies.consumer|default:'user'} <a href="logout.php">Logout</a></span>
 </div>
+{literal}
+<script>
+$(function(){
+  $('form.searchform').submit(function(e){
+    e.preventDefault();
+    alert("Still In Developing!");
+    return false;
+  })
+});
+</script>
+{/literal}
