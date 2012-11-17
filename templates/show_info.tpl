@@ -1,19 +1,19 @@
 {literal}
 <head>
 <style type="text/css">
+* { margin:0; padding: 0;}
+.resume {
+  width: 780px;
+  margin: 20px auto;
+}
 table {
-  margin:10px auto;
-  border-collapse:inherit;
   width: 100%;
 }
 table.outer {
-  border:1px solid grey;
   width:780px;
 }
 table.mix td {
   width: 70px;
-  border:none;
-  border-collapse: collapse;
 }
 table.outer thead td {
   text-align:center;
@@ -27,7 +27,7 @@ table.family-table thead td {
 table.family-table td {
   width: 100px;
 }
-tr {
+td {
   border:1px solid grey;
 }
 tr.extra {
@@ -72,10 +72,12 @@ tr.extra {
             <td>年级</td><td>{$student.grade}</td>
             <td>专业</td><td>{$student.major}</td>
             <td>联系方式</td><td>{$student.contact_num}</td>
-          </td>
+          </tr>
+        </table>
       </td>
     </tr>
     <tr class="family">
+      <td colspan=3>
       <table class="family-table">
         <thead>
           <tr><td colspan=4>家庭成员</td></tr>
@@ -89,9 +91,10 @@ tr.extra {
           </tr>
         {/foreach}
       </table>
+      </td>
     </tr>
     <tr class="extra">
-      <td colspan=2>{$student.extra}</td>
+      <td colspan=3>{$student.extra}</td>
     </tr>
   </table>
 </div>
