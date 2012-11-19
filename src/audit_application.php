@@ -10,8 +10,14 @@ if($user_type!=2){
 $page = $_GET['p'];
 $page = $page==NULL?1:$page;
 
-$total = get_application_count($consumer);
-$records = get_applications($consumer, $page);
+$name = escape($_GET['name']);
+if($name && $user_type!=1){
+  $total = get_student_record_count($consumer, $name, 0);
+  $records = get_student_record($consumer, $name, 0, $page);
+}else{
+  $total = get_application_count($consumer);
+  $records = get_applications($consumer, $page);
+}
 $smarty->assign('records', $records);
 $smarty->assign('page', $page);
 $smarty->assign('total', ceil($total/20));

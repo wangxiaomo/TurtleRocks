@@ -5,6 +5,7 @@
 {include file="header.tpl"}
 <link rel="stylesheet" href="{#STATIC_DIR#}/images/BrightSide.css" type="text/css" />
 <link href="{#STATIC_DIR#}/less/main.less" rel="stylesheet/less" type="text/css">
+<link href="{#STATIC_DIR#}/less/test.less" rel="stylesheet/less" type="text/css">
 <script type="text/javascript" src="{#STATIC_DIR#}/js/libs/less.min.js"></script>
 <script src="{#STATIC_DIR#}/js/paginator.js"></script>
 </head>
@@ -17,6 +18,9 @@
     {include file="sidebar.tpl"}
     <div id="main"> 
       <h1>实习申请审批</h1>
+      <div class="search_student">
+        <p><input type="text" id="search_name" name="search_name" placeholder="输入要查找的学生姓名" /><button class="btn btn-search">查找</button></p>
+      </div>
       <table class="table table-bordered table-hover table-condensed">
         <thead>
           <td>学生姓名</td>
@@ -100,6 +104,17 @@ $(function(){
       }
     });
     return false;
+  });
+  $('button.btn-search').click(function(e){
+    e.preventDefault();
+    window.location = '?name='+$('.search_student').find('input').attr('value').trim();
+    return false;
+  });
+  $('.search_student').find('input').on('keydown', function(e){
+    if(e.keyCode == 13){
+      e.preventDefault();
+      $('button.btn-search').click();
+    }
   });
 });
 </script>

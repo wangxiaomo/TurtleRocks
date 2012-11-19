@@ -138,4 +138,66 @@ function get_consumer_record_count($consumer, $user_type){
   $db->next_record();
   return $db->f('c');
 }
+function get_student_record_count($consumer, $name, $status=-1){
+  $user_type = get_user_type($consumer);
+  if($user_type == 0){
+    $sql = "SELECT count(*) as c FROM tr_record,tr_student,tr_company,tr_job "
+         . "WHERE tr_student.student_id=tr_record.student_id AND tr_job.job_id=tr_record.job_id AND tr_job.company_id=tr_company.company_id "
+         . "AND name='$name' ";
+    if($status!=-1){
+      $sql = $sql . "AND status=$status ";
+    }
+  }elseif($user_type == 2){
+    $sql = "SELECT count(*) as c FROM tr_record,tr_student,tr_company,tr_job "
+         . "WHERE tr_student.student_id=tr_record.student_id AND tr_job.job_id=tr_record.job_id AND tr_job.company_id=tr_company.company_id "
+         . "AND tr_company.consumer='$consumer' "
+         . "AND name='$name' ";
+    if($status!=-1){
+      $sql = $sql . "AND status=$status ";
+    }
+  }
+  $db = new DB;
+  $db->connect();
+  $db->query($sql);
+  $db->next_record();
+  return $db->f('c');
+}
+function get_student_record($consumer, $name, $status=-1, $page=1, $limit=20){
+  $start = ($page-1)*$limit;
+  $user_type = get_user_type($consumer);
+  if($user_type == 0){
+    $sql = "SELECT tr_record.student_id,name,company_name,job_name,request_date,audit_date,status FROM tr_record,tr_student,tr_company,tr_job "
+         . "WHERE tr_student.student_id=tr_record.student_id AND tr_job.job_id=tr_record.job_id AND tr_job.company_id=tr_company.company_id "
+         . "AND name='$name' ";
+    if($status!=-1){
+      $sql = $sql . "AND status=$status ";
+    }
+    $sql = $sql . "ORDER BY record_id DESC LIMIT $start, $limit;";
+  }elseif($user_type == 2){
+    $sql = "SELECT name,company_name,job_name,request_date,audit_date,status FROM tr_record,tr_student,tr_company,tr_job "
+         . "WHERE tr_student.student_id=tr_record.student_id AND tr_job.job_id=tr_record.job_id AND tr_job.company_id=tr_company.company_id "
+         . "AND tr_company.consumer='$consumer' "
+         . "AND name='$name' ";
+    if($status!=-1){
+      $sql = $sql . "AND status=$status ";
+    }
+    $sql = $sql . " ORDER BY record_id DESC LIMIT $start,$limit;";
+  }
+  $db = new DB;
+  $db->connect();
+  $db->query($sql);
+  $ret = Array();
+  while($db->next_record()){
+    array_push($ret, Array(
+      'student_id' => $db->f('student_id'),
+      'name'  =>  $db->f('name'),
+      'company_name'  =>  $db->f('company_name'),
+      'job_name'  =>  $db->f('job_name'),
+      'request_date'  =>  $db->f('request_date'),
+      'audit_date'  =>  $db->f('audit_date'),
+      'status'  =>  $db->f('status'),
+    ));
+  }
+  return $ret;
+}
 ?>
