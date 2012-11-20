@@ -16,7 +16,6 @@ li { margin-top:-25px;margin-bottom:0px; padding-left:20px;}
 #page {
   width:780px;
   margin:25px auto;
-  border-top: 1px solid #EEE;
 }
 #left {
   float:right;
