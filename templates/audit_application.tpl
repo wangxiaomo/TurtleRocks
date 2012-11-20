@@ -99,8 +99,8 @@ $(function(){
         return false;
       }else{
         alert("审批成功!");
-        $(o).closest('td').html('操作已完成');
         $(o).closest('td').prev().html($(o).text().trim());
+        $(o).closest('td').html('操作已完成');
       }
     });
     return false;

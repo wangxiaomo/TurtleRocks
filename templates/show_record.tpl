@@ -42,8 +42,11 @@
             {if $record.status == 0}
               <td>审核中.</td>
               <td>请耐心等待回复.</td>
-            {else}
+            {elseif $record.status == 1}
               <td>已通过审核</td>
+              <td>{$record.audit_date}</td>
+            {else}
+              <td>审核被拒绝</td>
               <td>{$record.audit_date}</td>
             {/if}
           </tr>
@@ -66,8 +69,11 @@
             {if $record.status == 0}
               <td>审核中.</td>
               <td>请耐心等待回复.</td>
-            {else}
+            {elseif $record.status == 1}
               <td>已通过审核</td>
+              <td>{$record.audit_date}</td>
+            {else}
+              <td>审核被拒绝</td>
               <td>{$record.audit_date}</td>
             {/if}
           </tr>
@@ -90,8 +96,11 @@
             {if $record.status == 0}
               <td>审核中.</td>
               <td>请耐心等待回复.</td>
-            {else}
+            {elseif $record.status == 1}
               <td>已通过审核</td>
+              <td>{$record.audit_date}</td>
+            {else}
+              <td>审核被拒绝</td>
               <td>{$record.audit_date}</td>
             {/if}
           </tr>

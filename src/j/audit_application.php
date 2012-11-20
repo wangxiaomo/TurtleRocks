@@ -6,7 +6,7 @@ $consumer = $_COOKIE["consumer"];
 $record_id = $_GET["record_id"];
 $op = $_GET["op"];
 
-$status = $op=='yes'?1:0;
+$status = $op=='yes'?1:2;
 
 $db = new DB;
 $db->connect();

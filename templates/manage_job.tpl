@@ -197,6 +197,7 @@ $(function(){
         return false;
       }else{
         alert("修改成功!");
+        history.back();
       }
     });
   });
