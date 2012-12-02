@@ -45,14 +45,34 @@ li { margin-top:-25px;margin-bottom:0px; padding-left:20px;}
 #user_info {
   margin-top:20px;
 }
+#internships {
+  margin-top:20px;
+}
+#internships p{
+  color: black;
+  font-size:10pt;
+  text-align:left;
+  text-indent: 2em;
+  border:1px solid #EEE;
+}
   </style>
 {/literal}
 </head>
 <body>
 <div id="page">
   <div id="left">
-    <div>
-    
+    <div id="internships">
+    {foreach from=$internships item=internship}   
+      <p>
+        从{$internship.start}到{$internship.end},
+        在{$internship.company_name}
+        担任{$internship.job_name},
+        证明人是{$internship.mentor},
+        证明人联系方式为{$internship.contact_num}.
+      </p>
+    {foreachelse}
+      <p>暂时没有实习记录</p>
+    {/foreach}
     </div>
     <div id="code">
       <div class="right-status">
