@@ -51,6 +51,9 @@ li { margin-top:-25px;margin-bottom:0px; padding-left:20px;}
 <body>
 <div id="page">
   <div id="left">
+    <div>
+    
+    </div>
     <div id="code">
       <div class="right-status">
 个人信息尽可能的丰富些.方便企业了解你.会得到意想不到的效果哦!!!

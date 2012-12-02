@@ -58,4 +58,22 @@ function add_new_internship($consumer, $company_name, $job_name, $start, $end, $
     $db->query("INSERT tr_internship(student_id,company_name,job_name,start,end,mentor,contact_num) "
               ."VALUES($sid, '$company_name', '$job_name', '$start', '$end', '$mentor', '$contact_num');");
 }
+function get_student_internships($sid){
+    $db = new DB;
+    $db->connect();
+    $db->query("SELECT company_name,job_name,start,end,mentor,contact_num FROM tr_internship "
+              ."WHERE student_id=$sid;");
+    $ret = Array();
+    while($db->next_record()){
+      array_push($ret, Array(
+        'company_name' => $db->f('company_name'),
+        'job_name'  =>  $db->f('job_name'),
+        'start' =>  $db->f('start'),
+        'end' =>  $db->f('end'),
+        'mentor'  =>  $db->f('mentor'),
+        'contact_num' =>  $db->f('contact_num'),
+      ));
+    }
+    return $ret;
+}
 ?>

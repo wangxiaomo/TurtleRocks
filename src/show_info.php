@@ -12,6 +12,8 @@ if(!$sid){
   return false;
 }
 $student = get_student_info($sid);
+$internships = get_student_internships($sid);
 $smarty->assign('student', $student);
+$smarty->assign('internships', $internships);
 $smarty->display('show_info.tpl');
 ?>
