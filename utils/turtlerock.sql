@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 3.4.11.1deb1
+-- version 3.5.1
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2012 年 11 月 07 日 11:09
--- 服务器版本: 5.5.28
--- PHP 版本: 5.4.6-1ubuntu1
+-- 生成日期: 2012 年 12 月 02 日 02:56
+-- 服务器版本: 5.5.24-log
+-- PHP 版本: 5.3.13
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -25,8 +25,6 @@ SET time_zone = "+00:00";
 --
 -- 表的结构 `tr_company`
 --
--- 创建时间: 2012 年 11 月 07 日 07:15
---
 
 CREATE TABLE IF NOT EXISTS `tr_company` (
   `consumer` varchar(20) NOT NULL,
@@ -38,12 +36,6 @@ CREATE TABLE IF NOT EXISTS `tr_company` (
   UNIQUE KEY `company_name` (`company_name`),
   KEY `consumer` (`consumer`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
-
---
--- 表的关联 `tr_company`:
---   `consumer`
---       `tr_login` -> `consumer`
---
 
 --
 -- 转存表中的数据 `tr_company`
@@ -58,8 +50,6 @@ INSERT INTO `tr_company` (`consumer`, `company_id`, `company_name`, `meta_info`)
 --
 -- 表的结构 `tr_family`
 --
--- 创建时间: 2012 年 11 月 07 日 06:20
---
 
 CREATE TABLE IF NOT EXISTS `tr_family` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -72,12 +62,6 @@ CREATE TABLE IF NOT EXISTS `tr_family` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
--- 表的关联 `tr_family`:
---   `student_id`
---       `tr_student` -> `student_id`
---
-
---
 -- 转存表中的数据 `tr_family`
 --
 
@@ -88,9 +72,25 @@ INSERT INTO `tr_family` (`id`, `student_id`, `name`, `relationship`, `contact_nu
 -- --------------------------------------------------------
 
 --
--- 表的结构 `tr_job`
+-- 表的结构 `tr_internship`
 --
--- 创建时间: 2012 年 11 月 07 日 07:39
+
+CREATE TABLE IF NOT EXISTS `tr_internship` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `student_id` int(11) NOT NULL,
+  `company_name` varchar(40) NOT NULL,
+  `job_name` varchar(40) NOT NULL,
+  `start` date NOT NULL,
+  `end` date NOT NULL,
+  `mentor` varchar(20) NOT NULL,
+  `contact_num` int(20) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `tr_job`
 --
 
 CREATE TABLE IF NOT EXISTS `tr_job` (
@@ -102,12 +102,6 @@ CREATE TABLE IF NOT EXISTS `tr_job` (
   UNIQUE KEY `job_id` (`job_id`),
   KEY `company_id` (`company_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
-
---
--- 表的关联 `tr_job`:
---   `company_id`
---       `tr_company` -> `company_id`
---
 
 --
 -- 转存表中的数据 `tr_job`
@@ -125,8 +119,6 @@ INSERT INTO `tr_job` (`job_id`, `company_id`, `job_name`, `job_meta`) VALUES
 
 --
 -- 表的结构 `tr_login`
---
--- 创建时间: 2012 年 11 月 07 日 06:20
 --
 
 CREATE TABLE IF NOT EXISTS `tr_login` (
@@ -154,8 +146,6 @@ INSERT INTO `tr_login` (`consumer`, `password`, `user_type`) VALUES
 --
 -- 表的结构 `tr_record`
 --
--- 创建时间: 2012 年 11 月 07 日 06:20
---
 
 CREATE TABLE IF NOT EXISTS `tr_record` (
   `record_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -170,14 +160,6 @@ CREATE TABLE IF NOT EXISTS `tr_record` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
 
 --
--- 表的关联 `tr_record`:
---   `student_id`
---       `tr_student` -> `student_id`
---   `job_id`
---       `tr_job` -> `job_id`
---
-
---
 -- 转存表中的数据 `tr_record`
 --
 
@@ -189,8 +171,6 @@ INSERT INTO `tr_record` (`record_id`, `student_id`, `job_id`, `request_date`, `a
 --
 -- 表的结构 `tr_school`
 --
--- 创建时间: 2012 年 11 月 07 日 06:20
---
 
 CREATE TABLE IF NOT EXISTS `tr_school` (
   `consumer` varchar(20) NOT NULL,
@@ -198,12 +178,6 @@ CREATE TABLE IF NOT EXISTS `tr_school` (
   `department_type` int(11) NOT NULL,
   KEY `consumer` (`consumer`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- 表的关联 `tr_school`:
---   `consumer`
---       `tr_login` -> `consumer`
---
 
 --
 -- 转存表中的数据 `tr_school`
@@ -217,8 +191,6 @@ INSERT INTO `tr_school` (`consumer`, `department_name`, `department_type`) VALUE
 
 --
 -- 表的结构 `tr_student`
---
--- 创建时间: 2012 年 11 月 07 日 10:36
 --
 
 CREATE TABLE IF NOT EXISTS `tr_student` (
@@ -236,12 +208,6 @@ CREATE TABLE IF NOT EXISTS `tr_student` (
   UNIQUE KEY `student_id` (`student_id`),
   KEY `consumer` (`consumer`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
-
---
--- 表的关联 `tr_student`:
---   `consumer`
---       `tr_login` -> `consumer`
---
 
 --
 -- 转存表中的数据 `tr_student`
