@@ -200,4 +200,79 @@ function get_student_record($consumer, $name, $status=-1, $page=1, $limit=20){
   }
   return $ret;
 }
+function get_consumer_internship_count($consumer, $user_type){
+  if($user_type == 0){
+    $sql = "SELECT COUNT(*) as c " 
+         . "FROM tr_internship, tr_student WHERE tr_internship.student_id=tr_student.student_id;";
+  }elseif($user_type == 1){
+    $sql = "SELECT COUNT(*) as c "
+         . "FROM tr_internship, tr_student WHERE tr_internship.student_id=tr_student.student_id "
+         . "AND consumer='$consumer';";
+  }
+  $db = new DB;
+  $db->connect();
+  $db->query($sql);
+  return $db->f('c');
+}
+function get_consumer_internships($consumer, $user_type, $page=1, $limit=20){
+  $start = ($page-1)*$limit;
+  if($user_type == 0){
+    $sql = "SELECT tr_student.student_id,tr_student.name,company_name,job_name,start,end,mentor,tr_internship.contact_num "
+         . "FROM tr_internship, tr_student WHERE tr_internship.student_id=tr_student.student_id "
+         . "ORDER BY id DESC LIMIT $start,$limit;";
+  }elseif($user_type == 1){
+      $sql = "SELECT tr_student.student_id,tr_student.name,company_name,job_name,start,end,mentor,tr_internship.contact_num "
+          . "FROM tr_internship, tr_student WHERE tr_internship.student_id=tr_student.student_id "
+          . "AND consumer='$consumer' ORDER BY id DESC LIMIT $start,$limit;";
+  }
+  $db = new DB;
+  $db->connect();
+  $db->query($sql);
+  $ret = Array();
+  while($db->next_record()){
+    array_push($ret, Array(
+      'student_id'  =>  $db->f('student_id'),
+      'name'  =>  $db->f('name'),
+      'company_name'  =>  $db->f('company_name'),
+      'job_name'  =>  $db->f('job_name'),
+      'start'  =>  $db->f('start'),
+      'end'  =>  $db->f('end'),
+      'mentor'  =>  $db->f('mentor'),
+      'contact_num'  =>  $db->f('contact_num'),
+    ));
+  }
+  return $ret;
+}
+function get_student_internship_count($consumer, $name){
+  $sql = "SELECT COUNT(*) as c "
+       . "FROM tr_internship, tr_student WHERE tr_internship.student_id=tr_student.student_id "
+       . "AND name LIKE '%$name%' ORDER BY id DESC;";
+  $db = new DB;
+  $db->connect();
+  $db->query($sql);
+  return $db->f('c');
+}
+function get_student_internships($consumer, $name, $page=1, $limit=20){
+  $start = ($page-1)*$limit;
+  $sql = "SELECT tr_student.student_id,tr_student.name,company_name,job_name,start,end,mentor,tr_internship.contact_num "
+       . "FROM tr_internship, tr_student WHERE tr_internship.student_id=tr_student.student_id "
+       . "AND name LIKE '%$name%' ORDER BY id DESC LIMIT $start,$limit;";
+  $db = new DB;
+  $db->connect();
+  $db->query($sql);
+  $ret = Array();
+  while($db->next_record()){
+    array_push($ret, Array(
+      'student_id'  =>  $db->f('student_id'),
+      'name'  =>  $db->f('name'),
+      'company_name'  =>  $db->f('company_name'),
+      'job_name'  =>  $db->f('job_name'),
+      'start'  =>  $db->f('start'),
+      'end'  =>  $db->f('end'),
+      'mentor'  =>  $db->f('mentor'),
+      'contact_num'  =>  $db->f('contact_num'),
+    ));
+  }
+  return $ret;
+}
 ?>

@@ -49,4 +49,13 @@ function get_student_info($sid){
     }
     return $account;
 }
+function add_new_internship($consumer, $company_name, $job_name, $start, $end, $mentor, $contact_num){
+    $db = new DB;
+    $db->connect();
+    $db->query("SELECT student_id as sid FROM tr_student WHERE consumer='$consumer';");
+    $db->next_record();
+    $sid = $db->f('sid');
+    $db->query("INSERT tr_internship(student_id,company_name,job_name,start,end,mentor,contact_num) "
+              ."VALUES($sid, '$company_name', '$job_name', '$start', '$end', '$mentor', '$contact_num');");
+}
 ?>

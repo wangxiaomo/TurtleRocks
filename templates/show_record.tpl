@@ -17,7 +17,7 @@
   <div id="content-wrap" style="background-color:white;">
     {include file="sidebar.tpl"}
     <div id="main"> 
-      <h1>查看实习记录</h1>
+      <h1>查看实习申请状况</h1>
       {if $user_type != 1}
         <div class="search_student">
           <p><input type="text" id="search_name" name="search_name" placeholder="输入要查找的学生姓名" /><button class="btn btn-search">查找</button></p>

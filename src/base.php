@@ -32,7 +32,8 @@ if($user_type == 0){
         Array("url"=>"update_pass.php", "meta"=>"修改登陆密码"),
         Array("url"=>"show_company.php", "meta"=>"查看全部公司"),
         Array("url"=>"show_job.php", "meta"=>"查看所有工作"),
-        Array("url"=>"show_record.php", "meta"=>"查看实习记录"),
+        Array("url"=>"show_record.php", "meta"=>"查看实习申请状况"),
+        Array("url"=>"show_internship.php", "meta"=>"查看学生实习记录"),
         Array("url"=>"new_company.php", "meta"=>"新建公司账号"),
         Array("url"=>"new_student.php", "meta"=>"新建学生账号"),
         Array("url"=>"new_school.php", "meta"=>"新建学校账号"),
@@ -44,7 +45,9 @@ if($user_type == 0){
         Array("url"=>"update_pass.php", "meta"=>"修改登陆密码"),
         Array("url"=>"show_company.php", "meta"=>"查看全部公司"),
         Array("url"=>"show_job.php", "meta"=>"查看所有工作"),
-        Array("url"=>"show_record.php", "meta"=>"查看实习记录"),
+        Array("url"=>"show_record.php", "meta"=>"查看实习申请状况"),
+        Array("url"=>"new_internship.php", "meta"=>"添加学生实习记录"),
+        Array("url"=>"show_internship.php", "meta"=>"查看学生实习记录"),
     );
 }elseif($user_type == 2){
     //给出属于公司的navs
@@ -53,7 +56,7 @@ if($user_type == 0){
         Array("url"=>"update_pass.php", "meta"=>"修改登陆密码"),
         Array("url"=>"manage_job.php", "meta"=>"工作发布与维护"),
         Array("url"=>"audit_application.php", "meta"=>"实习申请审批"),
-        Array("url"=>"show_record.php", "meta"=>"公司实习记录"),
+        Array("url"=>"show_record.php", "meta"=>"公司实习状况"),
     );
 }else{
     die("\$user_type error with $user_type!");
