@@ -67,3 +67,8 @@ Update 2012/11/14 00:26
 
 + 添加了 wysihtml5 editor
 + 就是不想往页面加 paginator 啊.好烦...
+
+Update 2012/12/10 16:11
+------------------
+
++ Fix IE6 Tricks.
