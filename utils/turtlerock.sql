@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2012 年 12 月 02 日 02:56
+-- 生成日期: 2012 年 12 月 28 日 03:10
 -- 服务器版本: 5.5.24-log
 -- PHP 版本: 5.3.13
 
@@ -202,6 +202,14 @@ CREATE TABLE IF NOT EXISTS `tr_student` (
   `id_num` varchar(20) NOT NULL,
   `grade` varchar(20) NOT NULL,
   `major` varchar(20) NOT NULL,
+  `birth_date` varchar(40) NOT NULL,
+  `marriage` int(11) NOT NULL,
+  `political_status` int(11) NOT NULL,
+  `domicile_place` varchar(50) NOT NULL,
+  `current_place` varchar(50) NOT NULL,
+  `mailing_address` varchar(100) NOT NULL,
+  `mailing_code` varchar(10) NOT NULL,
+  `email_address` varchar(20) NOT NULL,
   `contact_num` varchar(20) NOT NULL,
   `extra` text NOT NULL,
   PRIMARY KEY (`student_id`),
@@ -213,9 +221,9 @@ CREATE TABLE IF NOT EXISTS `tr_student` (
 -- 转存表中的数据 `tr_student`
 --
 
-INSERT INTO `tr_student` (`consumer`, `student_id`, `name`, `gender`, `pic_path`, `id_num`, `grade`, `major`, `contact_num`, `extra`) VALUES
-('test1', 7, 'æŽæ™¨å¸Œ', 2, '../upload/students/test11352286294cover.jpg', '14xx9123144123', '1', 'çƒ¹é¥ª', '18966666666', 'ä½ æ˜¯ä¸ªæ´»æ³¼å¯çˆ±çš„å­©å­,ä½†æ˜¯å°±æ˜¯å¹³æ—¶ä¸Šè¯¾å¤ªç¾žæ€¯äº†äº›,å¦‚æžœä½ èƒ½ç§¯æžå‘è¨€,ç›¸ä¿¡ä½ ä¼šåšçš„æ›´å¥½.é€ä½ ä¸€æŠŠ"é‡‘é’¥åŒ™",å®ƒå°†æ˜¯ä½ å¼€å¯çŸ¥è¯†ä¸–ç•Œçš„å¤§é—¨,åŠ æ²¹!'),
-('test2', 8, '', 0, '../upload/students/test21352286184Folder.jpg', '', '', '', '', '');
+INSERT INTO `tr_student` (`consumer`, `student_id`, `name`, `gender`, `pic_path`, `id_num`, `grade`, `major`, `birth_date`, `marriage`, `political_status`, `domicile_place`, `current_place`, `mailing_address`, `mailing_code`, `email_address`, `contact_num`, `extra`) VALUES
+('test1', 7, 'æŽæ™¨å¸Œ', 1, '../upload/students/test11352286294cover.jpg', '14xx9123144123', '1', 'çƒ¹é¥ª', '1990/11', 2, 1, '1', 'asd', 'asd', 'asd', 'asd', '18966666666', 'ä½ æ˜¯ä¸ªæ´»æ³¼å¯çˆ±çš„å­©å­,ä½†æ˜¯å°±æ˜¯å¹³æ—¶ä¸Šè¯¾å¤ªç¾žæ€¯äº†äº›,å¦‚æžœä½ èƒ½ç§¯æžå‘è¨€,ç›¸ä¿¡ä½ ä¼šåšçš„æ›´å¥½.é€ä½ ä¸€æŠŠ"é‡‘é’¥åŒ™",å®ƒå°†æ˜¯ä½ å¼€å¯çŸ¥è¯†ä¸–ç•Œçš„å¤§é—¨,åŠ æ²¹!'),
+('test2', 8, '', 0, '../upload/students/test21352286184Folder.jpg', '', '', '', '', 0, 0, '', '', '', '', '', '', '');
 
 --
 -- 限制导出的表

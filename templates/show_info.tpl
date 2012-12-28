@@ -106,6 +106,42 @@ li { margin-top:-25px;margin-bottom:0px; padding-left:20px;}
         <br />
         专业:{$student.major}
         <br />
+        出生日期:{$student.birth_date}
+        {if $student.marriage}
+          <br />
+          婚姻状况:
+          {if $student.marriage!=1}
+            未婚
+          {else}
+            已婚
+          {/if}
+        {/if}
+        {if $student.political_status}
+          <br />
+          政治面貌:
+          {if $student.political_status == 1}
+            群众
+          {elseif $student.political_status == 2}
+            团员
+          {elseif $student.political_status == 3}
+            预备党员
+          {elseif $student.political_status == 4}
+            党员
+          {else}
+            其他党派
+          {/if}
+        {/if}
+        <br />
+        户口所在地:{$student.domicile_place}
+        <br />
+        现居地:{$student.current_place}
+        <br />
+        联系地址:{$student.mailing_address}
+        <br />
+        邮编地址:{$student.mailing_code}
+        <br />
+        电子邮箱:{$studnet.email_address}
+        <br />
         联系方式:{$student.contact_num}
       </div>
       <div id="user_intro">

@@ -1,7 +1,7 @@
 <?php
 require_once('../libs/db.php');
-function update_student_info($consumer, $name, $gender, $id_num, $grade, $major, $contact_num, $extra){
-    $sql = "update tr_student set name='$name', gender=$gender, id_num='$id_num', grade='$grade', major='$major', contact_num='$contact_num', extra='$extra' where consumer='$consumer';";
+function update_student_info($consumer, $name, $gender, $id_num, $grade, $major, $birth_date, $marriage, $political_status, $domicile_place, $current_place, $mailing_address, $mailing_code, $email_address, $contact_num, $extra){
+    $sql = "update tr_student set name='$name', gender=$gender, id_num='$id_num', grade='$grade', major='$major', birth_date='$birth_date', marriage=$marriage, political_status=$political_status, domicile_place='$domicile_place', current_place='$current_place', mailing_address='$mailing_address', mailing_code='$mailing_code', email_address='$email_address', contact_num='$contact_num', extra='$extra' where consumer='$consumer';";
     $db = new DB;
     $db->connect();
     $db->query($sql);
@@ -20,7 +20,8 @@ function add_new_student($consumer, $password){
 function get_student_info($sid){
     $db = new DB;
     $db->connect();
-    $sql = "SELECT student_id, name, gender, pic_path, id_num, grade, major, contact_num, extra "
+    $sql = "SELECT student_id, name, gender, pic_path, id_num, grade, major, birth_date, marriage, political_status, "
+         . "domicile_place, current_place, mailing_address, mailing_code, email_address, contact_num, extra "
              . "FROM tr_student WHERE student_id=" . $sid . ";";
     $db->query($sql);
     $db->next_record();
@@ -33,6 +34,14 @@ function get_student_info($sid){
       'id_num'        =>  $db->f('id_num'),
       'grade'         =>  $db->f('grade'),
       'major'         =>  $db->f('major'),
+      'birth_date'    =>  $db->f('birth_date'),
+      'marriage'      =>  $db->f('marriage'),
+      'political_status'    =>  $db->f('political_status'),
+      'domicile_place'      =>  $db->f('domicile_place'),
+      'current_place'       =>  $db->f('current_place'),
+      'mailing_address'     =>  $db->f('mailing_address'),
+      'mailing_code'        =>  $db->f('mailing_code'),
+      'email_address'       =>  $db->f('email_address'),
       'contact_num'   =>  $db->f('contact_num'),
       'extra'         =>  $db->f('extra'),
       'family'        =>  Array(),

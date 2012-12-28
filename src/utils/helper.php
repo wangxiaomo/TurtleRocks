@@ -50,7 +50,8 @@ function get_account_info($user_type, $consumer){
           'department_type' =>  $db->f('department_type'),
         );
     }elseif($user_type == 1){
-        $sql = "SELECT student_id, name, gender, pic_path, id_num, grade, major, contact_num, extra "
+        $sql = "SELECT student_id, name, gender, pic_path, id_num, grade, major, birth_date, marriage, political_status,"
+             . "domicile_place, current_place, mailing_address, mailing_code, email_address, contact_num, extra "
              . "FROM tr_student WHERE consumer='" . $consumer . "';";
         $db->query($sql);
         $db->next_record();
@@ -63,6 +64,14 @@ function get_account_info($user_type, $consumer){
           'id_num'        =>  $db->f('id_num'),
           'grade'         =>  $db->f('grade'),
           'major'         =>  $db->f('major'),
+          'birth_date'    =>  $db->f('birth_date'),
+          'marriage'      =>  $db->f('marriage'),
+          'political_status'=>  $db->f('political_status'),
+          'domicile_place'  =>  $db->f('domicile_place'),
+          'current_place'   =>  $db->f('current_place'),
+          'mailing_address' =>  $db->f('mailing_address'),
+          'mailing_code'    =>  $db->f('mailing_code'),
+          'email_address'   =>  $db->f('email_address'),
           'contact_num'   =>  $db->f('contact_num'),
           'extra'         =>  $db->f('extra'),
         );
