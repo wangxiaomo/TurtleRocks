@@ -31,7 +31,12 @@ if($_POST){
         $meta_info = escape($_POST['meta_info']);
         update_company_info($consumer, $company_name, $meta_info);
     }
+    unset($_GET['rel']);
     $smarty->assign('status', "修改成功!");
+}
+
+if($_GET['rel'] == 'active'){
+    $smarty->assign('status', '请补全用户信息!');
 }
 
 $account = get_account_info($user_type, $consumer);

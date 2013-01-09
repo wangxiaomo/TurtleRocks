@@ -284,4 +284,19 @@ function get_student_internships($consumer, $name, $page=1, $limit=20){
     }
     return $ret;
 }
+function is_active($consumer){
+    $user_type = get_user_type($consumer);
+    if($user_type == 1){
+        $sql = "SELECT name as name FROM tr_login, tr_student WHERE tr_login.consumer=tr_student.consumer "
+             . "AND tr_login.consumer='$consumer';";
+    }else{
+        $sql = "SELECT company_name as name FROM tr_login, tr_company WHERE tr_login.consumer=tr_company.consumer "       
+             . "AND tr_login.consumer='$consumer';";
+    }
+    $db = new DB;
+    $db->connect();
+    $db->query($sql);
+    $db->next_record();
+    return $db->f('name')?true:false;
+}
 ?>

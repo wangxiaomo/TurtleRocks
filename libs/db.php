@@ -19,5 +19,7 @@ class DB extends DB_Sql{
         $this->Database = DB_NAME;
         $this->User = DB_USER;
         $this->Password = DB_PASS;
+
+        $this->Halt_On_Error = "no";
     }
 }

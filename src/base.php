@@ -24,6 +24,12 @@ if($user_type == -1){
     header('Location:logout.php');
 }
 
+if($user_type != 0 and !is_active($consumer)){
+    if(!strpos($_SERVER['PHP_SELF'], 'update_info.php')){
+      header('Location:update_info.php?rel=active');
+    }
+}
+
 $navs = Array();
 if($user_type == 0){
     //给出属于学校的navs
