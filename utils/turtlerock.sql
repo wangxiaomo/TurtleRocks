@@ -33,7 +33,6 @@ CREATE TABLE IF NOT EXISTS `tr_company` (
   `meta_info` text NOT NULL,
   PRIMARY KEY (`company_id`),
   UNIQUE KEY `company_id` (`company_id`),
-  UNIQUE KEY `company_name` (`company_name`),
   KEY `consumer` (`consumer`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
 

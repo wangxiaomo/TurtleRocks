@@ -89,199 +89,214 @@ function get_account_info($user_type, $consumer){
 }
 
 function get_consumer_records($consumer, $user_type, $page=1, $limit=20){
-  $start = ($page-1)*$limit;
-  //首先要根据 user_type 来判断权限.
-  if($user_type == 0){
-    //当前查看者为学校.有权看所有学生的实习记录
-    $sql = "SELECT tr_record.student_id,name,company_name,job_name,request_date,audit_date,status FROM tr_record,tr_student,tr_company,tr_job "
-         . "WHERE tr_student.student_id=tr_record.student_id AND tr_job.job_id=tr_record.job_id AND tr_job.company_id=tr_company.company_id "
-         . "ORDER BY record_id DESC LIMIT $start, $limit;";
-  }elseif($user_type == 1){
-    //当前查看者为学生.有权查看自己的实习记录
-    $sql = "SELECT tr_record.student_id,name,company_name,job_name,request_date,audit_date,status FROM tr_record,tr_student,tr_company,tr_job "
-         . "WHERE tr_student.student_id=tr_record.student_id AND tr_job.job_id=tr_record.job_id AND tr_job.company_id=tr_company.company_id "
-         . "AND tr_student.consumer='$consumer' ORDER BY record_id DESC LIMIT $start,$limit;";
-  }else{
-    //当前查看者为公司.有权查看申请本公司的实习记录
-    $sql = "SELECT tr_record.student_id,name,company_name,job_name,request_date,audit_date,status FROM tr_record,tr_student,tr_company,tr_job "
-         . "WHERE tr_student.student_id=tr_record.student_id AND tr_job.job_id=tr_record.job_id AND tr_job.company_id=tr_company.company_id "
-         . "AND tr_company.consumer='$consumer' ORDER BY record_id DESC LIMIT $start,$limit;";
-  }
-  $db = new DB;
-  $db->connect();
-  $db->query($sql);
-  $ret = Array();
-  while($db->next_record()){
-    array_push($ret, Array(
-      'student_id' => $db->f('student_id'),
-      'name'  =>  $db->f('name'),
-      'company_name'  =>  $db->f('company_name'),
-      'job_name'  =>  $db->f('job_name'),
-      'request_date'  =>  $db->f('request_date'),
-      'audit_date'  =>  $db->f('audit_date'),
-      'status'  =>  $db->f('status'),
-    ));
-  }
-  return $ret;
+    $start = ($page-1)*$limit;
+    //首先要根据 user_type 来判断权限.
+    if($user_type == 0){
+      //当前查看者为学校.有权看所有学生的实习记录
+      $sql = "SELECT tr_record.student_id,name,company_name,job_name,request_date,audit_date,status FROM tr_record,tr_student,tr_company,tr_job "
+           . "WHERE tr_student.student_id=tr_record.student_id AND tr_job.job_id=tr_record.job_id AND tr_job.company_id=tr_company.company_id "
+           . "ORDER BY record_id DESC LIMIT $start, $limit;";
+    }elseif($user_type == 1){
+      //当前查看者为学生.有权查看自己的实习记录
+      $sql = "SELECT tr_record.student_id,name,company_name,job_name,request_date,audit_date,status FROM tr_record,tr_student,tr_company,tr_job "
+           . "WHERE tr_student.student_id=tr_record.student_id AND tr_job.job_id=tr_record.job_id AND tr_job.company_id=tr_company.company_id "
+           . "AND tr_student.consumer='$consumer' ORDER BY record_id DESC LIMIT $start,$limit;";
+    }else{
+      //当前查看者为公司.有权查看申请本公司的实习记录
+      $sql = "SELECT tr_record.student_id,name,company_name,job_name,request_date,audit_date,status FROM tr_record,tr_student,tr_company,tr_job "
+           . "WHERE tr_student.student_id=tr_record.student_id AND tr_job.job_id=tr_record.job_id AND tr_job.company_id=tr_company.company_id "
+           . "AND tr_company.consumer='$consumer' ORDER BY record_id DESC LIMIT $start,$limit;";
+    }
+    $db = new DB;
+    $db->connect();
+    $db->query($sql);
+    $ret = Array();
+    while($db->next_record()){
+      array_push($ret, Array(
+        'student_id' => $db->f('student_id'),
+        'name'  =>  $db->f('name'),
+        'company_name'  =>  $db->f('company_name'),
+        'job_name'  =>  $db->f('job_name'),
+        'request_date'  =>  $db->f('request_date'),
+        'audit_date'  =>  $db->f('audit_date'),
+        'status'  =>  $db->f('status'),
+      ));
+    }
+    return $ret;
 }
 function get_consumer_record_count($consumer, $user_type){
-  //首先要根据 user_type 来判断权限.
-  if($user_type == 0){
-    //当前查看者为学校.有权看所有学生的实习记录
-    $sql = "SELECT count(*) as c FROM tr_record,tr_student,tr_company,tr_job "
-         . "WHERE tr_student.student_id=tr_record.student_id AND tr_job.job_id=tr_record.job_id AND tr_job.company_id=tr_company.company_id;";
-  }elseif($user_type == 1){
-    //当前查看者为学生.有权查看自己的实习记录
-    $sql = "SELECT count(*) as c FROM tr_record,tr_student,tr_company,tr_job "
-         . "WHERE tr_student.student_id=tr_record.student_id AND tr_job.job_id=tr_record.job_id AND tr_job.company_id=tr_company.company_id "
-         . "AND tr_student.consumer='$consumer';";
-  }else{
-    //当前查看者为公司.有权查看申请本公司的实习记录
-    $sql = "SELECT count(*) as c FROM tr_record,tr_student,tr_company,tr_job "
-         . "WHERE tr_student.student_id=tr_record.student_id AND tr_job.job_id=tr_record.job_id AND tr_job.company_id=tr_company.company_id "
-         . "AND tr_company.consumer='$consumer';";
-  }
-  $db = new DB;
-  $db->connect();
-  $db->query($sql);
-  $db->next_record();
-  return $db->f('c');
+    //首先要根据 user_type 来判断权限.
+    if($user_type == 0){
+      //当前查看者为学校.有权看所有学生的实习记录
+      $sql = "SELECT count(*) as c FROM tr_record,tr_student,tr_company,tr_job "
+           . "WHERE tr_student.student_id=tr_record.student_id AND tr_job.job_id=tr_record.job_id AND tr_job.company_id=tr_company.company_id;";
+    }elseif($user_type == 1){
+      //当前查看者为学生.有权查看自己的实习记录
+      $sql = "SELECT count(*) as c FROM tr_record,tr_student,tr_company,tr_job "
+           . "WHERE tr_student.student_id=tr_record.student_id AND tr_job.job_id=tr_record.job_id AND tr_job.company_id=tr_company.company_id "
+           . "AND tr_student.consumer='$consumer';";
+    }else{
+      //当前查看者为公司.有权查看申请本公司的实习记录
+      $sql = "SELECT count(*) as c FROM tr_record,tr_student,tr_company,tr_job "
+           . "WHERE tr_student.student_id=tr_record.student_id AND tr_job.job_id=tr_record.job_id AND tr_job.company_id=tr_company.company_id "
+           . "AND tr_company.consumer='$consumer';";
+    }
+    $db = new DB;
+    $db->connect();
+    $db->query($sql);
+    $db->next_record();
+    return $db->f('c');
 }
 function get_student_record_count($consumer, $name, $status=-1){
-  $user_type = get_user_type($consumer);
-  if($user_type == 0){
-    $sql = "SELECT count(*) as c FROM tr_record,tr_student,tr_company,tr_job "
-         . "WHERE tr_student.student_id=tr_record.student_id AND tr_job.job_id=tr_record.job_id AND tr_job.company_id=tr_company.company_id "
-         . "AND name like '%$name%' ";
-    if($status!=-1){
-      $sql = $sql . "AND status=$status ";
+    $user_type = get_user_type($consumer);
+    if($user_type == 0){
+      $sql = "SELECT count(*) as c FROM tr_record,tr_student,tr_company,tr_job "
+           . "WHERE tr_student.student_id=tr_record.student_id AND tr_job.job_id=tr_record.job_id AND tr_job.company_id=tr_company.company_id "
+           . "AND name like '%$name%' ";
+      if($status!=-1){
+        $sql = $sql . "AND status=$status ";
+      }
+    }elseif($user_type == 2){
+      $sql = "SELECT count(*) as c FROM tr_record,tr_student,tr_company,tr_job "
+           . "WHERE tr_student.student_id=tr_record.student_id AND tr_job.job_id=tr_record.job_id AND tr_job.company_id=tr_company.company_id "
+           . "AND tr_company.consumer='$consumer' "
+           . "AND name like '%$name%' ";
+      if($status!=-1){
+        $sql = $sql . "AND status=$status ";
+      }
     }
-  }elseif($user_type == 2){
-    $sql = "SELECT count(*) as c FROM tr_record,tr_student,tr_company,tr_job "
-         . "WHERE tr_student.student_id=tr_record.student_id AND tr_job.job_id=tr_record.job_id AND tr_job.company_id=tr_company.company_id "
-         . "AND tr_company.consumer='$consumer' "
-         . "AND name like '%$name%' ";
-    if($status!=-1){
-      $sql = $sql . "AND status=$status ";
-    }
-  }
-  $db = new DB;
-  $db->connect();
-  $db->query($sql);
-  $db->next_record();
-  return $db->f('c');
+    $db = new DB;
+    $db->connect();
+    $db->query($sql);
+    $db->next_record();
+    return $db->f('c');
 }
 function get_student_record($consumer, $name, $status=-1, $page=1, $limit=20){
-  $start = ($page-1)*$limit;
-  $user_type = get_user_type($consumer);
-  if($user_type == 0){
-    $sql = "SELECT tr_record.student_id,name,company_name,job_name,request_date,audit_date,status FROM tr_record,tr_student,tr_company,tr_job "
-         . "WHERE tr_student.student_id=tr_record.student_id AND tr_job.job_id=tr_record.job_id AND tr_job.company_id=tr_company.company_id "
-         . "AND name like '%$name%' ";
-    if($status!=-1){
-      $sql = $sql . "AND status=$status ";
+    $start = ($page-1)*$limit;
+    $user_type = get_user_type($consumer);
+    if($user_type == 0){
+      $sql = "SELECT tr_record.student_id,name,company_name,job_name,request_date,audit_date,status FROM tr_record,tr_student,tr_company,tr_job "
+           . "WHERE tr_student.student_id=tr_record.student_id AND tr_job.job_id=tr_record.job_id AND tr_job.company_id=tr_company.company_id "
+           . "AND name like '%$name%' ";
+      if($status!=-1){
+        $sql = $sql . "AND status=$status ";
+      }
+      $sql = $sql . "ORDER BY record_id DESC LIMIT $start, $limit;";
+    }elseif($user_type == 2){
+      $sql = "SELECT tr_record.student_id,name,company_name,job_name,request_date,audit_date,status FROM tr_record,tr_student,tr_company,tr_job "
+           . "WHERE tr_student.student_id=tr_record.student_id AND tr_job.job_id=tr_record.job_id AND tr_job.company_id=tr_company.company_id "
+           . "AND tr_company.consumer='$consumer' "
+           . "AND name like '%$name%' ";
+      if($status!=-1){
+        $sql = $sql . "AND status=$status ";
+      }
+      $sql = $sql . " ORDER BY record_id DESC LIMIT $start,$limit;";
     }
-    $sql = $sql . "ORDER BY record_id DESC LIMIT $start, $limit;";
-  }elseif($user_type == 2){
-    $sql = "SELECT tr_record.student_id,name,company_name,job_name,request_date,audit_date,status FROM tr_record,tr_student,tr_company,tr_job "
-         . "WHERE tr_student.student_id=tr_record.student_id AND tr_job.job_id=tr_record.job_id AND tr_job.company_id=tr_company.company_id "
-         . "AND tr_company.consumer='$consumer' "
-         . "AND name like '%$name%' ";
-    if($status!=-1){
-      $sql = $sql . "AND status=$status ";
+    $db = new DB;
+    $db->connect();
+    $db->query($sql);
+    $ret = Array();
+    while($db->next_record()){
+      array_push($ret, Array(
+        'student_id' => $db->f('student_id'),
+        'name'  =>  $db->f('name'),
+        'company_name'  =>  $db->f('company_name'),
+        'job_name'  =>  $db->f('job_name'),
+        'request_date'  =>  $db->f('request_date'),
+        'audit_date'  =>  $db->f('audit_date'),
+        'status'  =>  $db->f('status'),
+      ));
     }
-    $sql = $sql . " ORDER BY record_id DESC LIMIT $start,$limit;";
-  }
-  $db = new DB;
-  $db->connect();
-  $db->query($sql);
-  $ret = Array();
-  while($db->next_record()){
-    array_push($ret, Array(
-      'student_id' => $db->f('student_id'),
-      'name'  =>  $db->f('name'),
-      'company_name'  =>  $db->f('company_name'),
-      'job_name'  =>  $db->f('job_name'),
-      'request_date'  =>  $db->f('request_date'),
-      'audit_date'  =>  $db->f('audit_date'),
-      'status'  =>  $db->f('status'),
-    ));
-  }
-  return $ret;
+    return $ret;
 }
 function get_consumer_internship_count($consumer, $user_type){
-  if($user_type == 0){
-    $sql = "SELECT COUNT(*) as c " 
-         . "FROM tr_internship, tr_student WHERE tr_internship.student_id=tr_student.student_id;";
-  }elseif($user_type == 1){
-    $sql = "SELECT COUNT(*) as c "
-         . "FROM tr_internship, tr_student WHERE tr_internship.student_id=tr_student.student_id "
-         . "AND consumer='$consumer';";
-  }
-  $db = new DB;
-  $db->connect();
-  $db->query($sql);
-  return $db->f('c');
+    if($user_type == 0){
+      $sql = "SELECT COUNT(*) as c " 
+           . "FROM tr_internship, tr_student WHERE tr_internship.student_id=tr_student.student_id;";
+    }elseif($user_type == 1){
+      $sql = "SELECT COUNT(*) as c "
+           . "FROM tr_internship, tr_student WHERE tr_internship.student_id=tr_student.student_id "
+           . "AND consumer='$consumer';";
+    }
+    $db = new DB;
+    $db->connect();
+    $db->query($sql);
+    return $db->f('c');
 }
 function get_consumer_internships($consumer, $user_type, $page=1, $limit=20){
-  $start = ($page-1)*$limit;
-  if($user_type == 0){
-    $sql = "SELECT tr_student.student_id,tr_student.name,company_name,job_name,start,end,mentor,tr_internship.contact_num "
-         . "FROM tr_internship, tr_student WHERE tr_internship.student_id=tr_student.student_id "
-         . "ORDER BY id DESC LIMIT $start,$limit;";
-  }elseif($user_type == 1){
+    $start = ($page-1)*$limit;
+    if($user_type == 0){
       $sql = "SELECT tr_student.student_id,tr_student.name,company_name,job_name,start,end,mentor,tr_internship.contact_num "
-          . "FROM tr_internship, tr_student WHERE tr_internship.student_id=tr_student.student_id "
-          . "AND consumer='$consumer' ORDER BY id DESC LIMIT $start,$limit;";
-  }
-  $db = new DB;
-  $db->connect();
-  $db->query($sql);
-  $ret = Array();
-  while($db->next_record()){
-    array_push($ret, Array(
-      'student_id'  =>  $db->f('student_id'),
-      'name'  =>  $db->f('name'),
-      'company_name'  =>  $db->f('company_name'),
-      'job_name'  =>  $db->f('job_name'),
-      'start'  =>  $db->f('start'),
-      'end'  =>  $db->f('end'),
-      'mentor'  =>  $db->f('mentor'),
-      'contact_num'  =>  $db->f('contact_num'),
-    ));
-  }
-  return $ret;
+           . "FROM tr_internship, tr_student WHERE tr_internship.student_id=tr_student.student_id "
+           . "ORDER BY id DESC LIMIT $start,$limit;";
+    }elseif($user_type == 1){
+        $sql = "SELECT tr_student.student_id,tr_student.name,company_name,job_name,start,end,mentor,tr_internship.contact_num "
+            . "FROM tr_internship, tr_student WHERE tr_internship.student_id=tr_student.student_id "
+            . "AND consumer='$consumer' ORDER BY id DESC LIMIT $start,$limit;";
+    }
+    $db = new DB;
+    $db->connect();
+    $db->query($sql);
+    $ret = Array();
+    while($db->next_record()){
+      array_push($ret, Array(
+        'student_id'  =>  $db->f('student_id'),
+        'name'  =>  $db->f('name'),
+        'company_name'  =>  $db->f('company_name'),
+        'job_name'  =>  $db->f('job_name'),
+        'start'  =>  $db->f('start'),
+        'end'  =>  $db->f('end'),
+        'mentor'  =>  $db->f('mentor'),
+        'contact_num'  =>  $db->f('contact_num'),
+      ));
+    }
+    return $ret;
 }
 function get_student_internship_count($consumer, $name){
-  $sql = "SELECT COUNT(*) as c "
-       . "FROM tr_internship, tr_student WHERE tr_internship.student_id=tr_student.student_id "
-       . "AND name LIKE '%$name%' ORDER BY id DESC;";
-  $db = new DB;
-  $db->connect();
-  $db->query($sql);
-  return $db->f('c');
+    $sql = "SELECT COUNT(*) as c "
+         . "FROM tr_internship, tr_student WHERE tr_internship.student_id=tr_student.student_id "
+         . "AND name LIKE '%$name%' ORDER BY id DESC;";
+    $db = new DB;
+    $db->connect();
+    $db->query($sql);
+    return $db->f('c');
 }
 function get_student_internships($consumer, $name, $page=1, $limit=20){
-  $start = ($page-1)*$limit;
-  $sql = "SELECT tr_student.student_id,tr_student.name,company_name,job_name,start,end,mentor,tr_internship.contact_num "
-       . "FROM tr_internship, tr_student WHERE tr_internship.student_id=tr_student.student_id "
-       . "AND name LIKE '%$name%' ORDER BY id DESC LIMIT $start,$limit;";
-  $db = new DB;
-  $db->connect();
-  $db->query($sql);
-  $ret = Array();
-  while($db->next_record()){
-    array_push($ret, Array(
-      'student_id'  =>  $db->f('student_id'),
-      'name'  =>  $db->f('name'),
-      'company_name'  =>  $db->f('company_name'),
-      'job_name'  =>  $db->f('job_name'),
-      'start'  =>  $db->f('start'),
-      'end'  =>  $db->f('end'),
-      'mentor'  =>  $db->f('mentor'),
-      'contact_num'  =>  $db->f('contact_num'),
-    ));
-  }
-  return $ret;
+    $start = ($page-1)*$limit;
+    $sql = "SELECT tr_student.student_id,tr_student.name,company_name,job_name,start,end,mentor,tr_internship.contact_num "
+         . "FROM tr_internship, tr_student WHERE tr_internship.student_id=tr_student.student_id "
+         . "AND name LIKE '%$name%' ORDER BY id DESC LIMIT $start,$limit;";
+    $db = new DB;
+    $db->connect();
+    $db->query($sql);
+    $ret = Array();
+    while($db->next_record()){
+      array_push($ret, Array(
+        'student_id'  =>  $db->f('student_id'),
+        'name'  =>  $db->f('name'),
+        'company_name'  =>  $db->f('company_name'),
+        'job_name'  =>  $db->f('job_name'),
+        'start'  =>  $db->f('start'),
+        'end'  =>  $db->f('end'),
+        'mentor'  =>  $db->f('mentor'),
+        'contact_num'  =>  $db->f('contact_num'),
+      ));
+    }
+    return $ret;
+}
+function is_active($consumer){
+    $user_type = get_user_type($consumer);
+    if($user_type == 1){
+        $sql = "SELECT name as name FROM tr_login, tr_student WHERE tr_login.consumer=tr_student.consumer "
+             . "AND tr_login.consumer='$consumer';";
+    }else{
+        $sql = "SELECT company_name as name FROM tr_login, tr_company WHERE tr_login.consumer=tr_company.consumer "       
+             . "AND tr_login.consumer='$consumer';";
+    }
+    $db = new DB;
+    $db->connect();
+    $db->query($sql);
+    $db->next_record();
+    return $db->f('name')?true:false;
 }
 ?>

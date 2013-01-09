@@ -1,7 +1,6 @@
 <?php
 include('base.php');
 
-//交给 Helper 来进行权限判断
 $page = $_GET['p'];
 $page = $page==NULL?1:$page;
 
