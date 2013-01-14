@@ -62,7 +62,7 @@ if($user_type == 0){
         Array("url"=>"update_pass.php", "meta"=>"修改登陆密码"),
         Array("url"=>"manage_job.php", "meta"=>"工作发布与维护"),
         Array("url"=>"audit_application.php", "meta"=>"实习申请审批"),
-        Array("url"=>"show_record.php", "meta"=>"公司实习状况"),
+        Array("url"=>"show_record.php", "meta"=>"实习申请状况"),
     );
 }else{
     die("\$user_type error with $user_type!");
