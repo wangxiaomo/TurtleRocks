@@ -11,9 +11,10 @@ $page = $_GET['p'];
 $page = $page==NULL?1:$page;
 
 $name = escape($_GET['name']);
+$query_by = escape($_GET['query_by']);
 if($name && $user_type!=1){
-  $total = get_student_record_count($consumer, $name, 0);
-  $records = get_student_record($consumer, $name, 0, $page);
+  $total = get_student_record_count($consumer, $name, $query_by, 0);
+  $records = get_student_record($consumer, $name, $query_by, 0, $page);
 }else{
   $total = get_application_count($consumer);
   $records = get_applications($consumer, $page);

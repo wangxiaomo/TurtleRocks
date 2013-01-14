@@ -147,20 +147,28 @@ function get_consumer_record_count($consumer, $user_type){
     $db->next_record();
     return $db->f('c');
 }
-function get_student_record_count($consumer, $name, $status=-1){
+function get_student_record_count($consumer, $name, $query_by, $status=-1){
     $user_type = get_user_type($consumer);
     if($user_type == 0){
       $sql = "SELECT count(*) as c FROM tr_record,tr_student,tr_company,tr_job "
-           . "WHERE tr_student.student_id=tr_record.student_id AND tr_job.job_id=tr_record.job_id AND tr_job.company_id=tr_company.company_id "
-           . "AND name like '%$name%' ";
+           . "WHERE tr_student.student_id=tr_record.student_id AND tr_job.job_id=tr_record.job_id AND tr_job.company_id=tr_company.company_id ";
+      if($query_by == 'name'){
+          $sql = $sql . "AND name like '%$name%' ";
+      }else{
+          $sql = $sql . "AND major like '%$name%' ";
+      }
       if($status!=-1){
         $sql = $sql . "AND status=$status ";
       }
     }elseif($user_type == 2){
       $sql = "SELECT count(*) as c FROM tr_record,tr_student,tr_company,tr_job "
            . "WHERE tr_student.student_id=tr_record.student_id AND tr_job.job_id=tr_record.job_id AND tr_job.company_id=tr_company.company_id "
-           . "AND tr_company.consumer='$consumer' "
-           . "AND name like '%$name%' ";
+           . "AND tr_company.consumer='$consumer' ";
+      if($query_by == 'name'){
+          $sql = $sql . "AND name like '%$name%' ";
+      }else{
+          $sql = $sql . "AND major like '%$name%' ";
+      }
       if($status!=-1){
         $sql = $sql . "AND status=$status ";
       }
@@ -171,13 +179,17 @@ function get_student_record_count($consumer, $name, $status=-1){
     $db->next_record();
     return $db->f('c');
 }
-function get_student_record($consumer, $name, $status=-1, $page=1, $limit=20){
+function get_student_record($consumer, $name, $query_by, $status=-1, $page=1, $limit=20){
     $start = ($page-1)*$limit;
     $user_type = get_user_type($consumer);
     if($user_type == 0){
       $sql = "SELECT tr_record.student_id,name,company_name,job_name,request_date,audit_date,status FROM tr_record,tr_student,tr_company,tr_job "
-           . "WHERE tr_student.student_id=tr_record.student_id AND tr_job.job_id=tr_record.job_id AND tr_job.company_id=tr_company.company_id "
-           . "AND name like '%$name%' ";
+           . "WHERE tr_student.student_id=tr_record.student_id AND tr_job.job_id=tr_record.job_id AND tr_job.company_id=tr_company.company_id ";
+      if($query_by == 'name'){
+          $sql = $sql . "AND name like '%$name%' ";
+      }else{
+          $sql = $sql . "AND major like '%$name%' ";
+      }
       if($status!=-1){
         $sql = $sql . "AND status=$status ";
       }
@@ -185,8 +197,12 @@ function get_student_record($consumer, $name, $status=-1, $page=1, $limit=20){
     }elseif($user_type == 2){
       $sql = "SELECT tr_record.student_id,name,company_name,job_name,request_date,audit_date,status FROM tr_record,tr_student,tr_company,tr_job "
            . "WHERE tr_student.student_id=tr_record.student_id AND tr_job.job_id=tr_record.job_id AND tr_job.company_id=tr_company.company_id "
-           . "AND tr_company.consumer='$consumer' "
-           . "AND name like '%$name%' ";
+           . "AND tr_company.consumer='$consumer' ";
+      if($query_by == 'name'){
+          $sql = $sql . "AND name like '%$name%' ";
+      }else{
+          $sql = $sql . "AND major like '%$name%' ";
+      }
       if($status!=-1){
         $sql = $sql . "AND status=$status ";
       }
@@ -252,20 +268,28 @@ function get_consumer_internships($consumer, $user_type, $page=1, $limit=20){
     }
     return $ret;
 }
-function get_student_internship_count($consumer, $name){
+function get_student_internship_count($consumer, $name, $query_by){
     $sql = "SELECT COUNT(*) as c "
-         . "FROM tr_internship, tr_student WHERE tr_internship.student_id=tr_student.student_id "
-         . "AND name LIKE '%$name%' ORDER BY id DESC;";
+         . "FROM tr_internship, tr_student WHERE tr_internship.student_id=tr_student.student_id ";
+    if($query_by == 'name'){
+        $sql = $sql . "AND name LIKE '%$name%' ORDER BY id DESC;";
+    }else{
+        $sql = $sql . "AND major LIKE '%$name%' ORDER BY id DESC;";
+    }
     $db = new DB;
     $db->connect();
     $db->query($sql);
     return $db->f('c');
 }
-function get_student_internships($consumer, $name, $page=1, $limit=20){
+function get_student_internships($consumer, $name, $query_by, $page=1, $limit=20){
     $start = ($page-1)*$limit;
     $sql = "SELECT tr_student.student_id,tr_student.name,company_name,job_name,start,end,mentor,tr_internship.contact_num "
-         . "FROM tr_internship, tr_student WHERE tr_internship.student_id=tr_student.student_id "
-         . "AND name LIKE '%$name%' ORDER BY id DESC LIMIT $start,$limit;";
+         . "FROM tr_internship, tr_student WHERE tr_internship.student_id=tr_student.student_id ";
+    if($query_by == 'name'){
+        $sql = $sql . "AND name LIKE '%$name%' ORDER BY id DESC LIMIT $start,$limit;";
+    }else{
+        $sql = $sql . "AND major LIKE '%$name%' ORDER BY id DESC LIMIT $start,$limit;";
+    }
     $db = new DB;
     $db->connect();
     $db->query($sql);

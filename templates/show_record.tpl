@@ -20,7 +20,7 @@
       <h1>查看实习申请状况</h1>
       {if $user_type != 1}
         <div class="search_student">
-          <p><input type="text" id="search_name" name="search_name" placeholder="输入要查找的学生姓名" /><button class="btn btn-search">查找</button></p>
+          <p><select id="query_by" name="query_by" style="width:110px;"><option value="name">按姓名查找</option><option value="major">按专业查找</option></select><input type="text" id="search_name" name="search_name" placeholder="输入要查找的信息" /><button class="btn btn-search">查找</button></p>
         </div>
       {/if}
       <table class="table table-bordered table-hover table-condensed">
@@ -164,7 +164,7 @@ $(function(){
   /* end paginator */
   $('button.btn-search').click(function(e){
     e.preventDefault();
-    window.location = '?name='+$('.search_student').find('input').attr('value').trim();
+    window.location = '?name='+$('.search_student').find('input').attr('value').trim()+'&query_by='+$('#query_by').attr('value').trim();
     return false;
   });
   $('.search_student').find('input').on('keydown', function(e){
