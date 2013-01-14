@@ -1,1 +1,3 @@
 *.swp
+*.tpl.php
+*.conf.php
