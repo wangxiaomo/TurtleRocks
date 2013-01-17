@@ -31,7 +31,6 @@ li { margin-top:-25px;margin-bottom:0px; padding-left:20px;}
 }
 #code div {
   margin-top:20px;
-  color:black;
   word-break: break-all;
   text-align:left;
   font-size:18pt;
