@@ -20,7 +20,7 @@ function audit_apply_record($record_id, $status){
 function get_newest_company($limit=20){
     $db = new DB;
     $db->connect();
-    $db->query("SELECT company_id, company_name, meta_info FROM tr_company WHERE company_name<>'' ORDER BY company_id DESC LIMIT $limit;");
+    $db->query("SELECT company_id, company_name, meta_info FROM tr_company WHERE company_name<>'' AND meta_info<>'' ORDER BY company_id DESC LIMIT $limit;");
     $ret = Array();
     while($db->next_record()){
         array_push($ret, Array(
@@ -35,7 +35,7 @@ function get_companies($page=1, $limit=20){
     $start = ($page-1)*$limit;
     $db = new DB;
     $db->connect();
-    $db->query("SELECT company_id, company_name, meta_info FROM tr_company WHERE company_name<>'' ORDER BY company_id DESC LIMIT $start,$limit;");
+    $db->query("SELECT company_id, company_name, meta_info FROM tr_company WHERE company_name<>'' AND meta_info<>'' ORDER BY company_id DESC LIMIT $start,$limit;");
     $ret = Array();
     while($db->next_record()){
         array_push($ret, Array(
@@ -49,7 +49,7 @@ function get_companies($page=1, $limit=20){
 function get_company_count(){
     $db = new DB;
     $db->connect();
-    $db->query("SELECT count(*) as c FROM tr_company WHERE company_name<>''");
+    $db->query("SELECT count(*) as c FROM tr_company WHERE company_name<>'' AND meta_info<>''");
     $db->next_record();
     return $db->f('c');
 }
@@ -57,7 +57,7 @@ function get_newest_job($limit=20){
     $db = new DB;
     $db->connect();
     $db->query("SELECT job_id,company_name,job_name,job_meta FROM tr_company,tr_job WHERE tr_company.company_id=tr_job.company_id AND tr_company.company_name<>''
-    ORDER BY job_id DESC LIMIT $limit;");
+    AND meta_info<>'' ORDER BY job_id DESC LIMIT $limit;");
     $ret = Array();
     while($db->next_record()){
         array_push($ret, Array(
@@ -122,7 +122,7 @@ function get_jobs_from_company_by_consumer($consumer, $page=1, $limit=20){
 function get_all_job_count(){
     $db = new DB;
     $db->connect();
-    $db->query("SELECT count(*) as c FROM tr_company,tr_job WHERE tr_company.company_id=tr_job.company_id AND tr_company.company_name<>'';");
+    $db->query("SELECT count(*) as c FROM tr_company,tr_job WHERE tr_company.company_id=tr_job.company_id AND tr_company.company_name<>'' AND meta_info<>'';");
     $db->next_record();
     return $db->f('c');
 }
@@ -130,7 +130,7 @@ function get_all_jobs($page=1, $limit=20){
     $start = ($page-1)*$limit;
     $db = new DB;
     $db->connect();
-    $db->query("SELECT job_id,company_name,job_name,job_meta FROM tr_company,tr_job WHERE tr_company.company_id=tr_job.company_id AND tr_company.company_name<>'' "
+    $db->query("SELECT job_id,company_name,job_name,job_meta FROM tr_company,tr_job WHERE tr_company.company_id=tr_job.company_id AND tr_company.company_name<>'' AND meta_info<>'' "
               ."LIMIT $start,$limit;");
     $ret = Array();
     while($db->next_record()){
