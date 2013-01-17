@@ -110,7 +110,7 @@ li { margin-top:-25px;margin-bottom:0px; padding-left:20px;}
         {if $student.marriage}
           <br />
           婚姻状况:
-          {if $student.marriage!=1}
+          {if $student.marriage==1}
             未婚
           {else}
             已婚
