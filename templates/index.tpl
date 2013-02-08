@@ -22,12 +22,12 @@
         </thead>
       {foreach from=$companys item=company}
         <tr>
-          <td class="company_name">{$company.company_name}</td>
+          <td class="company_name">{$company.company_name|escape}</td>
           <td class="meta_info">点击查看更多</td>
           <td class="op"><a href="show_job.php?cid={$company.company_id}">查看</a></td>
         </tr>
         <tr class="meta_info">
-          <td colspan=3><pre>{$company.meta_info}</pre></td>
+          <td colspan=3><pre>{$company.meta_info|escape}</pre></td>
         </tr>
       {foreachelse}
         <tr><td colspan=3 style="text-align:center;">没有公司数据。请联系管理员添加</td></tr>
@@ -48,12 +48,12 @@
         </thead>
       {foreach from=$jobs item=job}
         <tr>
-          <td class="company_name">{$job.company_name}</td>
-          <td class="job_name">{$job.job_name}</td>
+          <td class="company_name">{$job.company_name|escape}</td>
+          <td class="job_name">{$job.job_name|escape}</td>
           <td class="op"><a href="show_job.php">查看详情</a></td>
         </tr>
         <tr class="meta_info">
-          <td colspan=3><pre>{$job.job_meta}</pre></td>
+          <td colspan=3><pre>{$job.job_meta|escape}</pre></td>
         </tr>
       {foreachelse}
         <tr><td colspan=3 style="text-align: center">没有公司数据。请联系管理员添加</td></tr>

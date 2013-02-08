@@ -28,8 +28,8 @@
         </thead>
         {foreach from=$jobs item=job}
         <tr>
-          <td>{$job.company_name}</td>
-          <td>{$job.job_name}</td>
+          <td>{$job.company_name|escape}</td>
+          <td>{$job.job_name|escape}</td>
           <td>点击查看更多</td>
           {if $user_type!=0}
             <td><a class="apply" href="j/apply_for_job.php?job_id={$job.job_id}">申请</a></td>
@@ -38,7 +38,7 @@
           {/if}
         </tr>
         <tr class="meta_info">
-          <td colspan=4><pre>{$job.job_meta}</pre></td>
+          <td colspan=4><pre>{$job.job_meta|escape}</pre></td>
         </tr>
         {foreachelse}
           <tr><td colspan=4><div class="status">这家公司没有任何职位..不给力啊.老师!!!</div></td></tr>

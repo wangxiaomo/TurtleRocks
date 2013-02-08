@@ -36,16 +36,16 @@
         {foreach from=$internships item=internship}
         <tr>
           {if $user_type==0}
-            <td><a href="show_info.php?sid={$internship.student_id}" target="_blank">{$internship.name}</a></td>
+            <td><a href="show_info.php?sid={$internship.student_id}" target="_blank">{$internship.name|escape}</a></td>
           {else}
-            <td>{$internship.name}</td>
+            <td>{$internship.name|escape}</td>
           {/if}
-          <td>{$internship.company_name}</td>
-          <td>{$internship.job_name}</td>
+          <td>{$internship.company_name|escape}</td>
+          <td>{$internship.job_name|escape}</td>
           <td>{$internship.start}</td>
           <td>{$internship.end}</td>
-          <td>{$internship.mentor}</td>
-          <td>{$internship.contact_num}</td>
+          <td>{$internship.mentor|escape}</td>
+          <td>{$internship.contact_num|escape}</td>
         </tr>
         {foreachelse}
           <tr><td colspan=7><div class="status">没有实习记录.同学不给力啊!!!</div></td></tr>

@@ -31,8 +31,8 @@
         </thead>
         {foreach from=$records item=record}
         <tr>
-          <td><a href="show_info.php?sid={$record.student_id}" target="_blank">{$record.name}</a></td>
-          <td>{$record.job_name}</td>
+          <td><a href="show_info.php?sid={$record.student_id}" target="_blank">{$record.name|escape}</a></td>
+          <td>{$record.job_name|escape}</td>
           <td>{$record.request_date}</td>
           <td>审核中</td>
           <td><a class="op" href="j/audit_application.php?op=yes&record_id={$record.record_id}">通过</a>&nbsp;&nbsp;<a class="op" href="j/audit_application.php?op=no&record_id={$record.record_id}">拒绝</a></td>

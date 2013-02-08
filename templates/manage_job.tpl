@@ -30,13 +30,13 @@
           </thead>
           {foreach from=$jobs item=job}
           <tr>
-            <td class="company_name">{$job.company_name}</td>
-            <td>{$job.job_name}</td>
+            <td class="company_name">{$job.company_name|escape}</td>
+            <td>{$job.job_name|escape}</td>
             <td>点击查看更多</td>
             <td><a href="manage_job.php?job_id={$job.job_id}">修改</a>&nbsp;&nbsp;<a class="delete-job" href="j/delete_job.php?job_id={$job.job_id}">删除</a></td>
           </tr>
           <tr class="meta_info">
-            <td colspan=4><pre>{$job.job_meta}</pre></td>
+            <td colspan=4><pre>{$job.job_meta|escape}</pre></td>
           </tr>
           {foreachelse}
             <tr><td colspan=4><div class="status">没有发布任何工作.不给力啊公司!!!</div></td></tr>
@@ -48,10 +48,10 @@
         <h1>修改工作</h1>
         <table>
           <input type="hidden" id="job_id" name="job_id" value="{$job.job_id}" />
-          <tr><td class="m">公司名称:</td><td class="left">{$job.company_name}</td></tr>
-          <tr><td class="m">职位名称:</td><td class="left"><input type="text" id="job_name" name="job_name" value="{$job.job_name}" /></td></tr>
+          <tr><td class="m">公司名称:</td><td class="left">{$job.company_name|escape}</td></tr>
+          <tr><td class="m">职位名称:</td><td class="left"><input type="text" id="job_name" name="job_name" value="{$job.job_name|escape}" /></td></tr>
           <tr><td class="m">职位信息:</td><td class="left"><textarea id="job_meta" name="job_meta" style="height:300px;
-            ">{$job.job_meta}</textarea></td></tr>
+            ">{$job.job_meta|escape}</textarea></td></tr>
           <tr><td>&nbsp;</td><td><button id="submit" class="btn btn-primary">提交</button><button id="reset" class="btn">重置</button></td></tr>
         </table>
       {/if}
