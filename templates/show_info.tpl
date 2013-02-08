@@ -64,10 +64,10 @@ li { margin-top:-25px;margin-bottom:0px; padding-left:20px;}
     {foreach from=$internships item=internship}   
       <p>
         从{$internship.start}到{$internship.end},
-        在{$internship.company_name}
-        担任{$internship.job_name},
-        证明人是{$internship.mentor},
-        证明人联系方式为{$internship.contact_num}.
+        在{$internship.company_name|escape}
+        担任{$internship.job_name|escape},
+        证明人是{$internship.mentor|escape},
+        证明人联系方式为{$internship.contact_num|escape}.
       </p>
     {foreachelse}
       <p>暂时没有实习记录</p>
@@ -78,7 +78,7 @@ li { margin-top:-25px;margin-bottom:0px; padding-left:20px;}
 个人信息尽可能的丰富些.方便企业了解你.会得到意想不到的效果哦!!!
       </div>
       <div>
-{$student.extra}
+{$student.extra|escape}
       </div>
     </div>
   </div>
@@ -90,7 +90,7 @@ li { margin-top:-25px;margin-bottom:0px; padding-left:20px;}
           <img src="../upload/students/default.jpg" width=120 height=160/>
       {/if}
       <div id="user_info">
-        姓名:{$student.name}
+        姓名:{$student.name|escape}
         <br />
         性别:
         {if $student.gender==1}
@@ -99,13 +99,13 @@ li { margin-top:-25px;margin-bottom:0px; padding-left:20px;}
             女
         {/if}
         <br />
-        身份证:{$student.id_num}
+        身份证:{$student.id_num|escape}
         <br />
-        年级:{$student.grade}
+        年级:{$student.grade|escape}
         <br />
-        专业:{$student.major}
+        专业:{$student.major|escape}
         <br />
-        出生日期:{$student.birth_date}
+        出生日期:{$student.birth_date|escape}
         {if $student.marriage}
           <br />
           婚姻状况:
@@ -131,17 +131,17 @@ li { margin-top:-25px;margin-bottom:0px; padding-left:20px;}
           {/if}
         {/if}
         <br />
-        户口所在地:{$student.domicile_place}
+        户口所在地:{$student.domicile_place|escape}
         <br />
-        现居地:{$student.current_place}
+        现居地:{$student.current_place|escape}
         <br />
-        联系地址:{$student.mailing_address}
+        联系地址:{$student.mailing_address|escape}
         <br />
-        邮编地址:{$student.mailing_code}
+        邮编地址:{$student.mailing_code|escape}
         <br />
-        电子邮箱:{$studnet.email_address}
+        电子邮箱:{$studnet.email_address|escape}
         <br />
-        联系方式:{$student.contact_num}
+        联系方式:{$student.contact_num|escape}
       </div>
       <div id="user_intro">
         <pre>
@@ -151,9 +151,9 @@ li { margin-top:-25px;margin-bottom:0px; padding-left:20px;}
 家庭关系:
 {foreach from=$student.family item=family}
     <ul>
-      <li>姓名:{$family.name}</li>
-      <li>关系:{$family.relationship}</li>
-      <li>联系方式:{$family.contact_num}</li>
+      <li>姓名:{$family.name|escape}</li>
+      <li>关系:{$family.relationship|escape}</li>
+      <li>联系方式:{$family.contact_num|escape}</li>
     </ul>
 {foreachelse}
     暂无信息

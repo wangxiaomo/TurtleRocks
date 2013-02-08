@@ -25,12 +25,12 @@
         </thead>
         {foreach from=$companies item=company}
         <tr>
-          <td>{$company.company_name}</td>
+          <td>{$company.company_name|escape}</td>
           <td>点击查看更多</td>
           <td><a href="show_job.php?cid={$company.company_id}">查看该公司提供的职位</a></td>
         </tr>
         <tr class="meta_info">
-          <td colspan=3><pre>{$company.meta_info}</pre></td>
+          <td colspan=3><pre>{$company.meta_info|escape}</pre></td>
         </tr>
         {foreachelse}
           <tr><td colspan=3><div class="status">没有招聘公司. 不给力啊.老师!!!</div></td></tr>

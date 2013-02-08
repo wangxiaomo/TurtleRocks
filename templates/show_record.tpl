@@ -35,9 +35,9 @@
           </thead>
           {foreach from=$records item=record}
           <tr>
-            <td><a href="show_info.php?sid={$record.student_id}" target="_blank">{$record.name}</a></td>
-            <td>{$record.company_name}</td>
-            <td>{$record.job_name}</td>
+            <td><a href="show_info.php?sid={$record.student_id}" target="_blank">{$record.name|escape}</a></td>
+            <td>{$record.company_name|escape}</td>
+            <td>{$record.job_name|escape}</td>
             <td>{$record.request_date}</td>
             {if $record.status == 0}
               <td>审核中.</td>
@@ -63,8 +63,8 @@
           </thead>
           {foreach from=$records item=record}
           <tr>
-            <td>{$record.company_name}</td>
-            <td>{$record.job_name}</td>
+            <td>{$record.company_name|escape}</td>
+            <td>{$record.job_name|escape}</td>
             <td>{$record.request_date}</td>
             {if $record.status == 0}
               <td>审核中.</td>
@@ -90,8 +90,8 @@
           </thead>
           {foreach from=$records item=record}
           <tr>
-            <td><a href="show_info.php?sid={$record.student_id}" target="_blank">{$record.name}</a></td>
-            <td>{$record.job_name}</td>
+            <td><a href="show_info.php?sid={$record.student_id}" target="_blank">{$record.name|escape}</a></td>
+            <td>{$record.job_name|escape}</td>
             <td>{$record.request_date}</td>
             {if $record.status == 0}
               <td>审核中.</td>
