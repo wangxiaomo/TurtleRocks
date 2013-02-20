@@ -116,7 +116,6 @@
 <script src="../static/js/bootstrap-wysihtml5.js"></script>
 <script>
 $(function(){
-  //TODO: Fix IT. Hack Method
   $('#change_photo').fileupload();
   $('textarea').wysihtml5({
     "font-styles": true,
