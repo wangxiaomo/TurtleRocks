@@ -49,10 +49,10 @@ function view_student_record($student_id){
     }
     return $ret;
 }
-function update_school_info($consumer, $department_name){
+function update_school_info($consumer, $department_name, $department_context){
     $db = new DB;
     $db->connect();
-    $db->query("UPDATE tr_school SET department_name='" . $department_name . "' WHERE consumer='" . $consumer . "';");
+    $db->query("UPDATE tr_school SET department_name='" . $department_name . "',department_context='$department_context' WHERE consumer='" . $consumer . "';");
     return true;
 }
 function add_new_department($department_name, $consumer, $password){

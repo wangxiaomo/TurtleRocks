@@ -42,11 +42,12 @@ function get_account_info($user_type, $consumer){
     $db->connect();
     //根据 user_type 取得 account 信息
     if($user_type == 0){
-        $sql = "SELECT department_name, department_type FROM tr_school WHERE consumer='" . $consumer . "';";
+        $sql = "SELECT department_name, department_context, department_type FROM tr_school WHERE consumer='" . $consumer . "';";
         $db->query($sql);
         $db->next_record();
         return Array(
           'department_name' =>  $db->f('department_name'),
+          'department_context' => $db->f('department_context'),
           'department_type' =>  $db->f('department_type'),
         );
     }elseif($user_type == 1){

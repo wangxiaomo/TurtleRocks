@@ -6,7 +6,8 @@ if($_POST){
     //根据不同的身份处理不同的请求
     if($user_type == 0){
         $department_name = escape($_POST['department_name']);
-        update_school_info($consumer, $department_name);
+        $department_extra = escape($_POST['department_extra']);
+        update_school_info($consumer, $department_name, $department_extra);
     }elseif($user_type == 1){
         $name = escape($_POST['name']);
         $gender = escape($_POST['gender']);

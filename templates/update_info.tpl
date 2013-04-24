@@ -25,7 +25,7 @@
           <table>
           {if $user_type == 0}
             <tr><td class="m">部门名称:</td><td class="left"><input type="text" name="department_name" readonly="true" value="{$account.department_name|escape}"/></td></tr>
-            <tr><td class="m">部门描述:</td><td class="left"><textarea name="department_extra" style="height:300px;"/></textarea></td></tr>
+            <tr><td class="m">部门描述:</td><td class="left"><textarea name="department_extra" style="height:300px;"/>{$account.department_context|escape}</textarea></td></tr>
             <tr><td>&nbsp;</td><td><button id="submit" class="btn btn-primary">提交</button><button id="reset" class="btn">重置</button></td></tr>
           {/if }
           {if $user_type == 1}

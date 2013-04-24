@@ -1,3 +1,4 @@
 *.swp
 *.tpl.php
 *.conf.php
+.DS_Store
