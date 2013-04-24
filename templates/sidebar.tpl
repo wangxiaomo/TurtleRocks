@@ -1,7 +1,7 @@
 <img src="{#STATIC_DIR#}/images/headerphoto.jpg" width="820" height="120" alt="headerphoto" class="no-border" />
 <div id="sidebar" >
   <h1>宗旨</h1>
-  <p>&quot;为了更好的学生，为了更好的未来...当代教师之义不容辞!&quot;</p>
+  <p style="text-indent:2em;">为了更好的学生，为了更好的未来...当代教师之义不容辞!</p>
   <p class="align-right">- xxx 2012.04</p>
   <h1>功能导航</h1>
   <ul class="sidemenu">
