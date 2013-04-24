@@ -110,7 +110,7 @@
         {/if}
       </table>
       <div class="tooltips">
-        <p><span class="label label-important">重要</span>审核通过后请主动联系公司负责人协商下一步的工作.</p>
+        <p><span class="label label-important">重要</span>审核通过后请主动联系公司负责人.</p>
       </div>
       <div class="paginator"></div>
     </div>
