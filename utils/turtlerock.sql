@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.1
+-- version 3.5.7
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2012 年 12 月 28 日 03:10
--- 服务器版本: 5.5.24-log
--- PHP 版本: 5.3.13
+-- 生成日期: 2013 年 04 月 24 日 18:05
+-- 服务器版本: 5.6.10
+-- PHP 版本: 5.3.15
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -26,15 +26,16 @@ SET time_zone = "+00:00";
 -- 表的结构 `tr_company`
 --
 
+DROP TABLE IF EXISTS `tr_company`;
 CREATE TABLE IF NOT EXISTS `tr_company` (
   `consumer` varchar(20) NOT NULL,
   `company_id` int(11) NOT NULL AUTO_INCREMENT,
   `company_name` varchar(50) NOT NULL,
-  `meta_info` text NOT NULL,
+  `meta_info` text,
   PRIMARY KEY (`company_id`),
   UNIQUE KEY `company_id` (`company_id`),
   KEY `consumer` (`consumer`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
 
 --
 -- 转存表中的数据 `tr_company`
@@ -42,7 +43,8 @@ CREATE TABLE IF NOT EXISTS `tr_company` (
 
 INSERT INTO `tr_company` (`consumer`, `company_id`, `company_name`, `meta_info`) VALUES
 ('c2', 10, 'é”¡æ©', 'â– å…¬å¸ç®€ä»‹\r\n   é”¡æ©è‹±æ‰äººåŠ›èµ„æºç®¡ç†é¡¾é—®æœ‰é™å…¬å¸æˆç«‹äºŽ2005å¹´ï¼Œæ˜¯é”¡æ©å’¨è¯¢ä½“ç³»ä¸­ä»Žäº‹ä¼ä¸šå’¨è¯¢å’Œä¼ä¸šç®¡ç†åŸ¹è®­ã€ç®¡ç†å®žæˆ˜è®­ç»ƒçš„ä¸“ä¸šå…¬å¸ã€‚é”¡æ©è‹±æ‰çš„å’¨è¯¢å’ŒåŸ¹è®­ä¸“æ³¨äºŽæ‰“é€ ä¼ä¸šæ ¸å¿ƒç«žäº‰åŠ›ï¼Œä»¥å®žæ“å®žæˆ˜å¼å›¢é˜Ÿè®­ç»ƒä¸ºç‰¹ç‚¹ï¼Œå±¡æ¬¡å‡»è´¥éº¦è‚¯é”¡ã€è´æ©ç­‰è·¨å›½å’¨è¯¢å·¨å¤´ï¼Œä¸ºä¸‡ç§‘é›†å›¢ã€TCLé›†å›¢ï¼Œç»´è¾¾çº¸ä¸šã€å¤§è‡ªç„¶åœ°æ¿ã€ä¸­å›½äº”çŸ¿ã€æ³¢å¸ç™»ã€è”ä¸œæŠ•èµ„é›†å›¢ç­‰æ•°åå®¶ä¸­å›½ä¸€æµä¼ä¸šæä¾›å’¨è¯¢å¼åŸ¹è®­æœåŠ¡ï¼ŒåŒæ—¶ä¹ŸæˆåŠŸåœ°ä¸ºåŒ—äº¬å¤©æ™®å¤ªé˜³èƒ½ã€å¤©æ´¥å°æŠ¤å£«ã€åŒ—äº¬è‹±æ‰æˆ¿åœ°äº§ç­‰æ•°ç™¾å®¶æˆé•¿åž‹ä¼ä¸šè¿›è¡Œå†…è®­å’Œå®žæˆ˜é¡¹ç›®è®­ç»ƒã€‚\r\n\r\nâ–  ä¸­å›½æœ‰å¾ˆå¤šå’¨è¯¢å…¬å¸ã€æœ‰å¾ˆå¤šåŸ¹è®­ç»„ç»‡ï¼Œæˆ‘ä»¬æ˜¯è°ï¼Ÿ\r\nä¸“ä¸šä»Žäº‹ä¼ä¸šæˆ˜ç•¥ã€è¿è¥ã€äººåŠ›èµ„æºã€è¥é”€å·¥ä¸šåŒ–ç®¡ç†å’¨è¯¢æœåŠ¡çš„æœ¬åœŸå’¨è¯¢å…¬å¸ã€‚\r\nä¸“ä¸šè‡´åŠ›äºŽé€šè¿‡å¼ºåŒ–è®­ç»ƒï¼Œå°†å„ç§ç®¡ç†æ–¹å¼ä¹ æƒ¯åŒ–ã€å’¨è¯¢å·¥å…·è½åœ°åŒ–çš„å’¨è¯¢å¼åŸ¹è®­å…¬å¸ï¼\r\n\r\n \r\nâ–   æˆ‘ä»¬çš„äº§å“å’Œè§£å†³æ–¹æ¡ˆèšç„¦äºŽä»€ä¹ˆæ–¹å‘ï¼Ÿ\r\né”¡æ©è‹±æ‰äº§å“å€¾å‘äºŽé€šè¿‡å•†ä¸šå¯è’™çš„åŸ¹è®­ï¼Œå’Œç»“åˆä¼ä¸šåŽŸæœ¬ä¸šåŠ¡çš„å¼ºåŒ–è®­ç»ƒï¼ŒåŠ ä¸Šæžå¯Œæ“ä½œæ€§çš„å’¨è¯¢å·¥å…·ï¼Œä½¿å¾—ä¼ä¸šç®¡ç†çš„ç†è®ºä¸Žæ–¹æ³•æœ€ç»ˆæˆä¸ºæ¯ä¸ªå‘˜å·¥çš„å·¥ä½œä¹ æƒ¯ï¼\r\n\r\nâ–   æˆ‘ä»¬çš„ä¸»è¦ç‰¹è‰²æ˜¯ä»€ä¹ˆï¼Ÿ\r\næ‹¥æœ‰å…ˆè¿›è€Œç‹¬ç«‹çš„è‡ªä¸»çŸ¥è¯†äº§æƒï¼Œæ‹¥æœ‰æˆåŠŸçŽ‡æœ€é«˜çš„å’¨è¯¢åŸ¹è®­ç›¸ç»“åˆçš„è®­ç»ƒæ¨¡å¼ï¼Œé‡‡å–ä¸“ä¸šå›¢é˜Ÿå…±åŒå‡ºå‡»çš„æœåŠ¡å½¢å¼ï¼Œå¸¸å¹´æœåŠ¡è·Ÿè¿›ä¼ä¸šå‘å±•çš„å’¨è¯¢è®­ç»ƒä¼™ä¼´ã€‚\r\n\r\nâ–   æˆ‘ä»¬çš„ä¸»è¦å®¢æˆ·ç¾¤æ˜¯ä»€ä¹ˆä¼ä¸šï¼Ÿ\r\nè‡´åŠ›äºŽæœåŠ¡ä¸­å›½æˆé•¿åž‹ä¼ä¸šï¼Œé’ˆå¯¹å¤šæ•°å·²å®Œæˆç¬¬ä¸€æ¬¡åˆ›ä¸šï¼Œæ­£å¯»æ±‚äºŒæ¬¡åˆ›ä¸šçªç ´ï¼Œèµ°å‘æ­£è§„åŒ–ã€æŒç»­åŒ–ã€å›½é™…åŒ–çš„ä¼ä¸šè¿›è¡Œå®žæˆ˜æ€§æœ€å¼ºã€æ•ˆæžœæœ€æ˜Žæ˜¾çš„è®­ç»ƒã€‚\r\n\r\nâ–   é”¡æ©è‹±æ‰å…¬å¸çš„ä½¿å‘½æ˜¯å…±å»ºä¼Ÿå¤§å…¬å¸---è‡´åŠ›äºŽä¸­å›½æˆé•¿åž‹ä¼ä¸šçš„æ­£è§„åŒ–ï¹‘å›½é™…åŒ–ï¹‘æŒç»­åŒ–ã€‚\r\n\r\nâ–  æˆ‘ä»¬æä¾›\r\n1ã€å…³æ³¨å‘˜å·¥çš„å­¦ä¹ å’Œå‘å±•ï¼Œä¸ºå‘˜å·¥æä¾›æŒç»­å¼€æ”¾å¼çš„åŸ¹è®­ï¼›\r\n2ã€å®Œå–„çš„å†…éƒ¨æ™‹å‡ä½“ç³»ï¼Œå¹¿é˜”çš„èŒä¸šå‘å±•ç©ºé—´ï¼›\r\n3ã€ä¸Žæžå…·é£Žæ ¼ä¸Žé­…åŠ›çš„å“è¶Šé¢†å¯¼å›¢é˜ŸåŠè¡Œä¸šå†…ç²¾è‹±äººæ‰æŽ¥è§¦äº¤æµã€å…±åŒåˆ›é€ åŽ†å²çš„æœºé‡ï¼›\r\n4ã€å»¶ç»­è¿‘10å¹´çš„ä¼ä¸šé«˜é€Ÿæˆé•¿çš„æ„¿æ™¯ã€ä½¿å‘½åŠç‹¬ç‰¹çš„ä¼ä¸šæ–‡åŒ–å’Œä»·å€¼è§‚ï¼›\r\n5ã€è¡Œä¸šå†…æžå…·ç«žäº‰åŠ›çš„è–ªé…¬ç¦åˆ©ä½“ç³»ï¼›\r\n6ã€å‘˜å·¥äº«æœ‰æ­£å¸¸åŒä¼‘æ—¥ï¼Œæ³•å®šå‡æ—¥ï¼Œå¸¦è–ªå¹´ä¼‘å‡ï¼Œå©šã€ä¸§ã€äº§å‡ç­‰ï¼›\r\n7ã€å…»è€ã€åŒ»ç–—ã€å¤±ä¸šã€ç”Ÿè‚²ã€å·¥ä¼¤ä¿é™©åŠä½æˆ¿å…¬ç§¯é‡‘ï¼›\r\n8ã€ä¸ºå‘˜å·¥å…è´¹æä¾›å…¥èŒä½“æ£€ï¼Œå®šæœŸç»„ç»‡å‘˜å·¥è¿›è¡Œå¥åº·ä½“æ£€ã€‚\r\n\r\nâ– è”ç³»æ–¹å¼\r\nå…¬å¸ä¸»é¡µï¼šwww.99809.com å…¬å¸åœ°å€ï¼šåŒ—äº¬å¸‚ä¸œåŸŽåŒºå´‡æ–‡é—¨å¤–å¤§è¡—16å·å›½ç‘žå¤§åŽ¦10å±‚\r\né‚®æ”¿ç¼–ç ï¼š100062 \r\nè”ç³»äººï¼šäºŽå°å§ \r\nè”ç³»ç”µè¯ï¼š86-010-87191305 \r\nE-Mailï¼šhr@yczion.com\r\nå±±ä¸œå…¬å¸è”ç³»äººï¼šç„¦å°å§ 0531-66713131ï¼Œjenna@sd99809.com\r\næ­¦æ±‰å…¬å¸è”ç³»äººï¼šå´å°å§ 027-86659661ï¼Œgrace@whzion.com'),
-('c1', 11, 'åŒ—äº¬ç‡•å®æ±½è½¦æœåŠ¡æœ‰é™å…¬å¸', 'ç‡•å®æ±½è½¦é›†å›¢ç³»1995å¹´åœ¨åŽæˆç«‹çš„å¤–å•†ç‹¬èµ„ä¼ä¸šã€‚æ€»éƒ¨ä½äºŽåŒ—äº¬ï¼Œé›†å›¢ä¸šåŠ¡éåŠåŒ—äº¬ã€å¤§è¿žã€è¥¿å®‰ã€ä¹Œé²æœ¨é½ç­‰åœ°åŒºã€‚ç‡•å®æ±½è½¦æ˜¯ç»å¾·å›½BMWæ±½è½¦å…¬å¸æ­£å¼æŽˆæƒçš„ä¸­å›½æœ€æ—©ä¸”æœ€å…·èµ„è´¨çš„ç»é”€å•†ä¹‹ä¸€ã€‚é›†å›¢é›†æ±½è½¦é”€å”®ã€å”®åŽç»´ä¿®ã€é›¶é…ä»¶ä¾›åº”ã€é¡¾å®¢å›žè®¿äºŽä¸€ä½“çš„å›½é™…åŒ–æ±½è½¦ç»é”€è¿è¥æ¨¡å¼ã€‚å…¬å¸ç»è¥BMWå’ŒMINIå…¨ç³»åˆ—äº§å“ï¼Œè£…å¤‡æœ‰å…¨å¥—å¾·å›½BMWæ±½è½¦ä¸“ç”¨ç»´ä¿®è®¾å¤‡å’Œæ£€æµ‹ä»ªå™¨ï¼ŒæŠ€æœ¯äººå‘˜å…¨éƒ¨ç»è¿‡å¾·å›½BMWä¸“ä¸šåŸ¹è®­ã€‚\r\nå‘˜å·¥æ˜¯å…¬å¸æœ€å¤§çš„è´¢å¯Œï¼Œåœ¨è¿™é‡Œæ‚¨èƒ½äº«å—åˆ°ï¼š\r\n  å¯Œæœ‰ç«žäº‰åŠ›çš„è–ªé…¬ç¦åˆ©\r\n  è‰¯å¥½çš„èŒä¸šå‘å±•å¹³å°\r\n  ç³»ç»Ÿçš„åŸ¹è®­å‘å±•æœºä¼š\r\n  äº”é™©ä¸€é‡‘ã€å•†ä¸šåŒ»ç–—ä¿é™©åŠæ„å¤–ä¼¤å®³é™©\r\n  å·¥ä½œåˆé¤ã€å¸¦è–ªå¹´å‡ã€å¹´åº¦å¥åº·ä½“æ£€\r\n  æœˆåº¦ç”Ÿæ—¥ä¼šåŠç”Ÿæ—¥è´ºç¤¼ã€å„ç§å›¢é˜Ÿå»ºè®¾æ´»åŠ¨\r\n  äººæ€§åŒ–ç®¡ç†\r\n  ä¸Šä¸‹ç­ç­è½¦');
+('c1', 11, 'åŒ—äº¬ç‡•å®æ±½è½¦æœåŠ¡æœ‰é™å…¬å¸', 'ç‡•å®æ±½è½¦é›†å›¢ç³»1995å¹´åœ¨åŽæˆç«‹çš„å¤–å•†ç‹¬èµ„ä¼ä¸šã€‚æ€»éƒ¨ä½äºŽåŒ—äº¬ï¼Œé›†å›¢ä¸šåŠ¡éåŠåŒ—äº¬ã€å¤§è¿žã€è¥¿å®‰ã€ä¹Œé²æœ¨é½ç­‰åœ°åŒºã€‚ç‡•å®æ±½è½¦æ˜¯ç»å¾·å›½BMWæ±½è½¦å…¬å¸æ­£å¼æŽˆæƒçš„ä¸­å›½æœ€æ—©ä¸”æœ€å…·èµ„è´¨çš„ç»é”€å•†ä¹‹ä¸€ã€‚é›†å›¢é›†æ±½è½¦é”€å”®ã€å”®åŽç»´ä¿®ã€é›¶é…ä»¶ä¾›åº”ã€é¡¾å®¢å›žè®¿äºŽä¸€ä½“çš„å›½é™…åŒ–æ±½è½¦ç»é”€è¿è¥æ¨¡å¼ã€‚å…¬å¸ç»è¥BMWå’ŒMINIå…¨ç³»åˆ—äº§å“ï¼Œè£…å¤‡æœ‰å…¨å¥—å¾·å›½BMWæ±½è½¦ä¸“ç”¨ç»´ä¿®è®¾å¤‡å’Œæ£€æµ‹ä»ªå™¨ï¼ŒæŠ€æœ¯äººå‘˜å…¨éƒ¨ç»è¿‡å¾·å›½BMWä¸“ä¸šåŸ¹è®­ã€‚\r\nå‘˜å·¥æ˜¯å…¬å¸æœ€å¤§çš„è´¢å¯Œï¼Œåœ¨è¿™é‡Œæ‚¨èƒ½äº«å—åˆ°ï¼š\r\n  å¯Œæœ‰ç«žäº‰åŠ›çš„è–ªé…¬ç¦åˆ©\r\n  è‰¯å¥½çš„èŒä¸šå‘å±•å¹³å°\r\n  ç³»ç»Ÿçš„åŸ¹è®­å‘å±•æœºä¼š\r\n  äº”é™©ä¸€é‡‘ã€å•†ä¸šåŒ»ç–—ä¿é™©åŠæ„å¤–ä¼¤å®³é™©\r\n  å·¥ä½œåˆé¤ã€å¸¦è–ªå¹´å‡ã€å¹´åº¦å¥åº·ä½“æ£€\r\n  æœˆåº¦ç”Ÿæ—¥ä¼šåŠç”Ÿæ—¥è´ºç¤¼ã€å„ç§å›¢é˜Ÿå»ºè®¾æ´»åŠ¨\r\n  äººæ€§åŒ–ç®¡ç†\r\n  ä¸Šä¸‹ç­ç­è½¦'),
+('douban', 12, 'douban', 'è±†ç“£æ˜¯ä¸ªå°æ¸…æ–°çš„å…¬å¸');
 
 -- --------------------------------------------------------
 
@@ -50,6 +52,7 @@ INSERT INTO `tr_company` (`consumer`, `company_id`, `company_name`, `meta_info`)
 -- 表的结构 `tr_family`
 --
 
+DROP TABLE IF EXISTS `tr_family`;
 CREATE TABLE IF NOT EXISTS `tr_family` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `student_id` int(11) NOT NULL,
@@ -74,6 +77,7 @@ INSERT INTO `tr_family` (`id`, `student_id`, `name`, `relationship`, `contact_nu
 -- 表的结构 `tr_internship`
 --
 
+DROP TABLE IF EXISTS `tr_internship`;
 CREATE TABLE IF NOT EXISTS `tr_internship` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `student_id` int(11) NOT NULL,
@@ -92,6 +96,7 @@ CREATE TABLE IF NOT EXISTS `tr_internship` (
 -- 表的结构 `tr_job`
 --
 
+DROP TABLE IF EXISTS `tr_job`;
 CREATE TABLE IF NOT EXISTS `tr_job` (
   `job_id` int(11) NOT NULL AUTO_INCREMENT,
   `company_id` int(11) NOT NULL,
@@ -120,6 +125,7 @@ INSERT INTO `tr_job` (`job_id`, `company_id`, `job_name`, `job_meta`) VALUES
 -- 表的结构 `tr_login`
 --
 
+DROP TABLE IF EXISTS `tr_login`;
 CREATE TABLE IF NOT EXISTS `tr_login` (
   `consumer` varchar(20) NOT NULL,
   `password` varchar(40) NOT NULL,
@@ -134,9 +140,12 @@ CREATE TABLE IF NOT EXISTS `tr_login` (
 INSERT INTO `tr_login` (`consumer`, `password`, `user_type`) VALUES
 ('admin1', '202cb962ac59075b964b07152d234b70', 0),
 ('admin2', '202cb962ac59075b964b07152d234b70', 0),
+('admin3', '202cb962ac59075b964b07152d234b70', 0),
 ('c1', '202cb962ac59075b964b07152d234b70', 2),
 ('c2', '202cb962ac59075b964b07152d234b70', 2),
+('douban', '202cb962ac59075b964b07152d234b70', 2),
 ('root', '202cb962ac59075b964b07152d234b70', 0),
+('t11', '202cb962ac59075b964b07152d234b70', 1),
 ('test1', '202cb962ac59075b964b07152d234b70', 1),
 ('test2', '202cb962ac59075b964b07152d234b70', 1);
 
@@ -146,6 +155,7 @@ INSERT INTO `tr_login` (`consumer`, `password`, `user_type`) VALUES
 -- 表的结构 `tr_record`
 --
 
+DROP TABLE IF EXISTS `tr_record`;
 CREATE TABLE IF NOT EXISTS `tr_record` (
   `record_id` int(11) NOT NULL AUTO_INCREMENT,
   `student_id` int(11) NOT NULL,
@@ -171,10 +181,12 @@ INSERT INTO `tr_record` (`record_id`, `student_id`, `job_id`, `request_date`, `a
 -- 表的结构 `tr_school`
 --
 
+DROP TABLE IF EXISTS `tr_school`;
 CREATE TABLE IF NOT EXISTS `tr_school` (
   `consumer` varchar(20) NOT NULL,
   `department_name` varchar(20) NOT NULL,
-  `department_type` int(11) NOT NULL,
+  `department_context` varchar(200) DEFAULT NULL COMMENT '部门描述~',
+  `department_type` int(11) NOT NULL DEFAULT '0',
   KEY `consumer` (`consumer`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -182,9 +194,10 @@ CREATE TABLE IF NOT EXISTS `tr_school` (
 -- 转存表中的数据 `tr_school`
 --
 
-INSERT INTO `tr_school` (`consumer`, `department_name`, `department_type`) VALUES
-('admin1', 'æ•™è‚²éƒ¨', 0),
-('admin2', 'æ ¡é•¿', 0);
+INSERT INTO `tr_school` (`consumer`, `department_name`, `department_context`, `department_type`) VALUES
+('admin1', 'æ•™è‚²éƒ¨', 'æµ‹è¯•å•Š~', 0),
+('admin2', 'æ ¡é•¿', '', 0),
+('admin3', 'ä½“è‚²éƒ¨', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -192,29 +205,30 @@ INSERT INTO `tr_school` (`consumer`, `department_name`, `department_type`) VALUE
 -- 表的结构 `tr_student`
 --
 
+DROP TABLE IF EXISTS `tr_student`;
 CREATE TABLE IF NOT EXISTS `tr_student` (
   `consumer` varchar(20) NOT NULL,
   `student_id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(10) NOT NULL,
-  `gender` tinyint(4) NOT NULL,
-  `pic_path` varchar(200) NOT NULL,
-  `id_num` varchar(20) NOT NULL,
-  `grade` varchar(20) NOT NULL,
-  `major` varchar(20) NOT NULL,
-  `birth_date` varchar(40) NOT NULL,
-  `marriage` int(11) NOT NULL,
-  `political_status` int(11) NOT NULL,
-  `domicile_place` varchar(50) NOT NULL,
-  `current_place` varchar(50) NOT NULL,
-  `mailing_address` varchar(100) NOT NULL,
-  `mailing_code` varchar(10) NOT NULL,
-  `email_address` varchar(20) NOT NULL,
-  `contact_num` varchar(20) NOT NULL,
-  `extra` text NOT NULL,
+  `name` varchar(10) DEFAULT NULL,
+  `gender` tinyint(4) DEFAULT NULL,
+  `pic_path` varchar(200) DEFAULT NULL,
+  `id_num` varchar(20) DEFAULT NULL,
+  `grade` varchar(20) DEFAULT NULL,
+  `major` varchar(20) DEFAULT NULL,
+  `birth_date` varchar(40) DEFAULT NULL,
+  `marriage` int(11) DEFAULT NULL,
+  `political_status` int(11) DEFAULT NULL,
+  `domicile_place` varchar(50) DEFAULT NULL,
+  `current_place` varchar(50) DEFAULT NULL,
+  `mailing_address` varchar(100) DEFAULT NULL,
+  `mailing_code` varchar(10) DEFAULT NULL,
+  `email_address` varchar(20) DEFAULT NULL,
+  `contact_num` varchar(20) DEFAULT NULL,
+  `extra` text,
   PRIMARY KEY (`student_id`),
   UNIQUE KEY `student_id` (`student_id`),
   KEY `consumer` (`consumer`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
 
 --
 -- 转存表中的数据 `tr_student`
@@ -222,7 +236,8 @@ CREATE TABLE IF NOT EXISTS `tr_student` (
 
 INSERT INTO `tr_student` (`consumer`, `student_id`, `name`, `gender`, `pic_path`, `id_num`, `grade`, `major`, `birth_date`, `marriage`, `political_status`, `domicile_place`, `current_place`, `mailing_address`, `mailing_code`, `email_address`, `contact_num`, `extra`) VALUES
 ('test1', 7, 'æŽæ™¨å¸Œ', 1, '../upload/students/test11352286294cover.jpg', '14xx9123144123', '1', 'çƒ¹é¥ª', '1990/11', 2, 1, '1', 'asd', 'asd', 'asd', 'asd', '18966666666', 'ä½ æ˜¯ä¸ªæ´»æ³¼å¯çˆ±çš„å­©å­,ä½†æ˜¯å°±æ˜¯å¹³æ—¶ä¸Šè¯¾å¤ªç¾žæ€¯äº†äº›,å¦‚æžœä½ èƒ½ç§¯æžå‘è¨€,ç›¸ä¿¡ä½ ä¼šåšçš„æ›´å¥½.é€ä½ ä¸€æŠŠ"é‡‘é’¥åŒ™",å®ƒå°†æ˜¯ä½ å¼€å¯çŸ¥è¯†ä¸–ç•Œçš„å¤§é—¨,åŠ æ²¹!'),
-('test2', 8, '', 0, '../upload/students/test21352286184Folder.jpg', '', '', '', '', 0, 0, '', '', '', '', '', '', '');
+('test2', 8, '', 0, '../upload/students/test21352286184Folder.jpg', '', '', '', '', 0, 0, '', '', '', '', '', '', ''),
+('t11', 9, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 --
 -- 限制导出的表
